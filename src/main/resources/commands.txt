@@ -12,7 +12,7 @@ Usage example:
 wallet> ApproveProposal TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 80 true
 wallet> ApproveProposal TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 80 false
 Syntax:
-AssetIssue [owner_address] asset_name abbr_name total_supply trx_num asset_num precision start_date end_date description url free_netLimit_per_account public_free_net_limit frozen_amount0 frozen_days0 ... frozen_amountN frozen_daysN
+AssetIssue [owner_address] asset_name abbr_name total_supply lind_num asset_num precision start_date end_date description url free_netLimit_per_account public_free_net_limit frozen_amount0 frozen_days0 ... frozen_amountN frozen_daysN
 Summary:
 Issue an asset
 Usage example:
@@ -56,7 +56,7 @@ Usage example:
 wallet> DeleteProposal 80
 wallet> DeleteProposal TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 80
 Syntax:
-DeployContract [owner_address] contractName ABI byteCode constructor params isHex fee_limit consume_user_resource_percent origin_energy_limit value token_value token_id(e.g: TRXTOKEN, use # if don't provided) <library:address,library:address,...> <lib_compiler_version(e.g:v5)>
+DeployContract [owner_address] contractName ABI byteCode constructor params isHex fee_limit consume_user_resource_percent origin_energy_limit value token_value token_id(e.g: LINDTOKEN, use # if don't provided) <library:address,library:address,...> <lib_compiler_version(e.g:v5)>
 Summary:
 Deploy a smart contract.
 Usage example:
@@ -91,16 +91,16 @@ Usage example:
 wallet> ExchangeWithdraw 66 1005416 3
 wallet> ExchangeWithdraw TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 66 1005416 3
 Syntax:
-FreezeBalance [owner_address] frozen_balance frozen_duration [resource_code:0 BANDWIDTH,1 ENERGY,2 TRON_POWER] [receiver_address]
+FreezeBalance [owner_address] frozen_balance frozen_duration [resource_code:0 BANDWIDTH,1 ENERGY,2 LINDA_POWER] [receiver_address]
 Summary:
-Stake TRX to obtain resources(BANDWIDTH/ENERGY).
+Stake LIND to obtain resources(BANDWIDTH/ENERGY).
 Usage example:
 wallet> FreezeBalance 1000000 3 0
 wallet> FreezeBalance 1000000 3 1 TH48niZfbwHMyqZwEB8wmHfzcvR8ZzJKC6
 Syntax:
 GenerateAddress
 Summary:
-Randomly generate a tron address.
+Randomly generate a linda address.
 Usage example:
 wallet> GenerateAddress
 Syntax:
@@ -154,7 +154,7 @@ wallet> GetAssetIssueListByName trident-101
 Syntax:
 GetBalance
 Summary:
-Get the current TRX balance of the account.
+Get the current LIND balance of the account.
 Usage example:
 wallet> GetBalance
 Syntax:
@@ -380,7 +380,7 @@ wallet> RegisterWallet
 Syntax:
 SendCoin [owner_address] to_address amount
 Summary:
-Make a TRX transfer.
+Make a LIND transfer.
 Usage example:
 wallet> SendCoin TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1000000
 wallet> SendCoin TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1000000
@@ -399,9 +399,9 @@ Usage example:
 wallet> UnfreezeAsset
 wallet> UnfreezeAsset TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
 Syntax:
-UnfreezeBalance [owner_address] resource_code(0 BANDWIDTH,1 ENERGY,2 TRON_POWER) [receiver_address]
+UnfreezeBalance [owner_address] resource_code(0 BANDWIDTH,1 ENERGY,2 LINDA_POWER) [receiver_address]
 Summary:
-Unstake TRX by Stake 1.0.
+Unstake LIND by Stake 1.0.
 Usage example:
 wallet> UnfreezeBalance 0
 wallet> UnfreezeBalance 0 TH48niZfbwHMyqZwEB8wmHfzcvR8ZzJKC6
@@ -442,16 +442,16 @@ Usage example:
 wallet> VoteWitness TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N 1 TFFLWM7tmKiwGtbh2mcz2rBssoFjHjSShG 2
 wallet> VoteWitness TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N 1 TFFLWM7tmKiwGtbh2mcz2rBssoFjHjSShG 2
 Syntax:
-FreezeBalanceV2 [owner_address] frozen_balance [resource_code:0 BANDWIDTH,1 ENERGY,2 TRON_POWER]
+FreezeBalanceV2 [owner_address] frozen_balance [resource_code:0 BANDWIDTH,1 ENERGY,2 LINDA_POWER]
 Summary:
-Stake TRX with Stake 2.0 to obtain resources.
+Stake LIND with Stake 2.0 to obtain resources.
 Usage example:
 wallet> FreezeBalanceV2 1000000 0
 wallet> FreezeBalanceV2 TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1000000 0
 Syntax:
-UnfreezeBalanceV2 [owner_address] unfreeze_balance resource_code(0 BANDWIDTH,1 ENERGY,2 TRON_POWER)
+UnfreezeBalanceV2 [owner_address] unfreeze_balance resource_code(0 BANDWIDTH,1 ENERGY,2 LINDA_POWER)
 Summary:
-Unstake TRX with Stake 2.0 .
+Unstake LIND with Stake 2.0 .
 Usage example:
 wallet> UnfreezeBalanceV2 1000000 0
 wallet> UnfreezeBalanceV2 TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1000000 0
@@ -556,17 +556,17 @@ Delete the keystore and mnemonic words for the current login wallet address.
 Usage example:
 wallet> ClearWalletKeystore
 Syntax:
-ExportWalletKeystore tronlink file_path
+ExportWalletKeystore lindalink file_path
 Summary:
-Export the Keystore file in Tronlink format.
+Export the Keystore file in Lindalink format.
 Usage example:
-wallet> ExportWalletKeystore tronlink /tmp
+wallet> ExportWalletKeystore lindalink /tmp
 Syntax:
-ImportWalletByKeystore tronlink keystore_path
+ImportWalletByKeystore lindalink keystore_path
 Summary:
-Import wallet through Tronlink formatted Keystore file.
+Import wallet through Lindalink formatted Keystore file.
 Usage example:
-wallet> ImportWalletByKeystore tronlink tronlink-export-keystore.json
+wallet> ImportWalletByKeystore lindalink lindalink-export-keystore.json
 Syntax:
 ImportWalletByLedger
 Summary:
@@ -678,7 +678,7 @@ Usage example:
 wallet> UpdateWitness https://www.example.com
 wallet> UpdateWitness TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp https://www.example.com
 Syntax:
-EstimateEnergy owner_address(use # if you own) contract_address method args isHex [value token_value token_id(e.g: TRXTOKEN, use # if don't provided)]
+EstimateEnergy owner_address(use # if you own) contract_address method args isHex [value token_value token_id(e.g: LINDTOKEN, use # if don't provided)]
 Summary:
 Estimate the energy required for the successful execution of smart contract transactions. (Confirmed state)
 Usage example:
@@ -722,13 +722,13 @@ Usage example:
 wallet> SetAccountId 100
 wallet> SetAccountId TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 100
 Syntax:
-TriggerContract [owner_address] contract_address method args isHex fee_limit value token_value token_id(e.g: TRXTOKEN, use # if don't provided)
+TriggerContract [owner_address] contract_address method args isHex fee_limit value token_value token_id(e.g: LINDTOKEN, use # if don't provided)
 Summary:
 Call the function of the contract (modified by views or pure modifiers) to execute the contract.
 Usage example:
 wallet> TriggerContract TAB1TVw5N8g1FLcKxPD17h2A3eEpSXvMQd TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf transfer(address,uint256) "TT4MHXVApKfbcq7cDLKnes9h9wLSD4eMJi",1 false 1000000000  0 0 #
 Syntax:
-TriggerConstantContract owner_address(use # if you own) contract_address method args isHex [value token_value token_id(e.g: TRXTOKEN, use # if don't provided)]
+TriggerConstantContract owner_address(use # if you own) contract_address method args isHex [value token_value token_id(e.g: LINDTOKEN, use # if don't provided)]
 Summary:
 Invoke the readonly function (modified by the view or pure modifier) of a contract for contract data query; or Invoke the non-readonly function of a contract for predicting whether the transaction can be successfully executed or estimating the energy consumption. (Confirmed state)
 Usage example:

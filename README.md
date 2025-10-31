@@ -4,7 +4,7 @@ Welcome to use the Wallet-cli.
 
 Wallet-cli now supports [GasFree](https://gasfree.io) addresses, enable users to transfer tokens without paying gas fees. For more details, please check the [GasFree](#Gas-Free-Support) section below.
 
-The underlying implementation of all Wallet-cli gRPC APIs has all migrated to the [Trident SDK](https://github.com/tronprotocol/trident). This strategic move consolidates the underlying implementation of the Wallet-cli's remote procedure calls, standardizing them under the robust and optimized Trident framework. 
+The underlying implementation of all Wallet-cli gRPC APIs has all migrated to the [Trident SDK](https://github.com/lindaprotocol/trident). This strategic move consolidates the underlying implementation of the Wallet-cli's remote procedure calls, standardizing them under the robust and optimized Trident framework. 
 
 If you need any help, please join the [Telegram](https://t.me/TronOfficialDevelopersGroupEn).
 
@@ -12,7 +12,7 @@ If you need any help, please join the [Telegram](https://t.me/TronOfficialDevelo
 
 ### Download Wallet-cli
 
-    git clone https://github.com/tronprotocol/wallet-cli.git
+    git clone https://github.com/lindaprotocol/wallet-cli.git
 
 ### Edit config.conf in src/main/resources
 
@@ -73,7 +73,7 @@ grpc = {
 
 - connect to fullNode
 
-    Take a look at: [java-tron deployment](https://tronprotocol.github.io/documentation-en/developers/deployment/)
+    Take a look at: [java-linda deployment](https://lindaprotocol.github.io/documentation-en/developers/deployment/)
     Run fullNode on either your local PC or a remote server.
 
 - compile and run web wallet
@@ -85,15 +85,15 @@ grpc = {
     $ java -jar wallet-cli.jar
     ```
 
-### Connect to Java-tron
+### Connect to Java-linda
 
-Wallet-cli connects to Java-tron via the gRPC protocol, which can be deployed locally or remotely. Check **Run a web Wallet** section.
-We can configure Java-tron node IP and port in ``src/main/resources/config.conf``, so that wallet-cli server can successfully talk to java-tron nodes.
+Wallet-cli connects to Java-linda via the gRPC protocol, which can be deployed locally or remotely. Check **Run a web Wallet** section.
+We can configure Java-linda node IP and port in ``src/main/resources/config.conf``, so that wallet-cli server can successfully talk to java-linda nodes.
 Besides that, you can simply use `SwitchNetwork` command to switch among the mainnet, testnets(Nile and Shasta) and custom networks. Please refer to the Switch Network section.
 
 ## Wallet-cli supported command list
 
-Following is a list of Tron Wallet-cli commands:
+Following is a list of Linda Wallet-cli commands:
 For more information on a specific command, just type the command in the terminal when you start your Wallet.
 
 |     [AddTransactionSign](#How-to-use-the-multi-signature-feature-of-wallet-cli)     |         [ApproveProposal](#Approve--disapprove-a-proposal)          |                         [AssetIssue](#Issue-trc10-tokens)                         |
@@ -117,8 +117,8 @@ For more information on a specific command, just type the command in the termina
 |                     [GetChainParameters](#get-chain-parameters)                     |           [GetContract](#Get-details-of-a-smart-contract)           |                 [GetContractInfo](#get-info-of-a-smart-contract)                  |
 |                  [GetDelegatedResource](#How-to-delegate-resource)                  |    [GetDelegatedResourceAccountIndex](#How-to-delegate-resource)    |              [GetDelegatedResourceAccountIndexV2](#How-to-freezev2)               |
 |                     [GetDelegatedResourceV2](#How-to-freezev2)                      |        [GetEnergyPrices](#Get-resource-prices-and-memo-fee)         |                        [GetExchange](#get-exchange-by-id)                         |
-|            [GetMarketOrderByAccount](#How-to-use-tron-dex-to-sell-asset)            |      [GetMarketOrderById](#How-to-use-tron-dex-to-sell-asset)       |          [GetMarketOrderListByPair](#How-to-use-tron-dex-to-sell-asset)           |
-|               [GetMarketPairList](#How-to-use-tron-dex-to-sell-asset)               |     [GetMarketPriceByPair](#How-to-use-tron-dex-to-sell-asset)      |                  [GetMemoFee](#Get-resource-prices-and-memo-fee)                  |
+|            [GetMarketOrderByAccount](#How-to-use-linda-dex-to-sell-asset)            |      [GetMarketOrderById](#How-to-use-linda-dex-to-sell-asset)       |          [GetMarketOrderListByPair](#How-to-use-linda-dex-to-sell-asset)           |
+|               [GetMarketPairList](#How-to-use-linda-dex-to-sell-asset)               |     [GetMarketPriceByPair](#How-to-use-linda-dex-to-sell-asset)      |                  [GetMemoFee](#Get-resource-prices-and-memo-fee)                  |
 |                       [GetNextMaintenanceTime](#Some-others)                        |             [GetProposal](#Obtain-proposal-information)             |                              [GetReward](#Brokerage)                              |
 | [GetTransactionApprovedList](#How-to-use-the-multi-signature-feature-of-wallet-cli) |      [GetTransactionById](#How-to-get-transaction-information)      |       [GetTransactionCountByBlockNum](#How-to-get-transaction-information)        |
 |         [GetTransactionInfoByBlockNum](#How-to-get-transaction-information)         |    [GetTransactionInfoById](#How-to-get-transaction-information)    | [GetTransactionSignWeight](#How-to-use-the-multi-signature-feature-of-wallet-cli) |
@@ -127,8 +127,8 @@ For more information on a specific command, just type the command in the termina
 |               [ListAssetIssuePaginated](#list-asset-issue-paginated)                |           [ListExchanges](#How-to-trade-on-the-exchange)            |              [ListExchangesPaginated](#How-to-trade-on-the-exchange)              |
 |                              [ListNodes](#Some-others)                              |            [ListProposals](#Obtain-proposal-information)            |              [ListProposalsPaginated](#Obtain-proposal-information)               |
 |                            [ListWitnesses](#Some-others)                            |            [Login](#Command-line-operation-flow-example)            |                              [LoginAll](#login-all)                               |
-|                                  [Logout](#logout)                                  |                            [Lock](#lock)                            |              [MarketCancelOrder](#How-to-use-tron-dex-to-sell-asset)              |
-|                [MarketSellAsset](#How-to-use-tron-dex-to-sell-asset)                | [ParticipateAssetIssue](#Participating-in-the-issue-of-trc10-token) |                    [RegisterWallet](#Wallet-related-commands)                     |
+|                                  [Logout](#logout)                                  |                            [Lock](#lock)                            |              [MarketCancelOrder](#How-to-use-linda-dex-to-sell-asset)              |
+|                [MarketSellAsset](#How-to-use-linda-dex-to-sell-asset)                | [ParticipateAssetIssue](#Participating-in-the-issue-of-trc10-token) |                    [RegisterWallet](#Wallet-related-commands)                     |
 |                            [ResetWallet](#reset-wallet)                             |  [SendCoin](#How-to-use-the-multi-signature-feature-of-wallet-cli)  |                          [SetAccountId](#set-account-id)                          |
 |                          [SwitchNetwork](#switch-network)                           |                   [SwitchWallet](#switch-wallet)                    |                      [TransferAsset](#Trc10-token-transfer)                       |
 |                [TriggerConstantContract](#trigger-constant-contract)                |             [TriggerContract](#trigger-smart-contract)              |                      [UnDelegateResource](#How-to-freezev2)                       |
@@ -159,7 +159,7 @@ OwnerAddress
 
 frozen_balance
 > The amount of frozen funds, the unit is Sun.
-> The minimum value is **1000000 Sun(1TRX)**.
+> The minimum value is **1000000 Sun(1LIND)**.
 
 frozen_duration
 > Freeze time, this value is currently only allowed for **3 days**.
@@ -189,15 +189,15 @@ After the freezing time expires, funds can be unfroze.
 
 Voting requires share. Share can be obtained by freezing funds.
 
-- The share calculation method is: **1** unit of share can be obtained for every **1TRX** frozen.
+- The share calculation method is: **1** unit of share can be obtained for every **1LIND** frozen.
 - After unfreezing, previous vote will expire. You can avoid the invalidation of the vote by re-freezing and voting.
 
-**NOTE** The Tron Network only records the status of your last vote, which means that each of your votes will overwrite all previous voting results.
+**NOTE** The Linda Network only records the status of your last vote, which means that each of your votes will overwrite all previous voting results.
 
 For example:
 
 ```console
-> freezeBalance 100000000 3 1 address  # Freeze 10TRX and acquire 10 units of shares
+> freezeBalance 100000000 3 1 address  # Freeze 10LIND and acquire 10 units of shares
 
 > votewitness 123455 witness1 4 witness2 6  # Cast 4 votes for witness1 and 6 votes for witness2 at the same time
 
@@ -270,7 +270,7 @@ The bandwidth calculation rule is:
 
     constant * FrozenFunds * days
 
-Assuming freeze 1TRX（1_000_000 Sun), 3 days, bandwidth obtained = 1 * 1_000_000 * 3 = 3_000_000.
+Assuming freeze 1LIND（1_000_000 Sun), 3 days, bandwidth obtained = 1 * 1_000_000 * 3 = 3_000_000.
 
 All contracts consume bandwidth, including transferring, transferring of assets, voting, freezing, etc.
 Querying does not consume bandwidth. Each contract needs to consume **100_000 bandwidth**.
@@ -288,7 +288,7 @@ The funds in allowance cannot be locked or traded.
 
 ## How to create witness
 
-Applying to become a witness account needs to consume **100_000TRX**.
+Applying to become a witness account needs to consume **100_000LIND**.
 This part of the funds will be burned directly.
 
 ### create witness
@@ -312,8 +312,8 @@ Example:
 ## How to create account
 
 You can create accounts by transferring funds to non-existing accounts or initiating a transaction to create an account using the **CreateAccount** command.
-Transferring to a non-existent account has minimum restriction amount of **1TRX**.
-Creating an account through the CreateAccount command will still burn **1TRX**.
+Transferring to a non-existent account has minimum restriction amount of **1LIND**.
+Creating an account through the CreateAccount command will still burn **1LIND**.
 
 
 ## Command line operation flow example
@@ -330,7 +330,7 @@ address = TRfwwLDpr4excH4V4QzghLEsdYwkapTxnm'  # backup it!
 priKey = 1234567890123456789012345678901234567890123456789012345678901234  # backup it!!! (BackupWallet2Base64 option)
 > getbalance
 Balance = 0
-> AssetIssue TestTRX TRX 75000000000000000 1 1 2 "2019-10-02 15:10:00" "2020-07-11" "just for test121212" www.test.com 100 100000 10000 10 10000 1
+> AssetIssue TestLIND LIND 75000000000000000 1 1 2 "2019-10-02 15:10:00" "2020-07-11" "just for test121212" www.test.com 100 100000 10000 10 10000 1
 > getaccount TRfwwLDpr4excH4V4QzghLEsdYwkapTxnm
 (Print balance: 9999900000
 "assetV2": [
@@ -339,8 +339,8 @@ Balance = 0
         "value": 74999999999980000
     }
 ],)
-  # (cost trx 1000 trx for assetIssue)
-  # (You can query the trx balance and other asset balances for any account )
+  # (cost lind 1000 lind for assetIssue)
+  # (You can query the lind balance and other asset balances for any account )
 > TransferAsset TWzrEZYtwzkAxXJ8PatVrGuoSNsexejRiM 1000001 10000
 ```
 
@@ -350,7 +350,7 @@ Each account can only issue **ONE** TRC10 token.
 
 ### Issue TRC10 tokens
 
-> AssetIssue [OwnerAddress] AssetName AbbrName TotalSupply TrxNum AssetNum Precision StartDate EndDate Description Url FreeNetLimitPerAccount PublicFreeNetLimit FrozenAmount0 FrozenDays0 [...] FrozenAmountN FrozenDaysN
+> AssetIssue [OwnerAddress] AssetName AbbrName TotalSupply LindNum AssetNum Precision StartDate EndDate Description Url FreeNetLimitPerAccount PublicFreeNetLimit FrozenAmount0 FrozenDays0 [...] FrozenAmountN FrozenDaysN
 
 OwnerAddress (optional)
 > The address of the account which initiated the transaction. 
@@ -368,20 +368,20 @@ TotalSupply
 > Account Balance Of Issuer: At the time of issuance
 > All Frozen Token Amount: Before asset transfer and the issuance
 
-TrxNum, AssetNum
+LindNum, AssetNum
 >  These two parameters determine the exchange rate when the token is issued.
-> Exchange Rate = TrxNum / AssetNum
+> Exchange Rate = LindNum / AssetNum
 > AssetNum: Unit in base unit of the issued token
-> TrxNum: Unit in SUN (0.000001 TRX)
+> LindNum: Unit in SUN (0.000001 LIND)
 
 Precision
 > Precision to how many decimal places  
 
 FreeNetLimitPerAccount
-> The maximum amount of bandwidth each account is allowed to use. Token issuers can freeze TRX to obtain bandwidth (TransferAssetContract only)
+> The maximum amount of bandwidth each account is allowed to use. Token issuers can freeze LIND to obtain bandwidth (TransferAssetContract only)
 
 PublicFreeNetLimit
-> The maximum total amount of bandwidth which is allowed to use for all accounts. Token issuers can freeze TRX to obtain bandwidth (TransferAssetContract only)
+> The maximum total amount of bandwidth which is allowed to use for all accounts. Token issuers can freeze LIND to obtain bandwidth (TransferAssetContract only)
 
 StartDate, EndDate
 > The start and end date of token issuance. Within this period time, other users can participate in token issuance.
@@ -394,14 +394,14 @@ FrozenAmount0 FrozenDays0
 Example:
 
 ```console
-> AssetIssue TestTRX TRX 75000000000000000 1 1 2 "2019-10-02 15:10:00" "2020-07-11" "just for test121212" www.test.com 100 100000 10000 10 10000 1
+> AssetIssue TestLIND LIND 75000000000000000 1 1 2 "2019-10-02 15:10:00" "2020-07-11" "just for test121212" www.test.com 100 100000 10000 10 10000 1
 > GetAssetIssueByAccount TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ  # View published information
 {
     "assetIssue": [
         {
             "owner_address": "TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ",
-            "name": "TestTRX",
-            "abbr": "TRX",
+            "name": "TestLIND",
+            "abbr": "LIND",
             "total_supply": 75000000000000000,
             "frozen_supply": [
                 {
@@ -413,7 +413,7 @@ Example:
                     "frozen_days": 10
                 }
             ],
-            "trx_num": 1,
+            "lind_num": 1,
             "precision": 2,
             "num": 1,
             "start_time": 1570000200000,
@@ -443,8 +443,8 @@ Example:
     "assetIssue": [
         {
             "owner_address": "TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ",
-            "name": "TestTRX",
-            "abbr": "TRX",
+            "name": "TestLIND",
+            "abbr": "LIND",
             "total_supply": 75000000000000000,
             "frozen_supply": [
                 {
@@ -456,7 +456,7 @@ Example:
                     "frozen_days": 10
                 }
             ],
-            "trx_num": 1,
+            "lind_num": 1,
             "precision": 2,
             "num": 1,
             "start_time": 1570000200000,
@@ -586,12 +586,12 @@ OwnerAddress (optional)
 > Default: the address of the login account.
 
 id0
-> The serial number of the parameter. Every parameter of TRON network has a serial number. Please refer to "http://tronscan.org/#/sr/committee" 
+> The serial number of the parameter. Every parameter of LINDA network has a serial number. Please refer to "http://tronscan.org/#/sr/committee" 
 
 Value0
 > The modified value
 
-In the example, modification No.4 (modifying token issuance fee) costs 1000TRX as follows:
+In the example, modification No.4 (modifying token issuance fee) costs 1000LIND as follows:
 
 ```console
 > createProposal 4 1000
@@ -666,7 +666,7 @@ GetProposal
 ## How to trade on the exchange
 
 The trading and price fluctuations of trading pairs are in accordance with the Bancor Agreement,
-which can be found in TRON's [related documents](https://tronprotocol.github.io/documentation-en/clients/wallet-cli-command/#dex).
+which can be found in LINDA's [related documents](https://lindaprotocol.github.io/documentation-en/clients/wallet-cli-command/#dex).
 
 ### Create a trading pair
 
@@ -683,13 +683,13 @@ second_token_id, second_token_balance
 > ID and amount of the second token
 >
 > The ID is the ID of the issued TRC10 token. 
-> If it is TRX, the ID is "_". 
+> If it is LIND, the ID is "_". 
 > The amount must be greater than 0, and less than 1,000,000,000,000,000.
 
 Example:
 
 > exchangeCreate 1000001 10000 _ 10000
-    # Create trading pairs with the IDs of 1000001 and TRX, with amount 10000 for both.
+    # Create trading pairs with the IDs of 1000001 and LIND, with amount 10000 for both.
 
 ### get exchange by id
 > getExchange
@@ -743,7 +743,7 @@ Example：
 
 > ExchangeTransaction 1 1000001 100 80
 
-It is expected to acquire the 80 TRX by exchanging 1000001 from the trading pair ID of 1, and the amount is 100.(Equivalent to selling an amount of 100 tokenID - 1000001, at a price of 80 TRX, in trading pair ID - 1).
+It is expected to acquire the 80 LIND by exchanging 1000001 from the trading pair ID of 1, and the amount is 100.(Equivalent to selling an amount of 100 tokenID - 1000001, at a price of 80 LIND, in trading pair ID - 1).
 
 ### Capital Withdrawal
 
@@ -935,7 +935,7 @@ The information displays as follows:
 
 ### deploy smart contracts
 
-> DeployContract [ownerAddress] contractName ABI byteCode constructor params isHex fee_limit consume_user_resource_percent origin_energy_limit value token_value token_id(e.g: TRXTOKEN, use # if don't provided) <library:address,library:address,...> <lib_compiler_version(e.g:v5)> library:address,...>
+> DeployContract [ownerAddress] contractName ABI byteCode constructor params isHex fee_limit consume_user_resource_percent origin_energy_limit value token_value token_id(e.g: LINDTOKEN, use # if don't provided) <library:address,library:address,...> <lib_compiler_version(e.g:v5)> library:address,...>
 
 OwnerAddress
 > The address of the account that initiated the transaction, optional, default is the address of the login account.
@@ -953,7 +953,7 @@ constructor, params, isHex
 > Define the format of the bytecode, which determines the way to parse byteCode from parameters
 
 fee_limit
-> Transaction allows for the most consumed TRX
+> Transaction allows for the most consumed LIND
 
 consume_user_resource_percent
 > Percentage of user resource consumed, in the range [0, 100]
@@ -962,13 +962,13 @@ origin_energy_limit
 > The most amount of developer Energy consumed by trigger contract once
 
 value
-> The amount of trx transferred to the contract account
+> The amount of lind transferred to the contract account
 
 token_value
-> Number of TRX10
+> Number of LIND10
 
 token_id
-> TRX10 Id
+> LIND10 Id
 
 Example:
 
@@ -1019,10 +1019,10 @@ isHex
 > The format of the parameters method and args, is hex string or not
 
 fee_limit
-> The most amount of trx allows for the consumption
+> The most amount of lind allows for the consumption
 
 token_value
-> Number of TRX10
+> Number of LIND10
 
 token_id
 > TRC10 id, If not, use ‘#’ instead
@@ -1074,10 +1074,10 @@ isHex
 > The format of the parameters method and args, is hex string or not
 
 fee_limit
-> The most amount of trx allows for the consumption
+> The most amount of lind allows for the consumption
 
 token_value
-> Number of TRX10
+> Number of LIND10
 
 token_id
 > TRC10 id, If not, use ‘#’ instead
@@ -1178,7 +1178,7 @@ Example:
 
 ### estimate-energy
 
-> EstimateEnergy owner_address(use # if you own) contract_address method args isHex [value token_value token_id(e.g: TRXTOKEN, use # if don't provided)]
+> EstimateEnergy owner_address(use # if you own) contract_address method args isHex [value token_value token_id(e.g: LINDTOKEN, use # if don't provided)]
 
 Estimate the energy required for the successful execution of smart contract transactions. (Confirmed state).
 
@@ -1194,14 +1194,14 @@ Example:
 
     > freezeBalance [OwnerAddress] frozen_balance frozen_duration [ResourceCode:0 BANDWIDTH, 1 ENERGY] [receiverAddress]
 
-The latter two parameters are optional parameters. If not set, the TRX is frozen to obtain
+The latter two parameters are optional parameters. If not set, the LIND is frozen to obtain
 resources for its own use; if it is not empty, the acquired resources are used by receiverAddress.
 
 OwnerAddress
 > The address of the account that initiated the transaction, optional, default is the address of the login account.
 
 frozen_balance
-> The amount of frozen TRX, the unit is the smallest unit (Sun), the minimum is 1000000sun.
+> The amount of frozen LIND, the unit is the smallest unit (Sun), the minimum is 1000000sun.
 
 frozen_duration
 > frezen duration, 3 days
@@ -1232,7 +1232,7 @@ getDelegatedResourceAccountIndex address
 
 ### freezev2/unfreezev2 resource
 
-    > freezeBalanceV2 [OwnerAddress] frozen_balance [ResourceCode:0 BANDWIDTH,1 ENERGY,2 TRON_POWER]
+    > freezeBalanceV2 [OwnerAddress] frozen_balance [ResourceCode:0 BANDWIDTH,1 ENERGY,2 LINDA_POWER]
 
 OwnerAddress
 > The address of the account that initiated the transaction, optional, default is the address of the login account.
@@ -1280,7 +1280,7 @@ wallet> GetTransactionById  82244829971b4235d98a9f09ba67ddb09690ac2f879ad93e09ba
 }
 ```
 
-    > unfreezeBalanceV2 [OwnerAddress] unfreezeBalance ResourceCode(0 BANDWIDTH,1 ENERGY,2 TRON_POWER)
+    > unfreezeBalanceV2 [OwnerAddress] unfreezeBalance ResourceCode(0 BANDWIDTH,1 ENERGY,2 LINDA_POWER)
 
 OwnerAddress
 > The address of the account that initiated the transaction, optional, default is the address of the login account.
@@ -1728,22 +1728,22 @@ ClearWalletKeystore successful !!!
 ```
 ## export import wallet keystore
     >ExportWalletKeystore
->export the wallet keystore to the format of tronlink wallet
+>export the wallet keystore to the format of lindalink wallet
 
 Example:
 ```console
-wallet> ExportWalletKeystore tronlink /tmp
+wallet> ExportWalletKeystore lindalink /tmp
 Please input your password.
 password:
 exported keystore file : /tmp/TYdhEg8b7tXm92UDbRDXPtJNU6T9xVGbbo.json
 exportWalletKeystore successful !!
 ```
     >ImportWalletByKeystore
->import the keystore file of tronlink wallet to wallet-cli 
+>import the keystore file of lindalink wallet to wallet-cli 
 
 Example:
 ```console
-wallet> ImportWalletByKeystore tronlink /tmp/tronlink.json
+wallet> ImportWalletByKeystore lindalink /tmp/lindalink.json
 Please input password.
 password:
 Please input password again.
@@ -2036,7 +2036,7 @@ Now, you can RegisterWallet or ImportWallet again. Or import the wallet through 
 
 ## create account
 > CreateAccount
->This command can create a new account with an inactive address and burn a 1-trx handling fee for it
+>This command can create a new account with an inactive address and burn a 1-lind handling fee for it
 
 Example:
 ```console
@@ -2234,7 +2234,7 @@ as: 1234567890123456789012345678901234567890123456789012345678901234
 **BroadcastTransaction**
 > Broadcast the transaction, where the transaction is in hex string format.
 
-## How to use tron-dex to sell asset
+## How to use linda-dex to sell asset
 
 ### MarketSellAsset
 

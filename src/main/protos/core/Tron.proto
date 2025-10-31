@@ -7,9 +7,9 @@ import "core/contract/common.proto";
 package protocol;
 
 
-option java_package = "org.tron.protos"; //Specify the name of the package that generated the Java file
+option java_package = "org.linda.protos"; //Specify the name of the package that generated the Java file
 option java_outer_classname = "Protocol"; //Specify the class name of the generated Java file
-option go_package = "github.com/tronprotocol/grpc-gateway/core";
+option go_package = "github.com/lindaprotocol/grpc-gateway/core";
 
 enum AccountType {
   Normal = 0;
@@ -132,7 +132,7 @@ message ChainParameters {
 message Account {
   /* frozen balance */
   message Frozen {
-    int64 frozen_balance = 1; // the frozen trx balance
+    int64 frozen_balance = 1; // the frozen lind balance
     int64 expire_time = 2; // the expire time
   }
   // account nick name
@@ -140,7 +140,7 @@ message Account {
   AccountType type = 2;
   // the create address
   bytes address = 3;
-  // the trx balance
+  // the lind balance
   int64 balance = 4;
   // the votes
   repeated Vote votes = 5;
@@ -159,8 +159,8 @@ message Account {
   //Freeze and provide balances to other accounts
   int64 delegated_frozen_balance_for_bandwidth = 42;
 
-  int64 old_tron_power = 46;
-  Frozen tron_power = 47;
+  int64 old_linda_power = 46;
+  Frozen linda_power = 47;
 
   bool asset_optimized = 60;
 
@@ -549,7 +549,7 @@ message BlockInventory {
 
 message Inventory {
   enum InventoryType {
-    TRX = 0;
+    LIND = 0;
     BLOCK = 1;
   }
   InventoryType type = 1;
@@ -559,7 +559,7 @@ message Inventory {
 message Items {
   enum ItemType {
     ERR = 0;
-    TRX = 1;
+    LIND = 1;
     BLOCK = 2;
     BLOCKHEADER = 3;
   }
@@ -633,14 +633,14 @@ message InternalTransaction {
   // internalTransaction identity, the root InternalTransaction hash
   // should equals to root transaction id.
   bytes hash = 1;
-  // the one send trx (TBD: or token) via function
+  // the one send lind (TBD: or token) via function
   bytes caller_address = 2;
-  // the one recieve trx (TBD: or token) via function
+  // the one recieve lind (TBD: or token) via function
   bytes transferTo_address = 3;
   message CallValueInfo {
-    // trx (TBD: or token) value
+    // lind (TBD: or token) value
     int64 callValue = 1;
-    // TBD: tokenName, trx should be empty
+    // TBD: tokenName, lind should be empty
     string tokenId = 2;
   }
   repeated CallValueInfo callValueInfo = 4;
