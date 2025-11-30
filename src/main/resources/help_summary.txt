@@ -6,21 +6,21 @@
 | GenerateAddress                                   | Generate an address and print out the address and private key           |
 | GetAccount                                        | Get account details information                                         |
 | GetAddress                                        | Get the address of the current account                                  |
-| GetBalance                                        | Get the current LIND balance of the account                              |
+| GetBalance                                        | Get the current LIND balance of the account                             |
 | CreateAccount                                     | Activating an account                                                   |
 | UpdateAccount                                     | Update account name                                                     |
 | UpdateAccountPermission                           | Update account permissions                                              |
 | SetAccountId                                      | Sets a custom unique identifier for an account                          |
 | GetReward                                         | Get the rewards that a SR or a user has not yet withdrawn               |
 | WithdrawBalance                                   | Withdraw rewards                                                        |
-| SendCoin                                          | Create a LIND transfer transaction                                       |
+| SendCoin                                          | Create a LIND transfer transaction                                      |
 |---------------------------------------------------+-------------------------------------------------------------------------+
 |                RESOURCE MANAGEMENT (19)           |                                                                         |
 +---------------------------------------------------+-------------------------------------------------------------------------+
-| FreezeBalance                                     | Stake LIND to obtain resources(BANDWIDTH/ENERGY)  with Stake 1.0         |
-| FreezeBalanceV2                                   | Stake LIND to obtain resources(BANDWIDTH/ENERGY)  with Stake 2.0         |
-| UnfreezeBalance                                   | Unstake LIND with Stake 1.0                                              |
-| UnfreezeBalanceV2                                 | Unstake LIND with Stake 2.0                                              |
+| FreezeBalance                                     | Stake LIND to obtain resources(BANDWIDTH/ENERGY)  with Stake 1.0        |
+| FreezeBalanceV2                                   | Stake LIND to obtain resources(BANDWIDTH/ENERGY)  with Stake 2.0        |
+| UnfreezeBalance                                   | Unstake LIND with Stake 1.0                                             |
+| UnfreezeBalanceV2                                 | Unstake LIND with Stake 2.0                                             |
 | GetAccountNet                                     | Get account bandwidth information                                       |
 | GetAccountResource                                | Get account resource information                                        |
 | DelegateResource                                  | Delegate resources with Stake 2.0                                       |
