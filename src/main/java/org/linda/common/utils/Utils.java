@@ -792,7 +792,7 @@ public class Utils {
         byte[] toBytes = Arrays.copyOfRange(data, 4, 36);
         byte[] addressBytes = Arrays.copyOfRange(toBytes, 12, 32);
         byte[] lindaAddressBytes = new byte[21];
-        lindaAddressBytes[0] = 0x41;
+        lindaAddressBytes[0] = 0x30;
         System.arraycopy(addressBytes, 0, lindaAddressBytes, 1, 20);
         String to = encode58Check(lindaAddressBytes);
         byte[] amountBytes = Arrays.copyOfRange(data, 36, 68);

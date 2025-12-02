@@ -7,7 +7,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 @Slf4j(topic = "Commons")
 public class DecodeUtil {
-  public static final byte ADD_PRE_FIX_BYTE_MAINNET = (byte) 0x41;   //41 + address
+  public static final byte ADD_PRE_FIX_BYTE_MAINNET = (byte) 0x30;   //30 + address
   public static final int ADDRESS_SIZE = 42;
   public static byte addressPreFixByte = ADD_PRE_FIX_BYTE_MAINNET;
 

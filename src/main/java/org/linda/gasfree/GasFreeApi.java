@@ -81,7 +81,7 @@ public class GasFreeApi {
     byte[] decoded = decodeFromBase58Check(base58Address);
 
     assert decoded != null;
-    if (decoded.length != 21 || decoded[0] != 0x41) {
+    if (decoded.length != 21 || decoded[0] != 0x30) {
       throw new IllegalArgumentException("Invalid LINDA address");
     }
 
