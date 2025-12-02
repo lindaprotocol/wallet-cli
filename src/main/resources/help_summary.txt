@@ -80,18 +80,18 @@
 | GetBrokerage                                      | Get the brokerage ratio of a super representative                       |
 | UpdateBrokerage                                   | Update SR's brokerage ratio                                             |
 +---------------------------------------------------+-------------------------------------------------------------------------+
-|                TRC10 (25)                         |                                                                         |
+|                LRC10 (25)                         |                                                                         |
 +---------------------------------------------------+-------------------------------------------------------------------------+
-| AssetIssue                                        | Issue a TRC10 token                                                     |
-| UpdateAsset                                       | Update basic TRC10 token information                                    |
-| ListAssetIssue                                    | Display a list of all TRC10 token                                       |
-| ListAssetIssuePaginated                           | Display a list of all TRC10 token by pagination                         |
+| AssetIssue                                        | Issue a LRC10 token                                                     |
+| UpdateAsset                                       | Update basic LRC10 token information                                    |
+| ListAssetIssue                                    | Display a list of all LRC10 token                                       |
+| ListAssetIssuePaginated                           | Display a list of all LRC10 token by pagination                         |
 | GetAssetIssueById                                 | Get a token by token id                                                 |
 | GetAssetIssueByName                               | Get a token by token name                                               |
 | GetAssetIssueListByName                           | Get the list of token by same name                                      |
 | GetAssetIssueByAccount                            | Get a token by account address                                          |
 | UnfreezeAsset                                     | Unstake a token that has passed the minimum freeze duration             |
-| TransferAsset                                     | Transfer TRC10 token                                                    |
+| TransferAsset                                     | Transfer LRC10 token                                                    |
 | ParticipateAssetIssue                             | Participate in an asset issue                                           |
 | MarketSellAsset                                   | Market sell asset                                                       |
 | MarketCancelOrder                                 | Cancel market order                                                     |

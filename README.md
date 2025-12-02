@@ -96,7 +96,7 @@ Besides that, you can simply use `SwitchNetwork` command to switch among the mai
 Following is a list of Linda Wallet-cli commands:
 For more information on a specific command, just type the command in the terminal when you start your Wallet.
 
-|     [AddTransactionSign](#How-to-use-the-multi-signature-feature-of-wallet-cli)     |         [ApproveProposal](#Approve--disapprove-a-proposal)          |                         [AssetIssue](#Issue-trc10-tokens)                         |
+|     [AddTransactionSign](#How-to-use-the-multi-signature-feature-of-wallet-cli)     |         [ApproveProposal](#Approve--disapprove-a-proposal)          |                         [AssetIssue](#Issue-lrc10-tokens)                         |
 |:-----------------------------------------------------------------------------------:|:-------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
 |                      [BackupWallet](#Wallet-related-commands)                       |           [BackupWallet2Base64](#Wallet-related-commands)           |                       [BroadcastTransaction](#Some-others)                        |
 |                       [CancelAllUnfreezeV2](#How-to-freezev2)                       |             [ChangePassword](#Wallet-related-commands)              |                      [ClearContractABI](#clear-contract-abi)                      |
@@ -109,8 +109,8 @@ For more information on a specific command, just type the command in the termina
 |                            [GasFreeInfo](#gas-free-info)                            |                   [GasFreeTrace](#gas-free-trace)                   |                       [GasFreeTransfer](#gas-free-transfer)                       |
 |                    [GenerateAddress](#Account-related-commands)                     |             [GenerateSubAccount](#generate-sub-account)             |                      [GetAccount](#Account-related-commands)                      |
 |                     [GetAccountNet](#Account-related-commands)                      |           [GetAccountResource](#Account-related-commands)           |                      [GetAddress](#Account-related-commands)                      |
-|          [GetAssetIssueByAccount](#How-to-obtain-trc10-token-information)           |     [GetAssetIssueById](#How-to-obtain-trc10-token-information)     |           [GetAssetIssueByName](#How-to-obtain-trc10-token-information)           |
-|          [GetAssetIssueListByName](#How-to-obtain-trc10-token-information)          |            [GetAvailableUnfreezeCount](#How-to-freezev2)            |                      [GetBalance](#Account-related-commands)                      |
+|          [GetAssetIssueByAccount](#How-to-obtain-lrc10-token-information)           |     [GetAssetIssueById](#How-to-obtain-lrc10-token-information)     |           [GetAssetIssueByName](#How-to-obtain-lrc10-token-information)           |
+|          [GetAssetIssueListByName](#How-to-obtain-lrc10-token-information)          |            [GetAvailableUnfreezeCount](#How-to-freezev2)            |                      [GetBalance](#Account-related-commands)                      |
 |               [GetBandwidthPrices](#Get-resource-prices-and-memo-fee)               |              [GetBlock](#How-to-get-block-information)              |                   [GetBlockById](#How-to-get-block-information)                   |
 |                 [GetBlockByIdOrNum](#How-to-get-block-information)                  |        [GetBlockByLatestNum](#How-to-get-block-information)         |               [GetBlockByLimitNext](#How-to-get-block-information)                |
 |                             [GetBrokerage](#Brokerage)                              |             [GetCanDelegatedMaxSize](#How-to-freezev2)              |                 [GetCanWithdrawUnfreezeAmount](#How-to-freezev2)                  |
@@ -123,18 +123,18 @@ For more information on a specific command, just type the command in the termina
 | [GetTransactionApprovedList](#How-to-use-the-multi-signature-feature-of-wallet-cli) |      [GetTransactionById](#How-to-get-transaction-information)      |       [GetTransactionCountByBlockNum](#How-to-get-transaction-information)        |
 |         [GetTransactionInfoByBlockNum](#How-to-get-transaction-information)         |    [GetTransactionInfoById](#How-to-get-transaction-information)    | [GetTransactionSignWeight](#How-to-use-the-multi-signature-feature-of-wallet-cli) |
 |                      [ImportWallet](#Wallet-related-commands)                       |          [ImportWalletByBase64](#Wallet-related-commands)           |             [ImportWalletByKeystore](#export-import-wallet-keystore)              |
-|                  [ImportWalletByLedger](#import-wallet-by-ledger)                   |        [ImportWalletByMnemonic](#import-and-export-mnemonic)        |             [ListAssetIssue](#How-to-obtain-trc10-token-information)              |
+|                  [ImportWalletByLedger](#import-wallet-by-ledger)                   |        [ImportWalletByMnemonic](#import-and-export-mnemonic)        |             [ListAssetIssue](#How-to-obtain-lrc10-token-information)              |
 |               [ListAssetIssuePaginated](#list-asset-issue-paginated)                |           [ListExchanges](#How-to-trade-on-the-exchange)            |              [ListExchangesPaginated](#How-to-trade-on-the-exchange)              |
 |                              [ListNodes](#Some-others)                              |            [ListProposals](#Obtain-proposal-information)            |              [ListProposalsPaginated](#Obtain-proposal-information)               |
 |                            [ListWitnesses](#Some-others)                            |            [Login](#Command-line-operation-flow-example)            |                              [LoginAll](#login-all)                               |
 |                                  [Logout](#logout)                                  |                            [Lock](#lock)                            |              [MarketCancelOrder](#How-to-use-linda-dex-to-sell-asset)              |
-|                [MarketSellAsset](#How-to-use-linda-dex-to-sell-asset)                | [ParticipateAssetIssue](#Participating-in-the-issue-of-trc10-token) |                    [RegisterWallet](#Wallet-related-commands)                     |
+|                [MarketSellAsset](#How-to-use-linda-dex-to-sell-asset)                | [ParticipateAssetIssue](#Participating-in-the-issue-of-lrc10-token) |                    [RegisterWallet](#Wallet-related-commands)                     |
 |                            [ResetWallet](#reset-wallet)                             |  [SendCoin](#How-to-use-the-multi-signature-feature-of-wallet-cli)  |                          [SetAccountId](#set-account-id)                          |
-|                          [SwitchNetwork](#switch-network)                           |                   [SwitchWallet](#switch-wallet)                    |                      [TransferAsset](#Trc10-token-transfer)                       |
+|                          [SwitchNetwork](#switch-network)                           |                   [SwitchWallet](#switch-wallet)                    |                      [TransferAsset](#Lrc10-token-transfer)                       |
 |                [TriggerConstantContract](#trigger-constant-contract)                |             [TriggerContract](#trigger-smart-contract)              |                      [UnDelegateResource](#How-to-freezev2)                       |
-|                       [UnfreezeAsset](#Unfreeze-trc10-token)                        |            [UnfreezeBalance](#How-to-delegate-resource)             |                       [UnfreezeBalanceV2](#How-to-freezev2)                       |
+|                       [UnfreezeAsset](#Unfreeze-lrc10-token)                        |            [UnfreezeBalance](#How-to-delegate-resource)             |                       [UnfreezeBalanceV2](#How-to-freezev2)                       |
 |                                  [Unlock](#unlock)                                  |                  [UpdateAccount](#update-account)                   | [UpdateAccountPermission](#How-to-use-the-multi-signature-feature-of-wallet-cli)  |
-|                  [UpdateAsset](#Update-parameters-of-trc10-token)                   |                    [UpdateBrokerage](#Brokerage)                    |              [UpdateEnergyLimit](#Update-smart-contract-parameters)               |
+|                  [UpdateAsset](#Update-parameters-of-lrc10-token)                   |                    [UpdateBrokerage](#Brokerage)                    |              [UpdateEnergyLimit](#Update-smart-contract-parameters)               |
 |                 [UpdateSetting](#Update-smart-contract-parameters)                  |                  [UpdateWitness](#update-witness)                   |                            [VoteWitness](#How-to-vote)                            |
 |                        [WithdrawBalance](#withdraw-balance)                         |         [WithdrawExpireUnfreeze](#withdraw-expire-unfreeze)         |                      [ModifyWalletName](#Modify-wallet-name)                      |
 |                      [ViewBackupRecords](#View-backup-records)                      |         [ViewTransactionHistory](#View-transaction-history)         |                                                                                   |
@@ -344,11 +344,11 @@ Balance = 0
 > TransferAsset TWzrEZYtwzkAxXJ8PatVrGuoSNsexejRiM 1000001 10000
 ```
 
-## How to issue a TRC10 token
+## How to issue a LRC10 token
 
-Each account can only issue **ONE** TRC10 token.
+Each account can only issue **ONE** LRC10 token.
 
-### Issue TRC10 tokens
+### Issue LRC10 tokens
 
 > AssetIssue [OwnerAddress] AssetName AbbrName TotalSupply LindNum AssetNum Precision StartDate EndDate Description Url FreeNetLimitPerAccount PublicFreeNetLimit FrozenAmount0 FrozenDays0 [...] FrozenAmountN FrozenDaysN
 
@@ -357,10 +357,10 @@ OwnerAddress (optional)
 > Default: the address of the login account.
 
 AssetName
-> The name of the issued TRC10 token
+> The name of the issued LRC10 token
 
 AbbrName
-> The abbreviation of TRC10 token
+> The abbreviation of LRC10 token
 
 TotalSupply
 > TotalSupply = Account Balance of Issuer + All Frozen Token Amount
@@ -428,7 +428,7 @@ Example:
 }
 ```
 
-### Update parameters of TRC10 token
+### Update parameters of LRC10 token
 
 > UpdateAsset [OwnerAddress] newLimit newPublicLimit description url
 
@@ -471,7 +471,7 @@ Example:
 }
 ```
 
-### TRC10 token transfer
+### LRC10 token transfer
 
 > TransferAsset [OwnerAddress] ToAddress AssertID Amount
 
@@ -483,11 +483,11 @@ ToAddress
 > Address of the target account
 
 AssertName
-> TRC10 token ID
+> LRC10 token ID
 > Example: 1000001
 
 Amount
-> The number of TRC10 token to transfer
+> The number of LRC10 token to transfer
 
 Example:
 
@@ -504,7 +504,7 @@ address: TN3zfjYUmMFK3ZsHSsrdJoNRtGkQmZLBLz
     }
 ```
 
-### Participating in the issue of TRC10 token
+### Participating in the issue of LRC10 token
 
     > ParticipateAssetIssue [OwnerAddress] ToAddress AssetID Amount
 
@@ -513,16 +513,16 @@ OwnerAddress (optional)
 > Default: the address of the login account.
 
 ToAddress
-> Account address of TRC10 issuers
+> Account address of LRC10 issuers
 
 AssertName
-> TRC10 token ID
+> LRC10 token ID
 > Example: 1000001
 
 Amount
-> The number of TRC10 token to transfers
+> The number of LRC10 token to transfers
 
-The participation process must happen during the release of TRC10, otherwise an error may occur.
+The participation process must happen during the release of LRC10, otherwise an error may occur.
 
 Example:
 
@@ -550,28 +550,28 @@ Example:
 > ListAssetIssuePaginated 0 1
 ```
 
-### Unfreeze TRC10 token
+### Unfreeze LRC10 token
 
-To unfreeze all TRC10 token which are supposed to be unfrozen after the freezing period.
+To unfreeze all LRC10 token which are supposed to be unfrozen after the freezing period.
 
     > unfreezeasset [OwnerAddress]
 
-## How to obtain TRC10 token information
+## How to obtain LRC10 token information
 
 ListAssetIssue
-> Obtain all of the published TRC10 token information
+> Obtain all of the published LRC10 token information
 
 GetAssetIssueByAccount
-> Obtain TRC10 token information based on issuing address
+> Obtain LRC10 token information based on issuing address
 
 GetAssetIssueById
-> Obtain TRC10 token Information based on ID
+> Obtain LRC10 token Information based on ID
 
 GetAssetIssueByName
-> Obtain TRC10 token Information based on names
+> Obtain LRC10 token Information based on names
 
 GetAssetIssueListByName
-> Obtain a list of TRC10 token information based on names
+> Obtain a list of LRC10 token information based on names
 
 ## How to operate with proposal
 
@@ -682,7 +682,7 @@ First_token_id, first_token_balance
 second_token_id, second_token_balance
 > ID and amount of the second token
 >
-> The ID is the ID of the issued TRC10 token. 
+> The ID is the ID of the issued LRC10 token. 
 > If it is LIND, the ID is "_". 
 > The amount must be greater than 0, and less than 1,000,000,000,000,000.
 
@@ -1025,7 +1025,7 @@ token_value
 > Number of LIND10
 
 token_id
-> TRC10 id, If not, use ‘#’ instead
+> LRC10 id, If not, use ‘#’ instead
 
 Example:
 
@@ -1080,7 +1080,7 @@ token_value
 > Number of LIND10
 
 token_id
-> TRC10 id, If not, use ‘#’ instead
+> LRC10 id, If not, use ‘#’ instead
 
 Example:
 

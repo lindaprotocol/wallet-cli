@@ -122,8 +122,8 @@ public class ApiClient {
     return client.updateAsset(encode58Check(owner), byte2String(description), byte2String(url), newLimit, newPublicLimit);
   }
 
-  public Response.TransactionExtention transferTrc10(byte[] owner, byte[] to, byte[] assertName, long amount) throws IllegalException {// pass
-    return client.transferTrc10(encode58Check(owner), encode58Check(to), Integer.parseInt(byte2String(assertName)), amount);
+  public Response.TransactionExtention transferLrc10(byte[] owner, byte[] to, byte[] assertName, long amount) throws IllegalException {// pass
+    return client.transferLrc10(encode58Check(owner), encode58Check(to), Integer.parseInt(byte2String(assertName)), amount);
   }
 
   public Response.TransactionExtention participateAssetIssueTransaction(byte[] owner, byte[] to, byte[] assertName, long amount) throws IllegalException {// pass

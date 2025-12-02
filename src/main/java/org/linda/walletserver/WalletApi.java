@@ -984,7 +984,7 @@ public class WalletApi {
     if (owner == null) {
       owner = getAddress();
     }
-    Response.TransactionExtention transactionExtention = apiCli.transferTrc10(owner, to, assertName, amount);
+    Response.TransactionExtention transactionExtention = apiCli.transferLrc10(owner, to, assertName, amount);
     return processTransactionExtention(transactionExtention);
   }
 
