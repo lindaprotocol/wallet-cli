@@ -38,7 +38,7 @@ import org.bouncycastle.util.encoders.Hex;
 import org.linda.common.crypto.ECKey;
 import org.linda.common.crypto.SignInterface;
 import org.linda.common.crypto.SignatureInterface;
-import org.lindaa.common.crypto.jce.ECKeyFactory;
+import org.linda.common.crypto.jce.ECKeyFactory;
 import org.linda.common.crypto.jce.LindaCastleProvider;
 import org.linda.common.utils.ByteUtil;
 

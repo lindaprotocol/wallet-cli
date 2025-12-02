@@ -69,7 +69,7 @@ import org.linda.common.crypto.cryptohash.Keccak256;
 import org.linda.common.crypto.jce.ECKeyAgreement;
 import org.linda.common.crypto.jce.ECKeyFactory;
 import org.linda.common.crypto.jce.ECKeyPairGenerator;
-import org.lindaa.common.crypto.jce.ECSignatureFactory;
+import org.linda.common.crypto.jce.ECSignatureFactory;
 import org.linda.common.crypto.jce.LindaCastleProvider;
 import org.linda.common.utils.BIUtil;
 import org.linda.common.utils.ByteUtil;

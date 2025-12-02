@@ -2,8 +2,8 @@ package org.linda.common.enums;
 
 import static org.linda.trident.core.Constant.FULLNODE_NILE;
 import static org.linda.trident.core.Constant.FULLNODE_NILE_SOLIDITY;
-import static org.lindaa.trident.core.Constant.LINDAGRID_MAIN_NET;
-import static org.lindaa.trident.core.Constant.LINDAGRID_MAIN_NET_SOLIDITY;
+import static org.linda.trident.core.Constant.LINDAGRID_MAIN_NET;
+import static org.linda.trident.core.Constant.LINDAGRID_MAIN_NET_SOLIDITY;
 import static org.linda.trident.core.Constant.LINDAGRID_SHASTA;
 import static org.linda.trident.core.Constant.LINDAGRID_SHASTA_SOLIDITY;
 
