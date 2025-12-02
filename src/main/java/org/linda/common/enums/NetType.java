@@ -13,15 +13,15 @@ import lombok.Setter;
 @Getter
 public enum NetType {
   MAIN(
-      "https://api.trongrid.io",
+      "https://api.lindagrid.io",
       new Grpc(LINDAGRID_MAIN_NET, LINDAGRID_MAIN_NET_SOLIDITY),
       new GasFree(
           728126428L,
           "TFFAMQLZybALaLb4uxHA9RBE7pxhUAjF3U",
           "https://open.gasfree.io",
-          "/tron")
+          "/linda")
   ),
-  NILE("https://nile.trongrid.io",
+  NILE("https://nile.lindagrid.io",
       new Grpc(FULLNODE_NILE, FULLNODE_NILE_SOLIDITY),
       new GasFree(
           3448148188L,
@@ -30,7 +30,7 @@ public enum NetType {
           "/nile")
   ),
   SHASTA(
-      "https://api.shasta.trongrid.io",
+      "https://api.shasta.lindagrid.io",
       new Grpc(LINDAGRID_SHASTA, LINDAGRID_SHASTA_SOLIDITY),
       new GasFree(
           2494104990L,

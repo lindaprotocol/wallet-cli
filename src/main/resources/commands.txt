@@ -616,7 +616,7 @@ You can choose or input the network type or fullnode_ded_point soliditynode_ded_
 Usage example:
 wallet> SwitchNetwork
 wallet> SwitchNetwork nile
-wallet> SwitchNetwork grpc.nile.trongrid.io:50051 grpc.nile.trongrid.io:50061
+wallet> SwitchNetwork grpc.nile.lindagrid.io:50051 grpc.nile.lindagrid.io:50061
 wallet> SwitchNetwork 127.0.0.1:50051 127.0.0.1:50052
 Syntax:
 CurrentNetwork

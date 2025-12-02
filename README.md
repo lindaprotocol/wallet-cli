@@ -6,7 +6,7 @@ Wallet-cli now supports [GasFree](https://gasfree.io) addresses, enable users to
 
 The underlying implementation of all Wallet-cli gRPC APIs has all migrated to the [Trident SDK](https://github.com/lindaprotocol/trident). This strategic move consolidates the underlying implementation of the Wallet-cli's remote procedure calls, standardizing them under the robust and optimized Trident framework. 
 
-If you need any help, please join the [Telegram](https://t.me/TronOfficialDevelopersGroupEn).
+If you need any help, please join the [Telegram](https://t.me/LindaOfficialDevelopersGroupEn).
 
 ## Get started
 
@@ -60,7 +60,7 @@ gasfree = {
   }
 }
 
-# If gRPC requests on the main network are limited in speed, you can apply for an apiKey of Trongrid to improve the user experience
+# If gRPC requests on the main network are limited in speed, you can apply for an apiKey of Lindagrid to improve the user experience
 grpc = {
   mainnet = {
     apiKey = ""
@@ -586,7 +586,7 @@ OwnerAddress (optional)
 > Default: the address of the login account.
 
 id0
-> The serial number of the parameter. Every parameter of LINDA network has a serial number. Please refer to "http://tronscan.org/#/sr/committee" 
+> The serial number of the parameter. Every parameter of LINDA network has a serial number. Please refer to "http://lindascan.org/#/sr/committee" 
 
 Value0
 > The modified value
@@ -1879,7 +1879,7 @@ fullNode: EMPTY, solidityNode: localhost:50052
 
 Wallet-cli now supports GasFree integration. This guide explains the new commands and provides instructions on how to use them.
 
-For more details, please refer to  [GasFree Documentation](https://gasfree.io/specification) and [TronLink User Guide For GasFree](https://support.tronlink.org/hc/en-us/articles/38903684778393-GasFree-User-Guide).
+For more details, please refer to  [GasFree Documentation](https://gasfree.io/specification) and [LindaLink User Guide For GasFree](https://support.lindalink.org/hc/en-us/articles/38903684778393-GasFree-User-Guide).
 
 Prerequisites
 API Credentials: Users must obtain the API Key and API Secret from GasFree for authentication. Please refer to the official [application form](https://docs.google.com/forms/d/e/1FAIpQLSc5EB1X8JN7LA4SAVAG99VziXEY6Kv6JxmlBry9rUBlwI-GaQ/viewform) for instructions on setting up API authentication.
