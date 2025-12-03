@@ -9,8 +9,8 @@ ApproveProposal owner_address proposal_id if_or_not_add_approval
 Summary:
 Approve / Disapprove a proposal.
 Usage example:
-wallet> ApproveProposal TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 80 true
-wallet> ApproveProposal TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 80 false
+wallet> ApproveProposal LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 80 true
+wallet> ApproveProposal LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 80 false
 Syntax:
 AssetIssue [owner_address] asset_name abbr_name total_supply lind_num asset_num precision start_date end_date description url free_netLimit_per_account public_free_net_limit frozen_amount0 frozen_days0 ... frozen_amountN frozen_daysN
 Summary:
@@ -47,56 +47,56 @@ Summary:
 Initiate and create proposals, multiple proposals can be created simultaneously, and appended in the format of 'ProposalNumber ProposalValue'.
 Usage example:
 wallet> CreateProposal 80 1 90 1
-wallet> CreateProposal TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 80 1 90 1
+wallet> CreateProposal LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 80 1 90 1
 Syntax:
 DeleteProposal [owner_address] proposal_id
 Summary:
 Delete a proposal.
 Usage example:
 wallet> DeleteProposal 80
-wallet> DeleteProposal TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 80
+wallet> DeleteProposal LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 80
 Syntax:
 DeployContract [owner_address] contractName ABI byteCode constructor params isHex fee_limit consume_user_resource_percent origin_energy_limit value token_value token_id(e.g: LINDTOKEN, use # if don't provided) <library:address,library:address,...> <lib_compiler_version(e.g:v5)>
 Summary:
 Deploy a smart contract.
 Usage example:
 wallet> DeployContract testContract [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},...] 5f805460ff1916600190811790915560649055606319600255600380546001600160a01b0319908116735b38da6a701... # # false 1000000000 100 1000000000 0 0 #
-wallet> DeployContract TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp testContract [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},...] 5f805460ff1916600190811790915560649055606319600255600380546001600160a01b0319908116735b38da6a701... # # false 1000000000 100 1000000000 0 0 #
+wallet> DeployContract LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC testContract [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},...] 5f805460ff1916600190811790915560649055606319600255600380546001600160a01b0319908116735b38da6a701... # # false 1000000000 100 1000000000 0 0 #
 Syntax:
 ExchangeCreate [owner_address] first_token_id first_token_balance second_token_id second_token_balance
 Summary:
 Exchange create.
 Usage example:
 wallet> ExchangeCreate 1005057 20 1005416 8
-wallet> ExchangeCreate TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1005057 20 1005416 8
+wallet> ExchangeCreate LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 1005057 20 1005416 8
 Syntax:
 ExchangeInject [owner_address] exchange_id token_id quantity
 Summary:
 Exchange inject.
 Usage example:
 wallet> ExchangeInject 66 1005416 3
-wallet> ExchangeInject TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 66 1005416 3
+wallet> ExchangeInject LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 66 1005416 3
 Syntax:
 ExchangeTransaction [owner_address] exchange_id token_id quantity expected
 Summary:
 Exchange transaction.
 Usage example:
 wallet> ExchangeTransaction 68 1005057 1 3
-wallet> ExchangeTransaction TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 68 1005057 1 3
+wallet> ExchangeTransaction LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 68 1005057 1 3
 Syntax:
 ExchangeWithdraw [owner_address] exchange_id token_id quantity
 Summary:
 Exchange withdraw.
 Usage example:
 wallet> ExchangeWithdraw 66 1005416 3
-wallet> ExchangeWithdraw TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 66 1005416 3
+wallet> ExchangeWithdraw LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 66 1005416 3
 Syntax:
 FreezeBalance [owner_address] frozen_balance frozen_duration [resource_code:0 BANDWIDTH,1 ENERGY,2 LINDA_POWER] [receiver_address]
 Summary:
 Stake LIND to obtain resources(BANDWIDTH/ENERGY).
 Usage example:
 wallet> FreezeBalance 1000000 3 0
-wallet> FreezeBalance 1000000 3 1 TH48niZfbwHMyqZwEB8wmHfzcvR8ZzJKC6
+wallet> FreezeBalance 1000000 3 1 LSJt3sVmXsQU5UCTp3UXXA3cvM36Ry2WZe
 Syntax:
 GenerateAddress
 Summary:
@@ -108,19 +108,19 @@ GetAccount address
 Summary:
 Get account details information.
 Usage example:
-wallet> GetAccount TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> GetAccount LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 GetAccountNet address
 Summary:
 Get the bandwidth usage of the account.
 Usage example:
-wallet> GetAccountNet TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> GetAccountNet LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 GetAccountResource address
 Summary:
 Get the bandwidth and energy usage of the account.
 Usage example:
-wallet> GetAccountResource TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> GetAccountResource LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 GetAddress
 Summary:
@@ -132,7 +132,7 @@ GetAssetIssueByAccount address
 Summary:
 Get its issued assets through the current account address.
 Usage example:
-wallet> GetAssetIssueByAccount TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> GetAssetIssueByAccount LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 GetAssetIssueById asset_id
 Summary:
@@ -188,31 +188,31 @@ GetBrokerage address
 Summary:
 Get the brokerage ratio of a certain super representative.
 Usage example:
-wallet> GetBrokerage TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N
+wallet> GetBrokerage LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr
 Syntax:
 GetContract contract_address
 Summary:
 Get contract details information based on the contract address.
 Usage example:
-wallet> GetContract TH8nedtU7LQcexsqDwVJqzPizX4HPejuaB
+wallet> GetContract LSPXunpa3GXikbWMooptbrmMHwgFGBMwNH
 Syntax:
 GetDelegatedResource from_address to_address
 Summary:
 Get the delegated resource relationship between two addresses.
 Usage example:
-wallet> GetDelegatedResource TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N
+wallet> GetDelegatedResource LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr
 Syntax:
 GetDelegatedResourceAccountIndex address
 Summary:
 Get the delegated resource account index for the address.
 Usage example:
-wallet> GetDelegatedResourceAccountIndex TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> GetDelegatedResourceAccountIndex LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 GetMarketOrderByAccount address
 Summary:
 Get market order through account address.
 Usage example:
-wallet> GetMarketOrderByAccount TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> GetMarketOrderByAccount LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 getMarketOrderById order_id
 Summary:
@@ -256,7 +256,7 @@ GetReward address
 Summary:
 Get reward information for the specified address.
 Usage example:
-wallet> GetReward TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> GetReward LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 GetTransactionApprovedList transaction_hex_string
 Summary:
@@ -358,19 +358,19 @@ MarketCancelOrder owner_address order_id
 Summary:
 Cancel market order.
 Usage example:
-wallet> MarketCancelOrder TQpb6SWxCLChged64W1MUxi2aNRjvdHbBZ d8b4edbe89e07ad8b3dc0b7580a2d2e6cd564538d83f7568a315783d5e789ee3
+wallet> MarketCancelOrderLa5LMbT48GKonHFceNLwEq5eso3hmrvf77 d8b4edbe89e07ad8b3dc0b7580a2d2e6cd564538d83f7568a315783d5e789ee3
 Syntax:
 MarketSellAsset address sell_token_id sell_token_quantity buy_token_id buy_token_quantity
 Summary:
 Market sell asset.
 Usage example:
-wallet> MarketSellAsset TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1005057 20 1005416 10
+wallet> MarketSellAsset LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 1005057 20 1005416 10
 Syntax:
 ParticipateAssetIssue [owner_address] to_address asset_id amount
 Summary:
 Participate in the issuance of assets.
 Usage example:
-wallet> ParticipateAssetIssue TP4ZaSZJ3Zu8eHYPo6iJUWKf1xzHrZQpzL 1005057 1
+wallet> ParticipateAssetIssue LYKJqbVPyW2EjvAvNy3tENhHKPcFhvg5at 1005057 1
 Syntax:
 RegisterWallet
 Summary:
@@ -382,95 +382,95 @@ SendCoin [owner_address] to_address amount
 Summary:
 Make a LIND transfer.
 Usage example:
-wallet> SendCoin TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1000000
-wallet> SendCoin TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1000000
+wallet> SendCoin LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 1000000
+wallet> SendCoin LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 1000000
 Syntax:
 TransferAsset [owner_address] to_address assert_id amount
 Summary:
 Make an asset transfer.
 Usage example:
-wallet> TransferAsset TH48niZfbwHMyqZwEB8wmHfzcvR8ZzJKC6 1005057 1
-wallet> TransferAsset TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp TH48niZfbwHMyqZwEB8wmHfzcvR8ZzJKC6 1005057 1
+wallet> TransferAsset LSJt3sVmXsQU5UCTp3UXXA3cvM36Ry2WZe 1005057 1
+wallet> TransferAsset LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC LSJt3sVmXsQU5UCTp3UXXA3cvM36Ry2WZe 1005057 1
 Syntax:
 UnfreezeAsset [owner_address]
 Summary:
 Unfreeze asset.
 Usage example:
 wallet> UnfreezeAsset
-wallet> UnfreezeAsset TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> UnfreezeAsset LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 UnfreezeBalance [owner_address] resource_code(0 BANDWIDTH,1 ENERGY,2 LINDA_POWER) [receiver_address]
 Summary:
 Unstake LIND by Stake 1.0.
 Usage example:
 wallet> UnfreezeBalance 0
-wallet> UnfreezeBalance 0 TH48niZfbwHMyqZwEB8wmHfzcvR8ZzJKC6
-wallet> UnfreezeBalance TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 0
-wallet> UnfreezeBalance TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 0 TH48niZfbwHMyqZwEB8wmHfzcvR8ZzJKC6
+wallet> UnfreezeBalance 0 LSJt3sVmXsQU5UCTp3UXXA3cvM36Ry2WZe
+wallet> UnfreezeBalance LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 0
+wallet> UnfreezeBalance LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 0 LSJt3sVmXsQU5UCTp3UXXA3cvM36Ry2WZe
 Syntax:
 UpdateAsset [owner_address] new_limit new_public_limit description url
 Summary:
 Update asset.
 Usage example:
 wallet> UpdateAsset 20 1 trident https://www.trident.com
-wallet> UpdateAsset TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 20 1 trident https://www.trident.com
+wallet> UpdateAsset LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 20 1 trident https://www.trident.com
 Syntax:
 UpdateBrokerage [owner_address] brokerage
 Summary:
 Update SR's brokerage ratio.
 Usage example:
-wallet> UpdateBrokerage TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 99
+wallet> UpdateBrokerage LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 99
 Syntax:
 UpdateEnergyLimit [owner_address] contract_address energy_limit
 Summary:
 Update energy limit.
 Usage example:
-wallet> UpdateEnergyLimit TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf 10000
-wallet> UpdateEnergyLimit TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf 10000
+wallet> UpdateEnergyLimitLgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT 10000
+wallet> UpdateEnergyLimit LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axCLgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT 10000
 Syntax:
 UpdateSetting [owner_address] contract_address consume_user_resource_percent
 Summary:
 Update setting.
 Usage example:
-wallet> UpdateSetting TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf 80
-wallet> UpdateSetting TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf 80
+wallet> UpdateSettingLgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT 80
+wallet> UpdateSetting LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axCLgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT 80
 Syntax:
 VoteWitness [owner_address] address0 count0 ... addressN countN
 Summary:
 Vote for Witness.
 Usage example:
-wallet> VoteWitness TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N 1 TFFLWM7tmKiwGtbh2mcz2rBssoFjHjSShG 2
-wallet> VoteWitness TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N 1 TFFLWM7tmKiwGtbh2mcz2rBssoFjHjSShG 2
+wallet> VoteWitness LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr 1 LQW5mW3zhFr3NXEDcdxZniZWBDshDZWmJ7 2
+wallet> VoteWitness LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr 1 LQW5mW3zhFr3NXEDcdxZniZWBDshDZWmJ7 2
 Syntax:
 FreezeBalanceV2 [owner_address] frozen_balance [resource_code:0 BANDWIDTH,1 ENERGY,2 LINDA_POWER]
 Summary:
 Stake LIND with Stake 2.0 to obtain resources.
 Usage example:
 wallet> FreezeBalanceV2 1000000 0
-wallet> FreezeBalanceV2 TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1000000 0
+wallet> FreezeBalanceV2 LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 1000000 0
 Syntax:
 UnfreezeBalanceV2 [owner_address] unfreeze_balance resource_code(0 BANDWIDTH,1 ENERGY,2 LINDA_POWER)
 Summary:
 Unstake LIND with Stake 2.0 .
 Usage example:
 wallet> UnfreezeBalanceV2 1000000 0
-wallet> UnfreezeBalanceV2 TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1000000 0
+wallet> UnfreezeBalanceV2 LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 1000000 0
 Syntax:
 DelegateResource [owner_address] balance resource_code(0 BANDWIDTH,1 ENERGY), receiver_address [lock] [lock_period]
 Summary:
 Delegate resources through Stake 2.0 .
 Usage example:
-wallet> DelegateResource 1000000 0 TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N
-wallet> DelegateResource 1000000 0 TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N true 86400
-wallet> DelegateResource TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1000000 0 TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N
-wallet> DelegateResource TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1000000 0 TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N true 86400
+wallet> DelegateResource 1000000 0 LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr
+wallet> DelegateResource 1000000 0 LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr true 86400
+wallet> DelegateResource LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 1000000 0 LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr
+wallet> DelegateResource LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 1000000 0 LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr true 86400
 Syntax:
 UnDelegateResource [owner_address] balance resource_code(0 BANDWIDTH,1 ENERGY) receiver_address
 Summary:
 Undelegate resources through Stake 1.0 .
 Usage example:
-wallet> UnDelegateResource 1000000 0 TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N
-wallet> UnDelegateResource TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1000000 0 TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N
+wallet> UnDelegateResource 1000000 0 LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr
+wallet> UnDelegateResource LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 1000000 0 LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr
 Syntax:
 WithdrawExpireUnfreeze
 Summary:
@@ -488,31 +488,31 @@ GetDelegatedResourceV2 from_address to_address
 Summary:
 Get the delegated resource relationship between two addresses in Stake 2.0 .
 Usage example:
-wallet> GetDelegatedResourceV2 TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp TEp1ru7opCexkbFM9ChK6DFfL2XFSfUo2N
+wallet> GetDelegatedResourceV2 LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC LQ4m843uk8n4rDssj52tr5dHdT9DKfV4gr
 Syntax:
 GetDelegatedResourceAccountIndexV2 owner_address
 Summary:
 Get the delegated resource account index for the address in Stake 2.0 .
 Usage example:
-wallet> GetDelegatedResourceAccountIndexV2 TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> GetDelegatedResourceAccountIndexV2 LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 GetCanDelegatedMaxSize owner_address resource_code(0 BANDWIDTH,1 ENERGY)
 Summary:
 Get the maximum amount of resources that can be delegated.
 Usage example:
-wallet> GetCanDelegatedMaxSize TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 0
+wallet> GetCanDelegatedMaxSize LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 0
 Syntax:
 GetAvailableUnfreezeCount owner_address
 Summary:
 Get the available number of unstaking times.
 Usage example:
-wallet> GetAvailableUnfreezeCount TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> GetAvailableUnfreezeCount LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 GetCanWithdrawUnfreezeAmount owner_address timestamp
 Summary:
 Get the withdrawable unstaking amount.
 Usage example:
-wallet> GetCanWithdrawUnfreezeAmount TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 1751008980405
+wallet> GetCanWithdrawUnfreezeAmount LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 1751008980405
 Syntax:
 GetBandwidthPrices
 Summary:
@@ -602,7 +602,7 @@ CreateAccount address
 Summary:
 Creating an account, which means activating the wallet address.
 Usage example:
-wallet> CreateAccount TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> CreateAccount LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 SwitchWallet
 Summary:
@@ -630,13 +630,13 @@ Summary:
 Get gasfree information for the specified address.
 Usage example:
 wallet> GasFreeInfo
-wallet> GasFreeInfo TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> GasFreeInfo LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 GasFreeTransfer to_address amount
 Summary:
 Make a gasfree transfer.
 Usage example:
-wallet> GasFreeTransfer TEkj3ndMVEmFLYaFrATMwMjBRZ1EAZkucT 100000
+wallet> GasFreeTransfer LQ1UJwZTRAtMSBCnS2nwhE6oiydC6yFEnT 100000
 Syntax:
 GasFreeTrace trace_id
 Summary:
@@ -648,42 +648,42 @@ ClearContractABI [owner_address] contract_address
 Summary:
 Clear contract's ABI.
 Usage example:
-wallet> ClearContractABI TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf
-wallet> ClearContractABI TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf
+wallet> ClearContractABILgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT
+wallet> ClearContractABI LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axCLgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT
 Syntax:
 Create2 address code salt
 Summary:
 Predict the contract address generated after deploying a contract. Among them, address is the contract address for executing the create 2 instruction, code is the bytecode of the contract to be deployed, and salt is a random salt value.
 Usage example:
-wallet> Create2 TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 5f805460ff1916600190811790915560649055606319600255 2132
+wallet> Create2 LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 5f805460ff1916600190811790915560649055606319600255 2132
 Syntax:
 WithdrawBalance [owner_address]
 Summary:
 Withdraw voting or block rewards.
 Usage example:
 wallet> WithdrawBalance
-wallet> WithdrawBalance TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp
+wallet> WithdrawBalance LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC
 Syntax:
 CreateWitness [owner_address] url
 Summary:
 Apply to become a super representative candidate.
 Usage example:
 wallet> CreateWitness 007570646174654e616d6531353330363038383733343633
-wallet> CreateWitness TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 007570646174654e616d6531353330363038383733343633
+wallet> CreateWitness LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 007570646174654e616d6531353330363038383733343633
 Syntax:
 UpdateWitness [owner_address] url
 Summary:
 Edit the URL of the SR's official website.
 Usage example:
 wallet> UpdateWitness https://www.example.com
-wallet> UpdateWitness TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp https://www.example.com
+wallet> UpdateWitness LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC https://www.example.com
 Syntax:
 EstimateEnergy owner_address(use # if you own) contract_address method args isHex [value token_value token_id(e.g: LINDTOKEN, use # if don't provided)]
 Summary:
 Estimate the energy required for the successful execution of smart contract transactions. (Confirmed state)
 Usage example:
-wallet> EstimateEnergy TSNEe5Tf4rnc9zPMNXfaTF5fZfHDDH8oyW TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs "balanceOf(address)" 000000000000000000000000a614f803b6fd780986a42c78ec9c7f77e6ded13c true
-wallet> EstimateEnergy # TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf balanceOf(address) "TAB1TVw5N8g1FLcKxPD17h2A3eEpSXvMQd" false 0 0 #
+wallet> EstimateEnergy LbcyuEPkznuiFd1sxQ1AD7THs5uBBBDLRV LRJGo8B47gWvFRdAAbZ9dgMsCUoiVj91QX "balanceOf(address)" 000000000000000000000000a614f803b6fd780986a42c78ec9c7f77e6ded13c true
+wallet> EstimateEnergy #LgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT balanceOf(address) "TAB1TVw5N8g1FLcKxPD17h2A3eEpSXvMQd" false 0 0 #
 Syntax:
 GetChainParameters
 Summary:
@@ -695,7 +695,7 @@ GetContractInfo contract_address
 Summary:
 Queries a contract's information from the blockchain. The difference from the wallet/getcontract interface is that this interface returns not only the bytecode but also the runtime bytecode of the contract. Compared with bytecode, runtime bytecode does not contain constructor and constructor parameter information.
 Usage example:
-wallet> GetContractInfo TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs
+wallet> GetContractInfo LRJGo8B47gWvFRdAAbZ9dgMsCUoiVj91QX
 Syntax:
 GetExchange exchange_id
 Summary:
@@ -720,19 +720,19 @@ Summary:
 Sets a custom unique identifier (Account ID) for an account.
 Usage example:
 wallet> SetAccountId 100
-wallet> SetAccountId TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp 100
+wallet> SetAccountId LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC 100
 Syntax:
 TriggerContract [owner_address] contract_address method args isHex fee_limit value token_value token_id(e.g: LINDTOKEN, use # if don't provided)
 Summary:
 Call the function of the contract (modified by views or pure modifiers) to execute the contract.
 Usage example:
-wallet> TriggerContract TAB1TVw5N8g1FLcKxPD17h2A3eEpSXvMQd TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf transfer(address,uint256) "TT4MHXVApKfbcq7cDLKnes9h9wLSD4eMJi",1 false 1000000000  0 0 #
+wallet> TriggerContract TAB1TVw5N8g1FLcKxPD17h2A3eEpSXvMQdLgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT transfer(address,uint256) "LcK6YgRGkFnhiTk8oCfNQjXKTMxQ7sebyh",1 false 1000000000  0 0 #
 Syntax:
 TriggerConstantContract owner_address(use # if you own) contract_address method args isHex [value token_value token_id(e.g: LINDTOKEN, use # if don't provided)]
 Summary:
 Invoke the readonly function (modified by the view or pure modifier) of a contract for contract data query; or Invoke the non-readonly function of a contract for predicting whether the transaction can be successfully executed or estimating the energy consumption. (Confirmed state)
 Usage example:
-wallet> TriggerConstantContract TSNEe5Tf4rnc9zPMNXfaTF5fZfHDDH8oyW TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs "balanceOf(address)" 000000000000000000000000a614f803b6fd780986a42c78ec9c7f77e6ded13c true
+wallet> TriggerConstantContract LbcyuEPkznuiFd1sxQ1AD7THs5uBBBDLRV LRJGo8B47gWvFRdAAbZ9dgMsCUoiVj91QX "balanceOf(address)" 000000000000000000000000a614f803b6fd780986a42c78ec9c7f77e6ded13c true
 Syntax:
 GetBlockByIdOrNum [block_id / block_num]
 Summary:
@@ -747,13 +747,13 @@ Summary:
 Modify account name.
 Usage example:
 wallet> UpdateAccount test-name
-wallet> UpdateAccount TEDapYSVvAZ3aYH7w8N9tMEEFKaNKUD5Bp test-name
+wallet> UpdateAccount LPUL5hNbr6g9gAueWzhjeDbrYkCLDu3axC test-name
 Syntax:
 UpdateAccountPermission owner_address permissions
 Summary:
 Update the account's permission.
 Usage example:
-wallet> UpdateAccountPermission TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ {"owner_permission":{"type":0,"permission_name":"owner","threshold":1,"keys":[{"address":"TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ","weight":1}]},"witness_permission":{"type":1,"permission_name":"owner","threshold":1,"keys":[{"address":"TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ","weight":1}]},"active_permissions":[{"type":2,"permission_name":"active12323","threshold":2,"operations":"7fff1fc0033e0000000000000000000000000000000000000000000000000000","keys":[{"address":"TNhXo1GbRNCuorvYu5JFWN3m2NYr9QQpVR","weight":1},{"address":"TKwhcDup8L2PH5r6hxp5CQvQzZqJLmKvZP","weight":1}]}]}
+wallet> UpdateAccountPermission LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb {"owner_permission":{"type":0,"permission_name":"owner","threshold":1,"keys":[{"address":"LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb","weight":1}]},"witness_permission":{"type":1,"permission_name":"owner","threshold":1,"keys":[{"address":"LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb","weight":1}]},"active_permissions":[{"type":2,"permission_name":"active12323","threshold":2,"operations":"7fff1fc0033e0000000000000000000000000000000000000000000000000000","keys":[{"address":"TNhXo1GbRNCuorvYu5JFWN3m2NYr9QQpVR","weight":1},{"address":"TKwhcDup8L2PH5r6hxp5CQvQzZqJLmKvZP","weight":1}]}]}
 Syntax:
 ModifyWalletName new_name
 Summary:
