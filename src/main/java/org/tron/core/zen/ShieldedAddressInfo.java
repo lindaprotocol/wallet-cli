@@ -1,12 +1,12 @@
-package org.tron.core.zen;
+package org.linda.core.zen;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.tron.common.utils.Base58;
-import org.tron.core.exception.CipherException;
-import org.tron.core.exception.ZksnarkException;
-import org.tron.core.zen.address.*;
+import org.linda.common.utils.Base58;
+import org.linda.core.exception.CipherException;
+import org.linda.core.exception.ZksnarkException;
+import org.linda.core.zen.address.*;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -121,7 +121,7 @@ public class ShieldedAddressInfo {
   }
 
   public Optional<ShieldedAddressInfo> getNewShieldedAddress() throws ZksnarkException{
-    byte[] sk = org.tron.keystore.Wallet.generateRandomBytes(32);
+    byte[] sk = org.linda.keystore.Wallet.generateRandomBytes(32);
     byte[] d = new DiversifierT().random().getData();
 
     return getNewShieldedAddressBySkAndD(sk, d);

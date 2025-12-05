@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.tron.keystore;
+package org.linda.keystore;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -308,7 +308,7 @@ public class CheckStrength {
   }
 
   /**
-   * Get password strength level, includes easy, midium, strong, very strong, extremely strong
+   * Get password strength level, includes easy, midium, slindag, very slindag, extremely slindag
    */
   public static LEVEL getPasswordLevel(char[] passwd) {
     int level = checkPasswordStrength(passwd);

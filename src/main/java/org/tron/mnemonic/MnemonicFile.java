@@ -1,4 +1,4 @@
-package org.tron.mnemonic;
+package org.linda.mnemonic;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonSubTypes;

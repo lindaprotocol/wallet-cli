@@ -1,10 +1,10 @@
-package org.tron.gasfree;
+package org.linda.gasfree;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.tron.common.enums.NetType.MAIN;
-import static org.tron.common.utils.Utils.greenBoldHighlight;
-import static org.tron.walletserver.WalletApi.decodeFromBase58Check;
+import static org.linda.common.enums.NetType.MAIN;
+import static org.linda.common.utils.Utils.greenBoldHighlight;
+import static org.linda.walletserver.WalletApi.decodeFromBase58Check;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -25,10 +25,10 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bouncycastle.util.encoders.Hex;
-import org.tron.common.enums.NetType;
-import org.tron.common.utils.HttpUtils;
-import org.tron.core.config.Configuration;
-import org.tron.gasfree.request.GasFreeSubmitRequest;
+import org.linda.common.enums.NetType;
+import org.linda.common.utils.HttpUtils;
+import org.linda.core.config.Configuration;
+import org.linda.gasfree.request.GasFreeSubmitRequest;
 import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.datatypes.Address;
 import org.web3j.abi.datatypes.Function;
@@ -77,12 +77,12 @@ public class GasFreeApi {
     return result;
   }
 
-  public static byte[] tronBase58ToBytes32(String base58Address) {
+  public static byte[] lindaBase58ToBytes32(String base58Address) {
     byte[] decoded = decodeFromBase58Check(base58Address);
 
     assert decoded != null;
-    if (decoded.length != 21 || decoded[0] != 0x41) {
-      throw new IllegalArgumentException("Invalid TRON address");
+    if (decoded.length != 21 || decoded[0] != 0x30) {
+      throw new IllegalArgumentException("Invalid LINDA address");
     }
 
     byte[] addressBytes = Arrays.copyOfRange(decoded, 1, 21);
@@ -231,8 +231,8 @@ public class GasFreeApi {
     if (publicAddress.startsWith("0x")) { // eth address
       return hexAddress.equals(publicAddress);
     }
-    // tron address, turn hexAddress to tron address
-    String address = new org.tron.trident.abi.datatypes.Address(hexAddress).toString();
+    // linda address, turn hexAddress to linda address
+    String address = new org.linda.trident.abi.datatypes.Address(hexAddress).toString();
     return address.equals(publicAddress);
   }
 
@@ -242,7 +242,7 @@ public class GasFreeApi {
     byte[] versionHash = Hash.sha3("V1.0.0".getBytes());
     long chainId = netType.getGasFree().getChainId();
     Uint256 chainIdUint = new Uint256(BigInteger.valueOf(chainId));
-    Address address = new Address(Numeric.toHexString(tronBase58ToBytes32(netType.getGasFree().getVerifyingContract())));
+    Address address = new Address(Numeric.toHexString(lindaBase58ToBytes32(netType.getGasFree().getVerifyingContract())));
     byte[] domainSeparatorAbiEncode = abiEncode(
         new Bytes32(domainTypeHash),
         new Bytes32(nameHash),
@@ -307,10 +307,10 @@ public class GasFreeApi {
     gasFreeSubmitRequest.setNonce(nonce);
     gasFreeSubmitRequest.setDeadline((System.currentTimeMillis() / 1000) + defaultDeadlineDuration);
 
-    Address token = new Address(Numeric.toHexString(tronBase58ToBytes32(gasFreeSubmitRequest.getToken())));
-    Address serviceProvider = new Address(Numeric.toHexString(tronBase58ToBytes32(gasFreeSubmitRequest.getServiceProvider())));
-    Address user = new Address(Numeric.toHexString(tronBase58ToBytes32(gasFreeSubmitRequest.getUser())));
-    Address receiver = new Address(Numeric.toHexString(tronBase58ToBytes32(gasFreeSubmitRequest.getReceiver())));
+    Address token = new Address(Numeric.toHexString(lindaBase58ToBytes32(gasFreeSubmitRequest.getToken())));
+    Address serviceProvider = new Address(Numeric.toHexString(lindaBase58ToBytes32(gasFreeSubmitRequest.getServiceProvider())));
+    Address user = new Address(Numeric.toHexString(lindaBase58ToBytes32(gasFreeSubmitRequest.getUser())));
+    Address receiver = new Address(Numeric.toHexString(lindaBase58ToBytes32(gasFreeSubmitRequest.getReceiver())));
     Uint256 valueUint = new Uint256(BigInteger.valueOf(gasFreeSubmitRequest.getValue()));
     Uint256 maxFeeUint = new Uint256(BigInteger.valueOf(gasFreeSubmitRequest.getMaxFee()));
     Uint256 deadlineUint = new Uint256(BigInteger.valueOf(gasFreeSubmitRequest.getDeadline()));

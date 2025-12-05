@@ -1,16 +1,16 @@
-package org.tron.core.zen;
+package org.linda.core.zen;
 
 import io.netty.util.internal.StringUtil;
 import java.math.BigInteger;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.tron.common.utils.Base58;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.exception.CipherException;
+import org.linda.common.utils.Base58;
+import org.linda.common.utils.ByteArray;
+import org.linda.core.exception.CipherException;
 
 @AllArgsConstructor
-public class ShieldedTRC20NoteInfo {
+public class ShieldedLRC20NoteInfo {
   @Setter
   @Getter
   public long value = 0;
@@ -25,7 +25,7 @@ public class ShieldedTRC20NoteInfo {
   public byte[] r; // 256
   @Setter
   @Getter
-  public String trxId;
+  public String lindId;
   @Setter
   @Getter
   public int index;
@@ -39,11 +39,11 @@ public class ShieldedTRC20NoteInfo {
   @Getter
   public byte[] memo;
 
-  public ShieldedTRC20NoteInfo() {
+  public ShieldedLRC20NoteInfo() {
   }
 
   /**
-   * format shieldedTRC20 note to a string
+   * format shieldedLRC20 note to a string
    *
    * @return
    */
@@ -53,7 +53,7 @@ public class ShieldedTRC20NoteInfo {
     encodeString += ";";
     encodeString += ByteArray.toHexString(r);
     encodeString += ";";
-    encodeString += trxId;
+    encodeString += lindId;
     encodeString += ";";
     encodeString += String.valueOf(value);
     encodeString += ";";
@@ -75,7 +75,7 @@ public class ShieldedTRC20NoteInfo {
   }
 
   /**
-   * parse string to get shieldedTRC20 note
+   * parse string to get shieldedLRC20 note
    *
    * @param data
    * @return
@@ -93,7 +93,7 @@ public class ShieldedTRC20NoteInfo {
     noteIndex = Long.valueOf(sourceStrArray[0]);
     paymentAddress = sourceStrArray[1];
     r = ByteArray.fromHexString(sourceStrArray[2]);
-    trxId = sourceStrArray[3];
+    lindId = sourceStrArray[3];
     value = Long.valueOf(sourceStrArray[4]);
     rawValue = new BigInteger(sourceStrArray[5]);
     index = Integer.valueOf(sourceStrArray[6]);

@@ -1,7 +1,7 @@
-package org.tron.keystore;
+package org.linda.keystore;
 
 
-import org.tron.common.crypto.SignInterface;
+import org.linda.common.crypto.SignInterface;
 
 public interface Credentials {
   SignInterface getPair();

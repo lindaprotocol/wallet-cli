@@ -16,12 +16,12 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.utils;
+package org.linda.common.utils;
 
 import static java.util.Arrays.copyOfRange;
-import static org.tron.common.utils.ByteUtil.EMPTY_BYTE_ARRAY;
-import static org.tron.common.utils.ByteUtil.isNullOrZeroArray;
-import static org.tron.common.utils.ByteUtil.isSingleZero;
+import static org.linda.common.utils.ByteUtil.EMPTY_BYTE_ARRAY;
+import static org.linda.common.utils.ByteUtil.isNullOrZeroArray;
+import static org.linda.common.utils.ByteUtil.isSingleZero;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -30,7 +30,7 @@ import java.security.Security;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.math.ec.ECPoint;
-import org.tron.common.crypto.jce.TronCastleProvider;
+import org.linda.common.crypto.jce.LindaCastleProvider;
 
 @Slf4j(topic = "crypto")
 public class Hash {
@@ -65,10 +65,10 @@ public class Hash {
   private static final int SIZE_THRESHOLD = 56;
 
   static {
-    Security.addProvider(TronCastleProvider.getInstance());
+    Security.addProvider(LindaCastleProvider.getInstance());
     CRYPTO_PROVIDER = Security.getProvider("BC");
-    HASH_256_ALGORITHM_NAME = "TRON-KECCAK-256";
-    HASH_512_ALGORITHM_NAME = "TRON-KECCAK-512";
+    HASH_256_ALGORITHM_NAME = "LINDA-KECCAK-256";
+    HASH_512_ALGORITHM_NAME = "LINDA-KECCAK-512";
     EMPTY_TRIE_HASH = sha3(encodeElement(EMPTY_BYTE_ARRAY));
   }
 

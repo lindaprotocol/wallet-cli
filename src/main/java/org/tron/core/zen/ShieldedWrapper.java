@@ -1,26 +1,26 @@
-package org.tron.core.zen;
+package org.linda.core.zen;
 
-import static org.tron.common.utils.Utils.failedHighlight;
-import static org.tron.common.utils.Utils.greenBoldHighlight;
+import static org.linda.common.utils.Utils.failedHighlight;
+import static org.linda.common.utils.Utils.greenBoldHighlight;
 
 import com.google.protobuf.ByteString;
 import io.netty.util.internal.StringUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.ArrayUtils;
-import org.tron.api.GrpcAPI.*;
-import org.tron.api.GrpcAPI.DecryptNotes.NoteTx;
-import org.tron.common.utils.Base58;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.Utils;
-import org.tron.core.exception.CipherException;
-import org.tron.keystore.SKeyCapsule;
-import org.tron.keystore.SKeyEncryptor;
-import org.tron.keystore.StringUtils;
-import org.tron.keystore.WalletUtils;
-import org.tron.protos.Protocol.Block;
-import org.tron.walletcli.Client;
-import org.tron.walletserver.WalletApi;
+import org.linda.api.GrpcAPI.*;
+import org.linda.api.GrpcAPI.DecryptNotes.NoteTx;
+import org.linda.common.utils.Base58;
+import org.linda.common.utils.ByteArray;
+import org.linda.common.utils.Utils;
+import org.linda.core.exception.CipherException;
+import org.linda.keystore.SKeyCapsule;
+import org.linda.keystore.SKeyEncryptor;
+import org.linda.keystore.StringUtils;
+import org.linda.keystore.WalletUtils;
+import org.linda.protos.Protocol.Block;
+import org.linda.walletcli.Client;
+import org.linda.walletserver.WalletApi;
 import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
@@ -189,7 +189,7 @@ public class ShieldedWrapper {
               noteInfo.setPaymentAddress(noteTx.getNote().getPaymentAddress());
               noteInfo.setR(noteTx.getNote().getRcm().toByteArray());
               noteInfo.setValue(noteTx.getNote().getValue());
-              noteInfo.setTrxId(ByteArray.toHexString(noteTx.getTxid().toByteArray()));
+              noteInfo.setLindId(ByteArray.toHexString(noteTx.getTxid().toByteArray()));
               noteInfo.setIndex(noteTx.getIndex());
               noteInfo.setNoteIndex(nodeIndex.getAndIncrement());
               noteInfo.setMemo(noteTx.getNote().getMemo().toByteArray());
@@ -224,7 +224,7 @@ public class ShieldedWrapper {
       noteBuild.setRcm(ByteString.copyFrom(noteInfo.getR()));
       noteBuild.setMemo(ByteString.copyFrom(noteInfo.getMemo()));
       builder.setNote(noteBuild.build());
-      builder.setTxid(ByteString.copyFrom(ByteArray.fromHexString(noteInfo.getTrxId())));
+      builder.setTxid(ByteString.copyFrom(ByteArray.fromHexString(noteInfo.getLindId())));
       builder.setIndex(noteInfo.getIndex());
 
       Optional<SpendResult> result = WalletApi.isNoteSpend(builder.build(), false);
@@ -395,7 +395,7 @@ public class ShieldedWrapper {
       String string = entry.getKey() + " " + entry.getValue().getPaymentAddress() + " ";
       string += entry.getValue().getValue();
       string += " ";
-      string += entry.getValue().getTrxId();
+      string += entry.getValue().getLindId();
       string += " ";
       string += entry.getValue().getIndex();
       string += " ";

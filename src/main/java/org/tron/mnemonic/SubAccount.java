@@ -1,4 +1,4 @@
-package org.tron.mnemonic;
+package org.linda.mnemonic;
 
 import com.typesafe.config.Config;
 import lombok.Builder;
@@ -14,12 +14,12 @@ import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedStringBuilder;
 import org.jline.utils.AttributedStyle;
 import org.jline.utils.InfoCmp;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.sm2.SM2;
-import org.tron.core.config.Configuration;
-import org.tron.core.exception.CipherException;
-import org.tron.keystore.WalletFile;
-import org.tron.walletserver.WalletApi;
+import org.linda.common.crypto.ECKey;
+import org.linda.common.crypto.sm2.SM2;
+import org.linda.core.config.Configuration;
+import org.linda.core.exception.CipherException;
+import org.linda.keystore.WalletFile;
+import org.linda.walletserver.WalletApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,14 +28,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import static org.apache.commons.lang3.StringUtils.isNumeric;
-import static org.tron.common.utils.Utils.blueBoldHighlight;
-import static org.tron.common.utils.Utils.failedHighlight;
-import static org.tron.common.utils.Utils.greenBoldHighlight;
-import static org.tron.common.utils.Utils.successfulHighlight;
-import static org.tron.common.utils.Utils.yellowBoldHighlight;
-import static org.tron.ledger.console.ConsoleColor.ANSI_BOLD;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RED;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RESET;
+import static org.linda.common.utils.Utils.blueBoldHighlight;
+import static org.linda.common.utils.Utils.failedHighlight;
+import static org.linda.common.utils.Utils.greenBoldHighlight;
+import static org.linda.common.utils.Utils.successfulHighlight;
+import static org.linda.common.utils.Utils.yellowBoldHighlight;
+import static org.linda.ledger.console.ConsoleColor.ANSI_BOLD;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RED;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RESET;
 
 public class SubAccount {
   private final Terminal terminal;

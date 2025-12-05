@@ -1,4 +1,4 @@
-package org.tron.common.crypto;
+package org.linda.common.crypto;
 
 /*
  * Copyright 2011 Google Inc.
@@ -30,7 +30,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Arrays;
 import org.bouncycastle.crypto.digests.SM3Digest;
-import org.tron.common.utils.ByteArray;
+import org.linda.common.utils.ByteArray;
 
 /**
  * A SM3Hash just wraps a byte[] so that equals and hashcode work correctly, allowing it to be used

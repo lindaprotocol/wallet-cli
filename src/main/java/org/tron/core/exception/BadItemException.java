@@ -1,4 +1,4 @@
-package org.tron.core.exception;
+package org.linda.core.exception;
 
 public class BadItemException extends StoreException {
 

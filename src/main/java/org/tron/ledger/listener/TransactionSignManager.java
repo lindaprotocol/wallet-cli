@@ -1,9 +1,9 @@
-package org.tron.ledger.listener;
+package org.linda.ledger.listener;
 
 import com.google.protobuf.ByteString;
 import org.bouncycastle.util.encoders.Hex;
 import org.hid4java.HidDevice;
-import org.tron.protos.Protocol;
+import org.linda.protos.Protocol;
 
 public class TransactionSignManager {
   private Protocol.Transaction transaction;

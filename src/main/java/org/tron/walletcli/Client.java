@@ -1,19 +1,19 @@
-package org.tron.walletcli;
+package org.linda.walletcli;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.tron.common.enums.NetType.CUSTOM;
-import static org.tron.common.utils.Utils.EMPTY_STR;
-import static org.tron.common.utils.Utils.blueBoldHighlight;
-import static org.tron.common.utils.Utils.failedHighlight;
-import static org.tron.common.utils.Utils.getLong;
-import static org.tron.common.utils.Utils.greenBoldHighlight;
-import static org.tron.common.utils.Utils.isValid;
-import static org.tron.common.utils.Utils.printBanner;
-import static org.tron.common.utils.Utils.successfulHighlight;
-import static org.tron.keystore.StringUtils.byte2Char;
-import static org.tron.keystore.StringUtils.char2Byte;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RED;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RESET;
+import static org.linda.common.enums.NetType.CUSTOM;
+import static org.linda.common.utils.Utils.EMPTY_STR;
+import static org.linda.common.utils.Utils.blueBoldHighlight;
+import static org.linda.common.utils.Utils.failedHighlight;
+import static org.linda.common.utils.Utils.getLong;
+import static org.linda.common.utils.Utils.greenBoldHighlight;
+import static org.linda.common.utils.Utils.isValid;
+import static org.linda.common.utils.Utils.printBanner;
+import static org.linda.common.utils.Utils.successfulHighlight;
+import static org.linda.keystore.StringUtils.byte2Char;
+import static org.linda.keystore.StringUtils.char2Byte;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RED;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RESET;
 
 import com.beust.jcommander.JCommander;
 import com.google.common.primitives.Longs;
@@ -53,78 +53,78 @@ import org.jline.reader.LineReaderBuilder;
 import org.jline.reader.impl.completer.StringsCompleter;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
-import org.tron.api.GrpcAPI.AccountNetMessage;
-import org.tron.api.GrpcAPI.AccountResourceMessage;
-import org.tron.api.GrpcAPI.AddressPrKeyPairMessage;
-import org.tron.api.GrpcAPI.AssetIssueList;
-import org.tron.api.GrpcAPI.BlockExtention;
-import org.tron.api.GrpcAPI.BlockList;
-import org.tron.api.GrpcAPI.BlockListExtention;
-import org.tron.api.GrpcAPI.CanDelegatedMaxSizeResponseMessage;
-import org.tron.api.GrpcAPI.CanWithdrawUnfreezeAmountResponseMessage;
-import org.tron.api.GrpcAPI.DelegatedResourceList;
-import org.tron.api.GrpcAPI.ExchangeList;
-import org.tron.api.GrpcAPI.GetAvailableUnfreezeCountResponseMessage;
-import org.tron.api.GrpcAPI.Node;
-import org.tron.api.GrpcAPI.NodeList;
-import org.tron.api.GrpcAPI.Note;
-import org.tron.api.GrpcAPI.NumberMessage;
-import org.tron.api.GrpcAPI.PricesResponseMessage;
-import org.tron.api.GrpcAPI.ProposalList;
-import org.tron.api.GrpcAPI.TransactionApprovedList;
-import org.tron.api.GrpcAPI.TransactionInfoList;
-import org.tron.api.GrpcAPI.TransactionList;
-import org.tron.api.GrpcAPI.TransactionListExtention;
-import org.tron.api.GrpcAPI.TransactionSignWeight;
-import org.tron.api.GrpcAPI.WitnessList;
-import org.tron.common.crypto.Hash;
-import org.tron.common.crypto.SignInterface;
-import org.tron.common.crypto.SignUtils;
-import org.tron.common.enums.NetType;
-import org.tron.common.utils.AbiUtil;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.ByteUtil;
-import org.tron.common.utils.PathUtil;
-import org.tron.common.utils.Utils;
-import org.tron.common.zksnark.JLibrustzcash;
-import org.tron.common.zksnark.LibrustzcashParam;
-import org.tron.core.exception.CancelException;
-import org.tron.core.exception.CipherException;
-import org.tron.core.exception.ZksnarkException;
-import org.tron.core.zen.ShieldedAddressInfo;
-import org.tron.core.zen.ShieldedNoteInfo;
-import org.tron.core.zen.ShieldedTRC20NoteInfo;
-import org.tron.core.zen.ShieldedTRC20Wrapper;
-import org.tron.core.zen.ShieldedWrapper;
-import org.tron.core.zen.ZenUtils;
-import org.tron.core.zen.address.DiversifierT;
-import org.tron.core.zen.address.ExpandedSpendingKey;
-import org.tron.core.zen.address.IncomingViewingKey;
-import org.tron.core.zen.address.KeyIo;
-import org.tron.core.zen.address.PaymentAddress;
-import org.tron.core.zen.address.SpendingKey;
-import org.tron.keystore.StringUtils;
-import org.tron.ledger.TronLedgerGetAddress;
-import org.tron.ledger.listener.TransactionSignManager;
-import org.tron.ledger.wrapper.LedgerUserHelper;
-import org.tron.mnemonic.MnemonicUtils;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.ChainParameters;
-import org.tron.protos.Protocol.DelegatedResourceAccountIndex;
-import org.tron.protos.Protocol.Exchange;
-import org.tron.protos.Protocol.MarketOrder;
-import org.tron.protos.Protocol.MarketOrderList;
-import org.tron.protos.Protocol.MarketOrderPairList;
-import org.tron.protos.Protocol.MarketPriceList;
-import org.tron.protos.Protocol.Proposal;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.TransactionInfo;
-import org.tron.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.tron.protos.contract.Common.ResourceCode;
-import org.tron.protos.contract.SmartContractOuterClass.SmartContract;
-import org.tron.protos.contract.SmartContractOuterClass.SmartContractDataWrapper;
-import org.tron.walletserver.WalletApi;
+import org.linda.api.GrpcAPI.AccountNetMessage;
+import org.linda.api.GrpcAPI.AccountResourceMessage;
+import org.linda.api.GrpcAPI.AddressPrKeyPairMessage;
+import org.linda.api.GrpcAPI.AssetIssueList;
+import org.linda.api.GrpcAPI.BlockExtention;
+import org.linda.api.GrpcAPI.BlockList;
+import org.linda.api.GrpcAPI.BlockListExtention;
+import org.linda.api.GrpcAPI.CanDelegatedMaxSizeResponseMessage;
+import org.linda.api.GrpcAPI.CanWithdrawUnfreezeAmountResponseMessage;
+import org.linda.api.GrpcAPI.DelegatedResourceList;
+import org.linda.api.GrpcAPI.ExchangeList;
+import org.linda.api.GrpcAPI.GetAvailableUnfreezeCountResponseMessage;
+import org.linda.api.GrpcAPI.Node;
+import org.linda.api.GrpcAPI.NodeList;
+import org.linda.api.GrpcAPI.Note;
+import org.linda.api.GrpcAPI.NumberMessage;
+import org.linda.api.GrpcAPI.PricesResponseMessage;
+import org.linda.api.GrpcAPI.ProposalList;
+import org.linda.api.GrpcAPI.TransactionApprovedList;
+import org.linda.api.GrpcAPI.TransactionInfoList;
+import org.linda.api.GrpcAPI.TransactionList;
+import org.linda.api.GrpcAPI.TransactionListExtention;
+import org.linda.api.GrpcAPI.TransactionSignWeight;
+import org.linda.api.GrpcAPI.WitnessList;
+import org.linda.common.crypto.Hash;
+import org.linda.common.crypto.SignInterface;
+import org.linda.common.crypto.SignUtils;
+import org.linda.common.enums.NetType;
+import org.linda.common.utils.AbiUtil;
+import org.linda.common.utils.ByteArray;
+import org.linda.common.utils.ByteUtil;
+import org.linda.common.utils.PathUtil;
+import org.linda.common.utils.Utils;
+import org.linda.common.zksnark.JLibrustzcash;
+import org.linda.common.zksnark.LibrustzcashParam;
+import org.linda.core.exception.CancelException;
+import org.linda.core.exception.CipherException;
+import org.linda.core.exception.ZksnarkException;
+import org.linda.core.zen.ShieldedAddressInfo;
+import org.linda.core.zen.ShieldedNoteInfo;
+import org.linda.core.zen.ShieldedLRC20NoteInfo;
+import org.linda.core.zen.ShieldedLRC20Wrapper;
+import org.linda.core.zen.ShieldedWrapper;
+import org.linda.core.zen.ZenUtils;
+import org.linda.core.zen.address.DiversifierT;
+import org.linda.core.zen.address.ExpandedSpendingKey;
+import org.linda.core.zen.address.IncomingViewingKey;
+import org.linda.core.zen.address.KeyIo;
+import org.linda.core.zen.address.PaymentAddress;
+import org.linda.core.zen.address.SpendingKey;
+import org.linda.keystore.StringUtils;
+import org.linda.ledger.LindaLedgerGetAddress;
+import org.linda.ledger.listener.TransactionSignManager;
+import org.linda.ledger.wrapper.LedgerUserHelper;
+import org.linda.mnemonic.MnemonicUtils;
+import org.linda.protos.Protocol.Account;
+import org.linda.protos.Protocol.Block;
+import org.linda.protos.Protocol.ChainParameters;
+import org.linda.protos.Protocol.DelegatedResourceAccountIndex;
+import org.linda.protos.Protocol.Exchange;
+import org.linda.protos.Protocol.MarketOrder;
+import org.linda.protos.Protocol.MarketOrderList;
+import org.linda.protos.Protocol.MarketOrderPairList;
+import org.linda.protos.Protocol.MarketPriceList;
+import org.linda.protos.Protocol.Proposal;
+import org.linda.protos.Protocol.Transaction;
+import org.linda.protos.Protocol.TransactionInfo;
+import org.linda.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.linda.protos.contract.Common.ResourceCode;
+import org.linda.protos.contract.SmartContractOuterClass.SmartContract;
+import org.linda.protos.contract.SmartContractOuterClass.SmartContractDataWrapper;
+import org.linda.walletserver.WalletApi;
 
 
 public class Client {
@@ -138,7 +138,7 @@ public class Client {
       "ApproveProposal",
       "AssetIssue",
       // "BackupShieldedWallet",
-      "BackupShieldedTRC20Wallet",
+      "BackupShieldedLRC20Wallet",
       "BackupWallet",
       "BackupWallet2Base64",
       "ExportWalletMnemonic",
@@ -166,8 +166,8 @@ public class Client {
       "GasFreeTrace",
       "GasFreeTransfer",
       "GenerateAddress",
-      // "GenerateShieldedAddress",
-      "GenerateShieldedTRC20Address",
+      "GenerateShieldedAddress",
+      "GenerateShieldedLRC20Address",
       "GetAccount",
       "GetAccountNet",
       "GetAccountResource",
@@ -212,7 +212,7 @@ public class Client {
       "GetNkFromNsk",
       "GetProposal",
       "GetReward",
-      // "GetShieldedNullifier",
+      "GetShieldedNullifier",
       "GetShieldedPaymentAddress",
       "GetSpendingKey",
       "GetTotalTransaction",
@@ -224,8 +224,8 @@ public class Client {
       "GetTransactionSignWeight",
       "GetTransactionsFromThis",
       "GetTransactionsToThis",
-      "ImportShieldedTRC20Wallet",
-      // "ImportShieldedWallet",
+      "ImportShieldedLRC20Wallet",
+      "ImportShieldedWallet",
       "ImportWallet",
       "ImportWalletByMnemonic",
       "ImportWalletByLedger",
@@ -235,44 +235,44 @@ public class Client {
       "ListExchanges",
       "ListExchangesPaginated",
       "ListNodes",
-      // "ListShieldedAddress",
-      // "ListShieldedNote",
-      "ListShieldedTRC20Address",
-      "ListShieldedTRC20Note",
+      "ListShieldedAddress",
+      "ListShieldedNote",
+      "ListShieldedLRC20Address",
+      "ListShieldedLRC20Note",
       "ListProposals",
       "ListProposalsPaginated",
-      // "ListShieldedAddress",
-      // "ListShieldedNote",
+      "ListShieldedAddress",
+      "ListShieldedNote",
       "ListWitnesses",
-      // "LoadShieldedWallet",
+      "LoadShieldedWallet",
       "Lock",
       "Login",
       "Logout",
       "LoginAll",
-      "LoadShieldedTRC20Wallet",
-      // "LoadShieldedWallet",
+      "LoadShieldedLRC20Wallet",
+      "LoadShieldedWallet",
       "MarketCancelOrder",
       "MarketSellAsset",
       "ParticipateAssetIssue",
       "RegisterWallet",
       "GenerateSubAccount",
-      // "ResetShieldedNote",
-      "ResetShieldedTRC20Note",
+      "ResetShieldedNote",
+      "ResetShieldedLRC20Note",
       "ResetWallet",
-      // "ScanAndMarkNotebyAddress",
-      // "ScanNotebyIvk",
-      // "ScanNotebyOvk",
-      "ScanShieldedTRC20NoteByIvk",
-      "ScanShieldedTRC20NoteByOvk",
+      "ScanAndMarkNotebyAddress",
+      "ScanNotebyIvk",
+      "ScanNotebyOvk",
+      "ScanShieldedLRC20NoteByIvk",
+      "ScanShieldedLRC20NoteByOvk",
       "SendCoin",
-      // "SendShieldedCoin",
-      // "SendShieldedCoinWithoutAsk",
-      "SendShieldedTRC20Coin",
-      "SendShieldedTRC20CoinWithoutAsk",
+      "SendShieldedCoin",
+      "SendShieldedCoinWithoutAsk",
+      "SendShieldedLRC20Coin",
+      "SendShieldedLRC20CoinWithoutAsk",
       "SetAccountId",
-      "SetShieldedTRC20ContractAddress",
-      // "ShowShieldedAddressInfo",
-      "ShowShieldedTRC20AddressInfo",
+      "SetShieldedLRC20ContractAddress",
+      "ShowShieldedAddressInfo",
+      "ShowShieldedLRC20AddressInfo",
       "SwitchNetwork",
       "SwitchWallet",
       "TransferAsset",
@@ -301,8 +301,8 @@ public class Client {
       "AddTransactionSign",
       "ApproveProposal",
       "AssetIssue",
-      // "BackupShieldedWallet",
-      "BackupShieldedTRC20Wallet",
+      "BackupShieldedWallet",
+      "BackupShieldedLRC20Wallet",
       "BackupWallet",
       "BackupWallet2Base64",
       "ExportWalletMnemonic",
@@ -330,8 +330,8 @@ public class Client {
       "GasFreeTrace",
       "GasFreeTransfer",
       "GenerateAddress",
-      // "GenerateShieldedAddress",
-      "GenerateShieldedTRC20Address",
+      "GenerateShieldedAddress",
+      "GenerateShieldedLRC20Address",
       "GetAccount",
       "GetAccountNet",
       "GetAccountResource",
@@ -376,7 +376,7 @@ public class Client {
       "GetNkFromNsk",
       "GetProposal",
       "GetReward",
-      // "GetShieldedNullifier",
+      "GetShieldedNullifier",
       "GetShieldedPaymentAddress",
       "GetSpendingKey",
       "GetTotalTransaction",
@@ -389,8 +389,8 @@ public class Client {
       "GetTransactionsFromThis",
       "GetTransactionsToThis",
       "Help",
-      "ImportShieldedTRC20Wallet",
-      // "ImportShieldedWallet",
+      "ImportShieldedLRC20Wallet",
+      "ImportShieldedWallet",
       "ImportWallet",
       "ImportWalletByMnemonic",
       "ImportWalletByLedger",
@@ -400,43 +400,43 @@ public class Client {
       "ListExchanges",
       "ListExchangesPaginated",
       "ListNodes",
-      // "ListShieldedAddress",
-      // "ListShieldedNote",
-      "ListShieldedTRC20Address",
-      "ListShieldedTRC20Note",
+      "ListShieldedAddress",
+      "ListShieldedNote",
+      "ListShieldedLRC20Address",
+      "ListShieldedLRC20Note",
       "ListProposals",
       "ListProposalsPaginated",
-      // "ListShieldedAddress",
-      // "ListShieldedNote",
+      "ListShieldedAddress",
+      "ListShieldedNote",
       "ListWitnesses",
       "Lock",
       "Login",
       "LoginAll",
       "Logout",
-      "LoadShieldedTRC20Wallet",
-      // "LoadShieldedWallet",
+      "LoadShieldedLRC20Wallet",
+      "LoadShieldedWallet",
       "MarketCancelOrder",
       "MarketSellAsset",
       "ParticipateAssetIssue",
       "RegisterWallet",
       "GenerateSubAccount",
-      // "ResetShieldedNote",
-      "ResetShieldedTRC20Note",
+      "ResetShieldedNote",
+      "ResetShieldedLRC20Note",
       "ResetWallet",
-      // "ScanAndMarkNotebyAddress",
-      // "ScanNotebyIvk",
-      // "ScanNotebyOvk",
-      "ScanShieldedTRC20NoteByIvk",
-      "ScanShieldedTRC20NoteByOvk",
+      "ScanAndMarkNotebyAddress",
+      "ScanNotebyIvk",
+      "ScanNotebyOvk",
+      "ScanShieldedLRC20NoteByIvk",
+      "ScanShieldedLRC20NoteByOvk",
       "SendCoin",
-      // "SendShieldedCoin",
-      // "SendShieldedCoinWithoutAsk",
-      "SendShieldedTRC20Coin",
-      "SendShieldedTRC20CoinWithoutAsk",
+      "SendShieldedCoin",
+      "SendShieldedCoinWithoutAsk",
+      "SendShieldedLRC20Coin",
+      "SendShieldedLRC20CoinWithoutAsk",
       "SetAccountId",
-      "SetShieldedTRC20ContractAddress",
-      // "ShowShieldedAddressInfo",
-      "ShowShieldedTRC20AddressInfo",
+      "SetShieldedLRC20ContractAddress",
+      "ShowShieldedAddressInfo",
+      "ShowShieldedLRC20AddressInfo",
       "SwitchNetwork",
       "SwitchWallet",
       "TransferAsset",
@@ -691,7 +691,7 @@ public class Client {
     char[] password = null;
     try {
       //get unused device
-      device  = TronLedgerGetAddress.getInstance().selectDevice();
+      device  = LindaLedgerGetAddress.getInstance().selectDevice();
       if (device == null) {
         LedgerUserHelper.showHidDeviceConnectionError();
         System.out.println("No Ledger device found");
@@ -892,15 +892,15 @@ public class Client {
   private void exportWalletKeystore(String[] parameters) throws CipherException, IOException {
     if (parameters.length < 2) {
       String tempPath = PathUtil.getTempDirectoryPath();
-      System.out.println("Example usage: ExportWalletKeystore tronlink " + tempPath);
+      System.out.println("Example usage: ExportWalletKeystore lindalink " + tempPath);
       System.out.println("exportWalletKeystore " + failedHighlight() + ", parameters error !!");
       return;
     }
 
     String channel = parameters[0];
-    if (!channel.equalsIgnoreCase("tronlink")) {
+    if (!channel.equalsIgnoreCase("lindalink")) {
       System.out.println("exportWalletKeystore " + failedHighlight() + ", channel error !!");
-      System.out.println("currrently only tronlink is supported!!");
+      System.out.println("currrently only lindalink is supported!!");
       return;
     }
     String exportDirPath = parameters[1];
@@ -933,13 +933,13 @@ public class Client {
     System.out.println("Please make sure to back up the old keystore files in the Wallet/Mnemonic directory if it is still needed!");
 
     if (parameters.length < 2) {
-      System.out.println("Example usage: ImportWalletByKeystore tronlink tronlink-export-keystore.json");
+      System.out.println("Example usage: ImportWalletByKeystore lindalink lindalink-export-keystore.json");
       System.out.println("importWalletByKeystore " + failedHighlight() + ", parameters error !!");
       return;
     }
 
     String channel = parameters[0];
-    if (!channel.equalsIgnoreCase("tronlink")) {
+    if (!channel.equalsIgnoreCase("lindalink")) {
       System.out.println("importWalletByKeystore " + failedHighlight() + ", channel error !!");
       return ;
     }
@@ -951,7 +951,7 @@ public class Client {
       return ;
     }
     if (importFile.isDirectory()) {
-      System.out.println("Example usage: ImportWalletByKeystore tronlink tronlink-export-keystore.json");
+      System.out.println("Example usage: ImportWalletByKeystore lindalink lindalink-export-keystore.json");
       System.out.println("importWalletByKeystore " + failedHighlight() + ", parameters 2 is a directory!!");
       return ;
     }
@@ -1025,7 +1025,7 @@ public class Client {
       System.out.println("GetBalance " + failedHighlight() + " !!!!");
     } else {
       long balance = account.getBalance();
-      System.out.println("Balance = " + balance + " SUN = " + balance / 1000000 + " TRX");
+      System.out.println("Balance = " + balance + " SUN = " + balance / 1000000 + " LIND");
     }
   }
 
@@ -1385,10 +1385,10 @@ public class Client {
       throws IOException, CipherException, CancelException {
     if (parameters == null || parameters.length < 12) {
       System.out.println("Use the assetIssue command for features that you require with below syntax: ");
-      System.out.println("AssetIssue [OwnerAddress] AssetName AbbrName TotalSupply TrxNum AssetNum Precision "
+      System.out.println("AssetIssue [OwnerAddress] AssetName AbbrName TotalSupply LindNum AssetNum Precision "
               + "StartDate EndDate Description Url FreeNetLimitPerAccount PublicFreeNetLimit "
               + "FrozenAmount0 FrozenDays0 ... FrozenAmountN FrozenDaysN");
-      System.out.println("TrxNum and AssetNum represents the conversion ratio of the tron to the asset.");
+      System.out.println("LindNum and AssetNum represents the conversion ratio of the linda to the asset.");
       System.out.println("The StartDate and EndDate format should look like 2018-03-01 2018-03-21 .");
       return;
     }
@@ -1406,7 +1406,7 @@ public class Client {
     String name = parameters[index++];
     String abbrName = parameters[index++];
     String totalSupplyStr = parameters[index++];
-    String trxNumStr = parameters[index++];
+    String lindNumStr = parameters[index++];
     String icoNumStr = parameters[index++];
     String precisionStr = parameters[index++];
     String startYyyyMmDd = parameters[index++];
@@ -1422,7 +1422,7 @@ public class Client {
       frozenSupply.put(days, amount);
     }
     long totalSupply = new Long(totalSupplyStr);
-    int trxNum = new Integer(trxNumStr);
+    int lindNum = new Integer(lindNumStr);
     int icoNum = new Integer(icoNumStr);
     int precision = new Integer(precisionStr);
     Date startDate = Utils.strToDateLong(startYyyyMmDd);
@@ -1439,7 +1439,7 @@ public class Client {
     long publicFreeNetLimit = new Long(publicFreeNetLimitString);
 
     boolean result = walletApiWrapper.assetIssue(ownerAddress, name, abbrName, totalSupply,
-        trxNum, icoNum, precision, startTime, endTime, 0,
+        lindNum, icoNum, precision, startTime, endTime, 0,
         description, url, freeAssetNetLimit, publicFreeNetLimit, frozenSupply);
     if (result) {
       System.out.println("AssetIssue " + name + " " + successfulHighlight() + " !!");
@@ -1715,7 +1715,7 @@ public class Client {
         || parameters.length == 4 || parameters.length == 5)) {
       System.out.println("Use freezeBalance command with below syntax: ");
       System.out.println("freezeBalance [OwnerAddress] frozen_balance frozen_duration "
-          + "[ResourceCode:0 BANDWIDTH,1 ENERGY,2 TRON_POWER] [receiverAddress]");
+          + "[ResourceCode:0 BANDWIDTH,1 ENERGY,2 LINDA_POWER] [receiverAddress]");
       return;
     }
 
@@ -1758,7 +1758,7 @@ public class Client {
     if (parameters == null || !(parameters.length == 2 || parameters.length == 3)) {
       System.out.println("Use freezeBalanceV2 command with below syntax: ");
       System.out.println("freezeBalanceV2 [OwnerAddress] frozen_balance "
-              + "[ResourceCode:0 BANDWIDTH,1 ENERGY,2 TRON_POWER]");
+              + "[ResourceCode:0 BANDWIDTH,1 ENERGY,2 LINDA_POWER]");
       return;
     }
 
@@ -1778,7 +1778,7 @@ public class Client {
       try {
         resourceCode = Integer.parseInt(parameters[index]);
       } catch (NumberFormatException e) {
-        System.out.println("freezeBalanceV2  [ResourceCode:0 BANDWIDTH,1 ENERGY,2 TRON_POWER]");
+        System.out.println("freezeBalanceV2  [ResourceCode:0 BANDWIDTH,1 ENERGY,2 LINDA_POWER]");
         return;
       }
     }
@@ -1797,7 +1797,7 @@ public class Client {
     if (parameters == null || parameters.length < 1 || parameters.length > 3) {
       System.out.println("Use unfreezeBalance command with below syntax: ");
       System.out.println(
-          "unfreezeBalance [OwnerAddress] ResourceCode(0 BANDWIDTH,1 ENERGY,2 TRON_POWER) [receiverAddress]");
+          "unfreezeBalance [OwnerAddress] ResourceCode(0 BANDWIDTH,1 ENERGY,2 LINDA_POWER) [receiverAddress]");
       return;
     }
 
@@ -1835,7 +1835,7 @@ public class Client {
     if (parameters == null || !(parameters.length == 2 || parameters.length == 3)) {
       System.out.println("Use unfreezeBalanceV2 command with below syntax: ");
       System.out.println(
-              "unfreezeBalanceV2 [OwnerAddress] unfreezeBalance ResourceCode(0 BANDWIDTH,1 ENERGY,2 TRON_POWER)");
+              "unfreezeBalanceV2 [OwnerAddress] unfreezeBalance ResourceCode(0 BANDWIDTH,1 ENERGY,2 LINDA_POWER)");
       return;
     }
 
@@ -3049,7 +3049,7 @@ public class Client {
         parameters.length < 11) {
       System.out.println("Using deployContract needs at least 11 parameters like: ");
       System.out.println(
-          "DeployContract [ownerAddress] contractName ABI byteCode constructor params isHex fee_limit consume_user_resource_percent origin_energy_limit value token_value token_id(e.g: TRXTOKEN, use # if don't provided) <library:address,library:address,...> <lib_compiler_version(e.g:v5)>");
+          "DeployContract [ownerAddress] contractName ABI byteCode constructor params isHex fee_limit consume_user_resource_percent origin_energy_limit value token_value token_id(e.g: LINDTOKEN, use # if don't provided) <library:address,library:address,...> <lib_compiler_version(e.g:v5)>");
 //      System.out.println(
 //          "Note: Please append the param for constructor tightly with byteCode without any space");
       return;
@@ -3175,7 +3175,7 @@ public class Client {
     if (parameters == null || (parameters.length != 8 && parameters.length != 9)) {
       System.out.println("TriggerContract needs 8 or 9 parameters like: ");
       System.out.println("TriggerContract [OwnerAddress] contractAddress method args isHex"
-          + " fee_limit value token_value token_id(e.g: TRXTOKEN, use # if don't provided)");
+          + " fee_limit value token_value token_id(e.g: LINDTOKEN, use # if don't provided)");
       return;
     }
 
@@ -3228,7 +3228,7 @@ public class Client {
     if (parameters == null || (parameters.length != 5 && parameters.length != 8)) {
       System.out.println("TriggerConstantContract needs 5 or 8 parameters like: ");
       System.out.println("TriggerConstantContract ownerAddress(use # if you own)"
-          + " contractAddress method args isHex [value token_value token_id(e.g: TRXTOKEN, use # if don't provided)]");
+          + " contractAddress method args isHex [value token_value token_id(e.g: LINDTOKEN, use # if don't provided)]");
       return;
     }
 
@@ -3287,7 +3287,7 @@ public class Client {
       System.out.println("EstimateEnergy needs 5 or 8 parameters like: ");
       System.out.println("EstimateEnergy ownerAddress(use # if you own)"
           + " contractAddress method args isHex "
-          + "[value token_value token_id(e.g: TRXTOKEN, use # if don't provided)]");
+          + "[value token_value token_id(e.g: LINDTOKEN, use # if don't provided)]");
       return;
     }
 
@@ -3788,7 +3788,7 @@ public class Client {
         String string = entry.getValue().getPaymentAddress() + " ";
         string += entry.getValue().getValue();
         string += " ";
-        string += entry.getValue().getTrxId();
+        string += entry.getValue().getLindId();
         string += " ";
         string += entry.getValue().getIndex();
         string += " ";
@@ -3803,7 +3803,7 @@ public class Client {
         String string = noteInfo.getPaymentAddress() + " ";
         string += noteInfo.getValue();
         string += " ";
-        string += noteInfo.getTrxId();
+        string += noteInfo.getLindId();
         string += " ";
         string += noteInfo.getIndex();
         string += " ";
@@ -3896,7 +3896,7 @@ public class Client {
 
   private void getSpendingKey() {
     while (true) {
-      byte[] skBytes = org.tron.keystore.Wallet.generateRandomBytes(32);
+      byte[] skBytes = org.linda.keystore.Wallet.generateRandomBytes(32);
       SpendingKey sk = new SpendingKey(skBytes);
       try {
         if (sk.fullViewingKey().isValid()) {
@@ -4238,56 +4238,56 @@ public class Client {
     return;
   }
 
-  private void setShieldedTRC20ContractAddress(String[] parameters) {
+  private void setShieldedLRC20ContractAddress(String[] parameters) {
     if (parameters.length == 2) {
-      byte[] trc20ContractAddress = WalletApi.decodeFromBase58Check(parameters[0]);
+      byte[] lrc20ContractAddress = WalletApi.decodeFromBase58Check(parameters[0]);
       byte[] shieldedContractAddress = WalletApi.decodeFromBase58Check(parameters[1]);
-      if (!(trc20ContractAddress == null || shieldedContractAddress == null)) {
-        ShieldedTRC20Wrapper.getInstance().setShieldedTRC20WalletPath(parameters[0], parameters[1]);
+      if (!(lrc20ContractAddress == null || shieldedContractAddress == null)) {
+        ShieldedLRC20Wrapper.getInstance().setShieldedLRC20WalletPath(parameters[0], parameters[1]);
         //set scaling factor
         String scalingFactorHexStr = walletApiWrapper.getScalingFactor(shieldedContractAddress);
         if (scalingFactorHexStr != null) {
           BigInteger scalingFactor = new BigInteger(scalingFactorHexStr, 16);
-          ShieldedTRC20Wrapper.getInstance().setScalingFactor(scalingFactor);
-          System.out.println("SetShieldedTRC20ContractAddress succeed!");
+          ShieldedLRC20Wrapper.getInstance().setScalingFactor(scalingFactor);
+          System.out.println("SetShieldedLRC20ContractAddress succeed!");
           System.out.println("The Scaling Factor is " + scalingFactor);
           System.out.println("That means:");
           System.out.println("No matter you MINT, TRANSFER or BURN, the value must be an integer "
               + "multiple of " + scalingFactor);
         }
       } else {
-        System.out.println("SetShieldedTRC20ContractAddress " + failedHighlight() + " !!! Invalid Address !!!");
+        System.out.println("SetShieldedLRC20ContractAddress " + failedHighlight() + " !!! Invalid Address !!!");
       }
     } else {
-      System.out.println("SetShieldedTRC20ContractAddress command needs 2 parameters like:");
-      System.out.println("SetShieldedTRC20ContractAddress TRC20ContractAddress"
+      System.out.println("SetShieldedLRC20ContractAddress command needs 2 parameters like:");
+      System.out.println("SetShieldedLRC20ContractAddress LRC20ContractAddress"
           + " ShieldedContractAddress");
     }
   }
 
-  private void backupShieldedTRC20Wallet() throws IOException, CipherException {
-    if (!ShieldedTRC20Wrapper.isSetShieldedTRC20WalletPath()) {
-      System.out.println("BackupShieldedTRC20Wallet " + failedHighlight() + " !!!"
-          + " Please SetShieldedTRC20ContractAddress first !!!");
+  private void backupShieldedLRC20Wallet() throws IOException, CipherException {
+    if (!ShieldedLRC20Wrapper.isSetShieldedLRC20WalletPath()) {
+      System.out.println("BackupShieldedLRC20Wallet " + failedHighlight() + " !!!"
+          + " Please SetShieldedLRC20ContractAddress first !!!");
       return;
     }
 
-    ShieldedAddressInfo addressInfo = ShieldedTRC20Wrapper.getInstance()
-        .backupShieldedTRC20Wallet();
+    ShieldedAddressInfo addressInfo = ShieldedLRC20Wrapper.getInstance()
+        .backupShieldedLRC20Wallet();
     if (addressInfo != null) {
       System.out.println("sk:" + ByteArray.toHexString(addressInfo.getSk()));
       System.out.println("d :" + ByteArray.toHexString(addressInfo.getD().getData()));
-      System.out.println("BackupShieldedTRC20Wallet " + successfulHighlight() + " !!!");
+      System.out.println("BackupShieldedLRC20Wallet " + successfulHighlight() + " !!!");
     } else {
-      System.out.println("BackupShieldedTRC20Wallet " + failedHighlight() + " !!!");
+      System.out.println("BackupShieldedLRC20Wallet " + failedHighlight() + " !!!");
     }
   }
 
-  private void generateShieldedTRC20Address(String[] parameters) throws IOException,
+  private void generateShieldedLRC20Address(String[] parameters) throws IOException,
       CipherException, ZksnarkException {
-    if (!ShieldedTRC20Wrapper.isSetShieldedTRC20WalletPath()) {
-      System.out.println("GenerateShieldedTRC20Address " + failedHighlight() + " !!!"
-          + " Please SetShieldedTRC20ContractAddress first !!!");
+    if (!ShieldedLRC20Wrapper.isSetShieldedLRC20WalletPath()) {
+      System.out.println("GenerateShieldedLRC20Address " + failedHighlight() + " !!!"
+          + " Please SetShieldedLRC20ContractAddress first !!!");
       return;
     }
 
@@ -4305,13 +4305,13 @@ public class Client {
       }
     }
 
-    ShieldedTRC20Wrapper.getInstance().initShieldedTRC20WalletFile();
+    ShieldedLRC20Wrapper.getInstance().initShieldedLRC20WalletFile();
 
-    System.out.println("ShieldedTRC20Address list:");
+    System.out.println("ShieldedLRC20Address list:");
     for (int i = 0; i < addressNum; ++i) {
       Optional<ShieldedAddressInfo> addressInfo = new ShieldedAddressInfo().getNewShieldedAddress();
       if (addressInfo.isPresent()) {
-        if (ShieldedTRC20Wrapper.getInstance().addNewShieldedTRC20Address(
+        if (ShieldedLRC20Wrapper.getInstance().addNewShieldedLRC20Address(
             addressInfo.get(), true)) {
           System.out.println(addressInfo.get().getAddress());
         }
@@ -4319,14 +4319,14 @@ public class Client {
     }
   }
 
-  private void importShieldedTRC20Wallet() throws CipherException, IOException, ZksnarkException {
-    if (!ShieldedTRC20Wrapper.isSetShieldedTRC20WalletPath()) {
-      System.out.println("ImportShieldedTRC20Wallet " + failedHighlight() + " !!!"
-          + " Please SetShieldedTRC20ContractAddress first !!!");
+  private void importShieldedLRC20Wallet() throws CipherException, IOException, ZksnarkException {
+    if (!ShieldedLRC20Wrapper.isSetShieldedLRC20WalletPath()) {
+      System.out.println("ImportShieldedLRC20Wallet " + failedHighlight() + " !!!"
+          + " Please SetShieldedLRC20ContractAddress first !!!");
       return;
     }
 
-    byte[] priKey = ShieldedTRC20Wrapper.getInstance().importShieldedTRC20Wallet();
+    byte[] priKey = ShieldedLRC20Wrapper.getInstance().importShieldedLRC20Wallet();
     if (!ArrayUtils.isEmpty(priKey) && priKey.length == 43) {
       byte[] sk = new byte[32];
       byte[] d = new byte[11];
@@ -4334,36 +4334,36 @@ public class Client {
       System.arraycopy(priKey, sk.length, d, 0, d.length);
       Optional<ShieldedAddressInfo> addressInfo =
           new ShieldedAddressInfo().getNewShieldedAddressBySkAndD(sk, d);
-      if (addressInfo.isPresent() && ShieldedTRC20Wrapper.getInstance().addNewShieldedTRC20Address(
+      if (addressInfo.isPresent() && ShieldedLRC20Wrapper.getInstance().addNewShieldedLRC20Address(
           addressInfo.get(), false)) {
-        System.out.println("Import new shieldedTRC20 wallet address is: "
+        System.out.println("Import new shieldedLRC20 wallet address is: "
             + addressInfo.get().getAddress());
-        System.out.println("ImportShieldedTRC20Wallet " + successfulHighlight() + " !!!");
+        System.out.println("ImportShieldedLRC20Wallet " + successfulHighlight() + " !!!");
       } else {
-        System.out.println("ImportShieldedTRC20Wallet " + failedHighlight() + " !!!");
+        System.out.println("ImportShieldedLRC20Wallet " + failedHighlight() + " !!!");
       }
     } else {
-      System.out.println("ImportShieldedTRC20Wallet " + failedHighlight() + " !!!");
+      System.out.println("ImportShieldedLRC20Wallet " + failedHighlight() + " !!!");
     }
   }
 
-  private void listShieldedTRC20Address() {
-    if (!ShieldedTRC20Wrapper.getInstance().ifShieldedTRC20WalletLoaded()) {
-      System.out.println("ListShieldedTRC20Address failed, please LoadShieldedTRC20Wallet " +
+  private void listShieldedLRC20Address() {
+    if (!ShieldedLRC20Wrapper.getInstance().ifShieldedLRC20WalletLoaded()) {
+      System.out.println("ListShieldedLRC20Address failed, please LoadShieldedLRC20Wallet " +
           "first!");
       return;
     }
 
-    List<String> listAddress = ShieldedTRC20Wrapper.getInstance().getShieldedTRC20AddressList();
-    System.out.println("ShieldedTRC20Address :");
+    List<String> listAddress = ShieldedLRC20Wrapper.getInstance().getShieldedLRC20AddressList();
+    System.out.println("ShieldedLRC20Address :");
     for (String address : listAddress) {
       System.out.println(address);
     }
   }
 
-  private void listShieldedTRC20Note(String[] parameters) {
-    if (!ShieldedTRC20Wrapper.getInstance().ifShieldedTRC20WalletLoaded()) {
-      System.out.println("ListShieldedTRC20Note failed, please LoadShieldedTRC20Wallet first!");
+  private void listShieldedLRC20Note(String[] parameters) {
+    if (!ShieldedLRC20Wrapper.getInstance().ifShieldedLRC20WalletLoaded()) {
+      System.out.println("ListShieldedLRC20Note failed, please LoadShieldedLRC20Wallet first!");
       return;
     }
 
@@ -4372,7 +4372,7 @@ public class Client {
       System.out.println("This command will show all the unspent notes. ");
       System.out.println(
           "If you want to display all notes, including spent notes and unspent notes, "
-              + "please use command ListShieldedTRC20Note 1 ");
+              + "please use command ListShieldedLRC20Note 1 ");
     } else {
       if (!StringUtil.isNullOrEmpty(parameters[0])) {
         try {
@@ -4385,7 +4385,7 @@ public class Client {
     }
 
     if (showType == 0) {
-      List<String> utxoList = ShieldedTRC20Wrapper.getInstance().getvalidateSortUtxoList();
+      List<String> utxoList = ShieldedLRC20Wrapper.getInstance().getvalidateSortUtxoList();
       if (utxoList.isEmpty()) {
         System.out.println("The count of unspent note is 0.");
       } else {
@@ -4395,14 +4395,14 @@ public class Client {
         }
       }
     } else {
-      Map<Long, ShieldedTRC20NoteInfo> noteMap =
-          ShieldedTRC20Wrapper.getInstance().getUtxoMapNote();
+      Map<Long, ShieldedLRC20NoteInfo> noteMap =
+          ShieldedLRC20Wrapper.getInstance().getUtxoMapNote();
       System.out.println("All notes are shown below:");
-      for (Entry<Long, ShieldedTRC20NoteInfo> entry : noteMap.entrySet()) {
+      for (Entry<Long, ShieldedLRC20NoteInfo> entry : noteMap.entrySet()) {
         String string = entry.getValue().getPaymentAddress() + " ";
         string += entry.getValue().getRawValue().toString();
         string += " ";
-        string += entry.getValue().getTrxId();
+        string += entry.getValue().getLindId();
         string += " ";
         string += entry.getValue().getIndex();
         string += " ";
@@ -4414,12 +4414,12 @@ public class Client {
         System.out.println(string);
       }
 
-      List<ShieldedTRC20NoteInfo> noteList = ShieldedTRC20Wrapper.getInstance().getSpendUtxoList();
-      for (ShieldedTRC20NoteInfo noteInfo : noteList) {
+      List<ShieldedLRC20NoteInfo> noteList = ShieldedLRC20Wrapper.getInstance().getSpendUtxoList();
+      for (ShieldedLRC20NoteInfo noteInfo : noteList) {
         String string = noteInfo.getPaymentAddress() + " ";
         string += noteInfo.getRawValue().toString();
         string += " ";
-        string += noteInfo.getTrxId();
+        string += noteInfo.getLindId();
         string += " ";
         string += noteInfo.getIndex();
         string += " ";
@@ -4431,46 +4431,46 @@ public class Client {
         System.out.println(string);
       }
     }
-    BigInteger scalingFactor = ShieldedTRC20Wrapper.getInstance().getScalingFactor();
+    BigInteger scalingFactor = ShieldedLRC20Wrapper.getInstance().getScalingFactor();
     System.out.println("The Scaling Factor is " + scalingFactor.toString());
     System.out.println("No matter you MINT, TRANSFER or BURN, the value must be an integer "
         + "multiple of " + scalingFactor.toString());
   }
 
-  private void loadShieldedTRC20Wallet() throws CipherException, IOException {
-    if (ShieldedTRC20Wrapper.isSetShieldedTRC20WalletPath()) {
-      boolean result = ShieldedTRC20Wrapper.getInstance().loadShieldTRC20Wallet();
+  private void loadShieldedLRC20Wallet() throws CipherException, IOException {
+    if (ShieldedLRC20Wrapper.isSetShieldedLRC20WalletPath()) {
+      boolean result = ShieldedLRC20Wrapper.getInstance().loadShieldLRC20Wallet();
       if (result) {
-        System.out.println("LoadShieldedTRC20Wallet " + successfulHighlight() + " !!!");
+        System.out.println("LoadShieldedLRC20Wallet " + successfulHighlight() + " !!!");
       } else {
-        System.out.println("LoadShieldedTRC20Wallet " + failedHighlight() + " !!!");
+        System.out.println("LoadShieldedLRC20Wallet " + failedHighlight() + " !!!");
       }
     } else {
-      System.out.println("LoadShieldedTRC20Wallet " + failedHighlight() + " !!!"
-          + " Please SetShieldedTRC20ContractAddress first !!!");
+      System.out.println("LoadShieldedLRC20Wallet " + failedHighlight() + " !!!"
+          + " Please SetShieldedLRC20ContractAddress first !!!");
     }
   }
 
-  private void resetShieldedTRC20Note() {
-    if (!ShieldedTRC20Wrapper.getInstance().ifShieldedTRC20WalletLoaded()) {
-      System.out.println("ResetShieldedTRC20Note failed, please LoadShieldedTRC20Wallet first!");
+  private void resetShieldedLRC20Note() {
+    if (!ShieldedLRC20Wrapper.getInstance().ifShieldedLRC20WalletLoaded()) {
+      System.out.println("ResetShieldedLRC20Note failed, please LoadShieldedLRC20Wallet first!");
       return;
     } else {
-      System.out.println("Start to reset shieldedTRC20 notes, please wait ...");
-      ShieldedTRC20Wrapper.getInstance().setResetNote(true);
+      System.out.println("Start to reset shieldedLRC20 notes, please wait ...");
+      ShieldedLRC20Wrapper.getInstance().setResetNote(true);
     }
   }
 
-  private void scanShieldedTRC20NoteByIvk(String[] parameters) {
+  private void scanShieldedLRC20NoteByIvk(String[] parameters) {
     if (parameters == null || parameters.length < 6) {
-      System.out.println("ScanShieldedTRC20NoteByIvk command needs at least 6 parameters like: ");
-      System.out.println("ScanShieldedTRC20NoteByIvk shieldedContractAddress ivk ak nk " +
+      System.out.println("ScanShieldedLRC20NoteByIvk command needs at least 6 parameters like: ");
+      System.out.println("ScanShieldedLRC20NoteByIvk shieldedContractAddress ivk ak nk " +
               "startNum endNum [event1] [event2]");
       return;
     }
     byte[] contractAddress = WalletApi.decodeFromBase58Check(parameters[0]);
     if (contractAddress == null) {
-      System.out.println("ScanShieldedTRC20NoteByIvk " + failedHighlight() + "! Invalid shieldedTRC20ContractAddress");
+      System.out.println("ScanShieldedLRC20NoteByIvk " + failedHighlight() + "! Invalid shieldedLRC20ContractAddress");
       return;
     }
     String ak = parameters[2];
@@ -4494,24 +4494,24 @@ public class Client {
       for (int i = 0; i < eventNum; i++) {
         eventArray[i] = parameters[i + 6];
       }
-      walletApiWrapper.scanShieldedTRC20NoteByIvk(contractAddress,
+      walletApiWrapper.scanShieldedLRC20NoteByIvk(contractAddress,
           parameters[1], ak, nk, startNum, endNum, eventArray);
     } else {
-      walletApiWrapper.scanShieldedTRC20NoteByIvk(contractAddress,
+      walletApiWrapper.scanShieldedLRC20NoteByIvk(contractAddress,
           parameters[1], ak, nk, startNum, endNum, null);
     }
   }
 
-  private void scanShieldedTRC20NoteByOvk(String[] parameters) {
+  private void scanShieldedLRC20NoteByOvk(String[] parameters) {
     if (parameters == null || parameters.length < 4) {
-      System.out.println("ScanShieldedTRC20NoteByOvk command needs at lease 4 parameters like: ");
-      System.out.println("ScanShieldedTRC20NoteByOvk shieldedTRC20ContractAddress ovk startNum " +
+      System.out.println("ScanShieldedLRC20NoteByOvk command needs at lease 4 parameters like: ");
+      System.out.println("ScanShieldedLRC20NoteByOvk shieldedLRC20ContractAddress ovk startNum " +
               "endNum [event1] [event2] ");
       return;
     }
     byte[] contractAddress = WalletApi.decodeFromBase58Check(parameters[0]);
     if (contractAddress == null) {
-      System.out.println("ScanShieldedTRC20NoteByOvk " + failedHighlight() + "! Invalid shieldedTRC20ContractAddress");
+      System.out.println("ScanShieldedLRC20NoteByOvk " + failedHighlight() + "! Invalid shieldedLRC20ContractAddress");
       return;
     }
     long startNum;
@@ -4530,44 +4530,44 @@ public class Client {
       for (int i = 0; i < eventNum; i++) {
         eventArray[i] = parameters[i + 4];
       }
-      walletApiWrapper.scanShieldedTRC20NoteByOvk(parameters[1], startNum, endNum,
+      walletApiWrapper.scanShieldedLRC20NoteByOvk(parameters[1], startNum, endNum,
           contractAddress, eventArray);
     } else {
-      walletApiWrapper.scanShieldedTRC20NoteByOvk(parameters[1], startNum, endNum,
+      walletApiWrapper.scanShieldedLRC20NoteByOvk(parameters[1], startNum, endNum,
           contractAddress, null);
     }
   }
 
-  private void sendShieldedTRC20Coin(String[] parameters) throws IOException, CipherException,
+  private void sendShieldedLRC20Coin(String[] parameters) throws IOException, CipherException,
       CancelException, ZksnarkException {
-    if (firstCheck(parameters, "SendShieldedTRC20Coin")) {
+    if (firstCheck(parameters, "SendShieldedLRC20Coin")) {
       String contractAddress =
-          ShieldedTRC20Wrapper.getInstance().getTRC20ContractAddress();
+          ShieldedLRC20Wrapper.getInstance().getLRC20ContractAddress();
       String shieldedContractAddress =
-          ShieldedTRC20Wrapper.getInstance().getShieldedTRC20ContractAddress();
-      boolean result = sendShieldedTRC20CoinNormal(parameters, true,
+          ShieldedLRC20Wrapper.getInstance().getShieldedLRC20ContractAddress();
+      boolean result = sendShieldedLRC20CoinNormal(parameters, true,
           contractAddress, shieldedContractAddress);
       if (result) {
-        System.out.println("SendShieldedTRC20Coin " + successfulHighlight() + " !!!");
+        System.out.println("SendShieldedLRC20Coin " + successfulHighlight() + " !!!");
       } else {
-        System.out.println("SendShieldedTRC20Coin " + failedHighlight() + " !!!");
+        System.out.println("SendShieldedLRC20Coin " + failedHighlight() + " !!!");
       }
     }
   }
 
-  private void sendShieldedTRC20CoinWithoutAsk(String[] parameters) throws IOException,
+  private void sendShieldedLRC20CoinWithoutAsk(String[] parameters) throws IOException,
       CipherException, CancelException, ZksnarkException {
-    if (firstCheck(parameters, "SendShieldedTRC20CoinWithoutAsk")) {
+    if (firstCheck(parameters, "SendShieldedLRC20CoinWithoutAsk")) {
       String contractAddress =
-          ShieldedTRC20Wrapper.getInstance().getTRC20ContractAddress();
+          ShieldedLRC20Wrapper.getInstance().getLRC20ContractAddress();
       String shieldedContractAddress =
-          ShieldedTRC20Wrapper.getInstance().getShieldedTRC20ContractAddress();
-      boolean result = sendShieldedTRC20CoinNormal(parameters, false,
+          ShieldedLRC20Wrapper.getInstance().getShieldedLRC20ContractAddress();
+      boolean result = sendShieldedLRC20CoinNormal(parameters, false,
           contractAddress, shieldedContractAddress);
       if (result) {
-        System.out.println("SendShieldedTRC20CoinWithoutAsk " + successfulHighlight() + " !!!");
+        System.out.println("SendShieldedLRC20CoinWithoutAsk " + successfulHighlight() + " !!!");
       } else {
-        System.out.println("SendShieldedTRC20CoinWithoutAsk " + failedHighlight() + " !!!");
+        System.out.println("SendShieldedLRC20CoinWithoutAsk " + failedHighlight() + " !!!");
       }
     }
   }
@@ -4586,18 +4586,18 @@ public class Client {
       return false;
     }
 
-    if (!ShieldedTRC20Wrapper.getInstance().ifShieldedTRC20WalletLoaded()) {
-      System.out.println("SendShieldedTRC20Coin failed, please LoadShieldedTRC20Wallet first !!!");
+    if (!ShieldedLRC20Wrapper.getInstance().ifShieldedLRC20WalletLoaded()) {
+      System.out.println("SendShieldedLRC20Coin failed, please LoadShieldedLRC20Wallet first !!!");
       return false;
     }
     return true;
   }
 
-  private boolean sendShieldedTRC20CoinNormal(String[] parameters, boolean withAsk,
+  private boolean sendShieldedLRC20CoinNormal(String[] parameters, boolean withAsk,
                                               String contractAddress,
                                               String shieldedContractAddress)
       throws IOException, CipherException, CancelException, ZksnarkException {
-    BigInteger scalingFactor = ShieldedTRC20Wrapper.getInstance().getScalingFactor();
+    BigInteger scalingFactor = ShieldedLRC20Wrapper.getInstance().getScalingFactor();
     int parameterIndex = 0;
     BigInteger fromPublicAmount;
     try {
@@ -4633,8 +4633,8 @@ public class Client {
         System.out.println("Invalid the " + (i + 1) + "shielded input");
         return false;
       }
-      ShieldedTRC20NoteInfo noteInfo =
-          ShieldedTRC20Wrapper.getInstance().getUtxoMapNote().get(mapIndex);
+      ShieldedLRC20NoteInfo noteInfo =
+          ShieldedLRC20Wrapper.getInstance().getUtxoMapNote().get(mapIndex);
       if (noteInfo == null) {
         System.out.println("Can't find index " + mapIndex + " note.");
         return false;
@@ -4747,11 +4747,11 @@ public class Client {
     }
 
     if (withAsk) {
-      return walletApiWrapper.sendShieldedTRC20Coin(shieldedContractType, fromPublicAmount,
+      return walletApiWrapper.sendShieldedLRC20Coin(shieldedContractType, fromPublicAmount,
           shieldedInputList, shieldedOutList, toPublicAddress, toPublicAmount, contractAddress,
           shieldedContractAddress);
     } else {
-      return walletApiWrapper.sendShieldedTRC20CoinWithoutAsk(shieldedContractType,
+      return walletApiWrapper.sendShieldedLRC20CoinWithoutAsk(shieldedContractType,
           fromPublicAmount, shieldedInputList, shieldedOutList, toPublicAddress, toPublicAmount,
           contractAddress, shieldedContractAddress);
     }
@@ -4771,22 +4771,22 @@ public class Client {
     return true;
   }
 
-  private void showShieldedTRC20AddressInfo(String[] parameters) {
+  private void showShieldedLRC20AddressInfo(String[] parameters) {
     if (parameters == null || parameters.length != 1) {
-      System.out.println("Using ShowShieldedTRC20AddressInfo needs 1 parameter like: ");
-      System.out.println("ShowShieldedTRC20AddressInfo shieldedTRC20Address");
+      System.out.println("Using ShowShieldedLRC20AddressInfo needs 1 parameter like: ");
+      System.out.println("ShowShieldedLRC20AddressInfo shieldedLRC20Address");
       return;
     }
 
-    if (!ShieldedTRC20Wrapper.getInstance().ifShieldedTRC20WalletLoaded()) {
-      System.out.println("ShowShieldedTRC20AddressInfo failed, " +
-          "please loadShieldedTRC20Wallet first!");
+    if (!ShieldedLRC20Wrapper.getInstance().ifShieldedLRC20WalletLoaded()) {
+      System.out.println("ShowShieldedLRC20AddressInfo failed, " +
+          "please loadShieldedLRC20Wallet first!");
       return;
     }
 
     String shieldedAddress = parameters[0];
     ShieldedAddressInfo addressInfo =
-        ShieldedTRC20Wrapper.getInstance().getShieldedAddressInfoMap().get(shieldedAddress);
+        ShieldedLRC20Wrapper.getInstance().getShieldedAddressInfoMap().get(shieldedAddress);
     if (addressInfo != null) {
       System.out.println("The following variables are secret information, " +
           "please don't show to other people!!!");
@@ -4813,7 +4813,7 @@ public class Client {
   }
 
   private void help() {
-    System.out.println("Help: List of Tron Wallet-cli commands");
+    System.out.println("Help: List of Linda Wallet-cli commands");
     System.out.println(
         "For more information on a specific command, type the command and it will display tips");
     System.out.println("");
@@ -4870,7 +4870,7 @@ public class Client {
 
   private void run() {
     System.out.println(" ");
-    System.out.println("Welcome to Tron " + blueBoldHighlight("Wallet-Cli"));
+    System.out.println("Welcome to Linda " + blueBoldHighlight("Wallet-Cli"));
     printBanner();
     System.out.println("Please type one of the following commands to proceed.");
     System.out.println(greenBoldHighlight("Login") + ", " + greenBoldHighlight("LoginAll")
@@ -5380,7 +5380,7 @@ public class Client {
               broadcastTransaction(parameters);
               break;
             }
-            /*
+            
             case "generateshieldedaddress": {
               generateShieldedAddress(parameters);
               break;
@@ -5433,61 +5433,61 @@ public class Client {
               backupShieldedWallet();
               break;
             }
-             */
+             
             case "create2": {
               create2(parameters);
               break;
             }
-            case "setshieldedtrc20contractaddress": {
-              setShieldedTRC20ContractAddress(parameters);
+            case "setshieldedlrc20contractaddress": {
+              setShieldedLRC20ContractAddress(parameters);
               break;
             }
-            case "backupshieldedtrc20wallet": {
-              backupShieldedTRC20Wallet();
+            case "backupshieldedlrc20wallet": {
+              backupShieldedLRC20Wallet();
               break;
             }
-            case "generateshieldedtrc20address": {
-              generateShieldedTRC20Address(parameters);
+            case "generateshieldedlrc20address": {
+              generateShieldedLRC20Address(parameters);
               break;
             }
-            case "importshieldedtrc20wallet": {
-              importShieldedTRC20Wallet();
+            case "importshieldedlrc20wallet": {
+              importShieldedLRC20Wallet();
               break;
             }
-            case "listshieldedtrc20address": {
-              listShieldedTRC20Address();
+            case "listshieldedlrc20address": {
+              listShieldedLRC20Address();
               break;
             }
-            case "listshieldedtrc20note": {
-              listShieldedTRC20Note(parameters);
+            case "listshieldedlrc20note": {
+              listShieldedLRC20Note(parameters);
               break;
             }
-            case "loadshieldedtrc20wallet": {
-              loadShieldedTRC20Wallet();
+            case "loadshieldedlrc20wallet": {
+              loadShieldedLRC20Wallet();
               break;
             }
-            case "resetshieldedtrc20note": {
-              resetShieldedTRC20Note();
+            case "resetshieldedlrc20note": {
+              resetShieldedLRC20Note();
               break;
             }
-            case "scanshieldedtrc20notebyivk": {
-              scanShieldedTRC20NoteByIvk(parameters);
+            case "scanshieldedlrc20notebyivk": {
+              scanShieldedLRC20NoteByIvk(parameters);
               break;
             }
-            case "scanshieldedtrc20notebyovk": {
-              scanShieldedTRC20NoteByOvk(parameters);
+            case "scanshieldedlrc20notebyovk": {
+              scanShieldedLRC20NoteByOvk(parameters);
               break;
             }
-            case "sendshieldedtrc20coin": {
-              sendShieldedTRC20Coin(parameters);
+            case "sendshieldedlrc20coin": {
+              sendShieldedLRC20Coin(parameters);
               break;
             }
-            case "sendshieldedtrc20coinwithoutask": {
-              sendShieldedTRC20CoinWithoutAsk(parameters);
+            case "sendshieldedlrc20coinwithoutask": {
+              sendShieldedLRC20CoinWithoutAsk(parameters);
               break;
             }
-            case "showshieldedtrc20addressinfo": {
-              showShieldedTRC20AddressInfo(parameters);
+            case "showshieldedlrc20addressinfo": {
+              showShieldedLRC20AddressInfo(parameters);
               break;
             }
             case "gettransactioninfobyblocknum": {

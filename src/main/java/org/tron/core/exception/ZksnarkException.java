@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.linda.core.exception;
 
-public class ZksnarkException extends TronException {
+public class ZksnarkException extends LindaException {
 
   public ZksnarkException() {
     super();

@@ -1,7 +1,7 @@
-package org.tron.core.zen;
+package org.linda.core.zen;
 
-import static org.tron.common.utils.Utils.failedHighlight;
-import static org.tron.common.utils.Utils.greenBoldHighlight;
+import static org.linda.common.utils.Utils.failedHighlight;
+import static org.linda.common.utils.Utils.greenBoldHighlight;
 
 import com.google.protobuf.ByteString;
 import com.typesafe.config.Config;
@@ -9,24 +9,24 @@ import io.netty.util.internal.StringUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.ArrayUtils;
-import org.tron.api.GrpcAPI.*;
-import org.tron.api.GrpcAPI.DecryptNotesTRC20;
-import org.tron.common.utils.Base58;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.ByteUtil;
-import org.tron.common.utils.Utils;
-import org.tron.core.config.Configuration;
-import org.tron.core.exception.CipherException;
-import org.tron.core.exception.ZksnarkException;
-import org.tron.core.zen.address.KeyIo;
-import org.tron.core.zen.address.PaymentAddress;
-import org.tron.keystore.SKeyCapsule;
-import org.tron.keystore.SKeyEncryptor;
-import org.tron.keystore.StringUtils;
-import org.tron.keystore.WalletUtils;
-import org.tron.protos.Protocol.Block;
-import org.tron.walletcli.Client;
-import org.tron.walletserver.WalletApi;
+import org.linda.api.GrpcAPI.*;
+import org.linda.api.GrpcAPI.DecryptNotesLRC20;
+import org.linda.common.utils.Base58;
+import org.linda.common.utils.ByteArray;
+import org.linda.common.utils.ByteUtil;
+import org.linda.common.utils.Utils;
+import org.linda.core.config.Configuration;
+import org.linda.core.exception.CipherException;
+import org.linda.core.exception.ZksnarkException;
+import org.linda.core.zen.address.KeyIo;
+import org.linda.core.zen.address.PaymentAddress;
+import org.linda.keystore.SKeyCapsule;
+import org.linda.keystore.SKeyEncryptor;
+import org.linda.keystore.StringUtils;
+import org.linda.keystore.WalletUtils;
+import org.linda.protos.Protocol.Block;
+import org.linda.walletcli.Client;
+import org.linda.walletserver.WalletApi;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -36,11 +36,11 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class ShieldedTRC20Wrapper {
+public class ShieldedLRC20Wrapper {
 
   private static String prefixFolder;
-  private static String trc20ContractAddress;
-  private static String shieldedTRC20ContractAddress;
+  private static String lrc20ContractAddress;
+  private static String shieldedLRC20ContractAddress;
   private static String ivkAndNumFileName;
   private static String unspendNoteFileName;
   private static String spendNoteFileName;
@@ -51,7 +51,7 @@ public class ShieldedTRC20Wrapper {
   private Thread thread;
 
   private byte[] shieldedSkey;
-  private static ShieldedTRC20Wrapper instance;
+  private static ShieldedLRC20Wrapper instance;
 
   @Setter
   @Getter
@@ -63,10 +63,10 @@ public class ShieldedTRC20Wrapper {
   public Map<String, Long> ivkMapScanBlockNum = new ConcurrentHashMap();
   @Getter
   @Setter
-  public Map<Long, ShieldedTRC20NoteInfo> utxoMapNote = new ConcurrentHashMap();
+  public Map<Long, ShieldedLRC20NoteInfo> utxoMapNote = new ConcurrentHashMap();
   @Getter
   @Setter
-  public List<ShieldedTRC20NoteInfo> spendUtxoList = new ArrayList<>();
+  public List<ShieldedLRC20NoteInfo> spendUtxoList = new ArrayList<>();
   @Getter
   @Setter
   public static long defaultBlockNumberToScan = 0;
@@ -83,35 +83,35 @@ public class ShieldedTRC20Wrapper {
     }
   }
 
-  private ShieldedTRC20Wrapper() {
+  private ShieldedLRC20Wrapper() {
     thread = new Thread(new scanIvkRunable());
   }
 
-  public static ShieldedTRC20Wrapper getInstance() {
+  public static ShieldedLRC20Wrapper getInstance() {
     if (instance == null) {
-      instance = new ShieldedTRC20Wrapper();
+      instance = new ShieldedLRC20Wrapper();
     }
     return instance;
   }
 
-  public static boolean isSetShieldedTRC20WalletPath() {
-    return !(prefixFolder == null || trc20ContractAddress == null
-        || shieldedTRC20ContractAddress == null || ivkAndNumFileName == null
+  public static boolean isSetShieldedLRC20WalletPath() {
+    return !(prefixFolder == null || lrc20ContractAddress == null
+        || shieldedLRC20ContractAddress == null || ivkAndNumFileName == null
         || unspendNoteFileName == null || spendNoteFileName == null
         || shieldedAddressFileName == null || shieldedSkeyFileName == null);
   }
 
-  public void setShieldedTRC20WalletPath(String contractAddress,
+  public void setShieldedLRC20WalletPath(String contractAddress,
                                          String shieldedContractAddress) {
     if (contractAddress == null || shieldedContractAddress == null
-        || !contractAddress.equals(trc20ContractAddress)
-        || !shieldedContractAddress.equals(shieldedTRC20ContractAddress)) {
+        || !contractAddress.equals(lrc20ContractAddress)
+        || !shieldedContractAddress.equals(shieldedLRC20ContractAddress)) {
       loadShieldedStatus = false;
       shieldedSkey = null;
-      trc20ContractAddress = contractAddress;
-      shieldedTRC20ContractAddress = shieldedContractAddress;
-      prefixFolder = "WalletShieldedTRC20Contract/"
-          + trc20ContractAddress + "_" + shieldedTRC20ContractAddress;
+      lrc20ContractAddress = contractAddress;
+      shieldedLRC20ContractAddress = shieldedContractAddress;
+      prefixFolder = "WalletShieldedLRC20Contract/"
+          + lrc20ContractAddress + "_" + shieldedLRC20ContractAddress;
       ivkAndNumFileName = prefixFolder + "/scanblocknumber";
       unspendNoteFileName = prefixFolder + "/unspendnote";
       spendNoteFileName = prefixFolder + "/spendnote";
@@ -127,15 +127,15 @@ public class ShieldedTRC20Wrapper {
     return scalingFactor;
   }
 
-  public String getShieldedTRC20ContractAddress() {
-    return shieldedTRC20ContractAddress;
+  public String getShieldedLRC20ContractAddress() {
+    return shieldedLRC20ContractAddress;
   }
 
-  public String getTRC20ContractAddress() {
-    return trc20ContractAddress;
+  public String getLRC20ContractAddress() {
+    return lrc20ContractAddress;
   }
 
-  public boolean ifShieldedTRC20WalletLoaded() {
+  public boolean ifShieldedLRC20WalletLoaded() {
     return loadShieldedStatus;
   }
 
@@ -146,15 +146,15 @@ public class ShieldedTRC20Wrapper {
     loadSpendNoteFromFile();
   }
 
-  public boolean loadShieldTRC20Wallet() throws CipherException, IOException {
-    if (ifShieldedTRC20WalletLoaded()) {
+  public boolean loadShieldLRC20Wallet() throws CipherException, IOException {
+    if (ifShieldedLRC20WalletLoaded()) {
       return true;
     }
 
     if (!shieldedSkeyFileExist()) {
-      System.out.println("shieldedTRC20 wallet does not exist. Please use " +
-          "ImportShieldedTRC20Wallet command to import a shielded TRC20 wallet, or " +
-          "GenerateShieldedTRC20Address to generate one.");
+      System.out.println("shieldedLRC20 wallet does not exist. Please use " +
+          "ImportShieldedLRC20Wallet command to import a shielded LRC20 wallet, or " +
+          "GenerateShieldedLRC20Address to generate one.");
       return false;
     }
 
@@ -180,7 +180,7 @@ public class ShieldedTRC20Wrapper {
     public void run() {
       int count = 24;
       for (; ; ) {
-        if (!ifShieldedTRC20WalletLoaded()) {
+        if (!ifShieldedLRC20WalletLoaded()) {
           try {
             Thread.sleep(500);
           } catch (Exception e) {
@@ -196,7 +196,7 @@ public class ShieldedTRC20Wrapper {
             if (e.getMessage() != null) {
               System.out.println(e.getMessage());
             }
-            System.out.println("Please user command resetShieldedTRC20Note to reset notes!!");
+            System.out.println("Please user command resetShieldedLRC20Note to reset notes!!");
             count = 0;
           }
         } finally {
@@ -205,10 +205,10 @@ public class ShieldedTRC20Wrapper {
             for (int i = 0; i < 5; ++i) {
               Thread.sleep(500);
               if (resetNote) {
-                resetShieldedTRC20Note();
+                resetShieldedLRC20Note();
                 resetNote = false;
                 count = 0;
-                System.out.println("Reset shieldedTRC20 note success!");
+                System.out.println("Reset shieldedLRC20 note success!");
               }
             }
           } catch (Exception e) {
@@ -218,7 +218,7 @@ public class ShieldedTRC20Wrapper {
     }
   }
 
-  private void resetShieldedTRC20Note() throws ZksnarkException {
+  private void resetShieldedLRC20Note() throws ZksnarkException {
     ivkMapScanBlockNum.clear();
     for (Entry<String, ShieldedAddressInfo> entry : getShieldedAddressInfoMap().entrySet()) {
       byte[] key = ByteUtil.merge(entry.getValue().getIvk(),
@@ -258,29 +258,29 @@ public class ShieldedTRC20Wrapper {
             end = blockNum;
           }
 
-          IvkDecryptTRC20Parameters.Builder builder = IvkDecryptTRC20Parameters.newBuilder();
+          IvkDecryptLRC20Parameters.Builder builder = IvkDecryptLRC20Parameters.newBuilder();
           builder.setStartBlockIndex(start);
           builder.setEndBlockIndex(end);
-          builder.setShieldedTRC20ContractAddress(
+          builder.setShieldedLRC20ContractAddress(
               ByteString.copyFrom(
                   WalletApi.decodeFromBase58Check(
-                      getShieldedTRC20ContractAddress())));
+                      getShieldedLRC20ContractAddress())));
           builder.setIvk(ByteString.copyFrom(ivk));
           builder.setAk(ByteString.copyFrom(ak));
           builder.setNk(ByteString.copyFrom(nk));
-          Optional<DecryptNotesTRC20> notes = WalletApi.scanShieldedTRC20NoteByIvk(
+          Optional<DecryptNotesLRC20> notes = WalletApi.scanShieldedLRC20NoteByIvk(
               builder.build(), false);
           if (notes.isPresent()) {
             int startNum = utxoMapNote.size();
             for (int i = 0; i < notes.get().getNoteTxsList().size(); ++i) {
-              DecryptNotesTRC20.NoteTx noteTx = notes.get().getNoteTxsList().get(i);
-              ShieldedTRC20NoteInfo noteInfo = new ShieldedTRC20NoteInfo();
+              DecryptNotesLRC20.NoteTx noteTx = notes.get().getNoteTxsList().get(i);
+              ShieldedLRC20NoteInfo noteInfo = new ShieldedLRC20NoteInfo();
               noteInfo.setPaymentAddress(noteTx.getNote().getPaymentAddress());
               noteInfo.setR(noteTx.getNote().getRcm().toByteArray());
               long noteValue = noteTx.getNote().getValue();
               noteInfo.setValue(noteValue);
               noteInfo.setRawValue(BigInteger.valueOf(noteValue).multiply(scalingFactor));
-              noteInfo.setTrxId(ByteArray.toHexString(noteTx.getTxid().toByteArray()));
+              noteInfo.setLindId(ByteArray.toHexString(noteTx.getTxid().toByteArray()));
               noteInfo.setIndex(noteTx.getIndex());
               noteInfo.setNoteIndex(nodeIndex.getAndIncrement());
               noteInfo.setPosition(noteTx.getPosition());
@@ -328,19 +328,19 @@ public class ShieldedTRC20Wrapper {
   }
 
   private void updateNoteWhetherSpend() throws Exception {
-    for (Entry<Long, ShieldedTRC20NoteInfo> entry : utxoMapNote.entrySet()) {
-      ShieldedTRC20NoteInfo noteInfo = entry.getValue();
+    for (Entry<Long, ShieldedLRC20NoteInfo> entry : utxoMapNote.entrySet()) {
+      ShieldedLRC20NoteInfo noteInfo = entry.getValue();
 
       ShieldedAddressInfo addressInfo =
           getShieldedAddressInfoMap().get(noteInfo.getPaymentAddress());
-      NfTRC20Parameters.Builder builder = NfTRC20Parameters.newBuilder();
+      NfLRC20Parameters.Builder builder = NfLRC20Parameters.newBuilder();
       builder.setAk(ByteString.copyFrom(addressInfo.getFullViewingKey().getAk()));
       builder.setNk(ByteString.copyFrom(addressInfo.getFullViewingKey().getNk()));
       builder.setPosition(noteInfo.getPosition());
-      builder.setShieldedTRC20ContractAddress(
+      builder.setShieldedLRC20ContractAddress(
           ByteString.copyFrom(
               WalletApi.decodeFromBase58Check(
-                  getShieldedTRC20ContractAddress())));
+                  getShieldedLRC20ContractAddress())));
 
       Note.Builder noteBuild = Note.newBuilder();
       noteBuild.setPaymentAddress(noteInfo.getPaymentAddress());
@@ -349,7 +349,7 @@ public class ShieldedTRC20Wrapper {
       noteBuild.setMemo(ByteString.copyFrom(noteInfo.getMemo()));
       builder.setNote(noteBuild.build());
 
-      Optional<NullifierResult> result = WalletApi.isShieldedTRC20ContractNoteSpent(
+      Optional<NullifierResult> result = WalletApi.isShieldedLRC20ContractNoteSpent(
           builder.build(), false);
       if (result.isPresent() && result.get().getIsSpent()) {
         spendNote(entry.getKey());
@@ -364,7 +364,7 @@ public class ShieldedTRC20Wrapper {
    * @return
    */
   public boolean spendNote(long noteIndex) throws CipherException {
-    ShieldedTRC20NoteInfo noteInfo = utxoMapNote.get(noteIndex);
+    ShieldedLRC20NoteInfo noteInfo = utxoMapNote.get(noteIndex);
     if (noteInfo != null) {
       utxoMapNote.remove(noteIndex);
       spendUtxoList.add(noteInfo);
@@ -378,12 +378,12 @@ public class ShieldedTRC20Wrapper {
   }
 
   /**
-   * save new shieldedTRC20 address and scan block num
+   * save new shieldedLRC20 address and scan block num
    *
-   * @param addressInfo new shieldedTRC20 address
+   * @param addressInfo new shieldedLRC20 address
    * @return
    */
-  public boolean addNewShieldedTRC20Address(final ShieldedAddressInfo addressInfo,
+  public boolean addNewShieldedLRC20Address(final ShieldedAddressInfo addressInfo,
                                             boolean newAddress)
       throws CipherException, ZksnarkException {
     appendAddressInfoToFile(addressInfo);
@@ -498,7 +498,7 @@ public class ShieldedTRC20Wrapper {
    *
    * @return
    */
-  public List<String> getShieldedTRC20AddressList() {
+  public List<String> getShieldedLRC20AddressList() {
     List<String> addressList = new ArrayList<>();
     for (Entry<String, ShieldedAddressInfo> entry : shieldedAddressInfoMap.entrySet()) {
       addressList.add(entry.getKey());
@@ -512,9 +512,9 @@ public class ShieldedTRC20Wrapper {
    * @return
    */
   public List<String> getvalidateSortUtxoList() {
-    List<Map.Entry<Long, ShieldedTRC20NoteInfo>> list = new ArrayList<>(utxoMapNote.entrySet());
-    Collections.sort(list, (Entry<Long, ShieldedTRC20NoteInfo> o1,
-                            Entry<Long, ShieldedTRC20NoteInfo> o2) -> {
+    List<Map.Entry<Long, ShieldedLRC20NoteInfo>> list = new ArrayList<>(utxoMapNote.entrySet());
+    Collections.sort(list, (Entry<Long, ShieldedLRC20NoteInfo> o1,
+                            Entry<Long, ShieldedLRC20NoteInfo> o2) -> {
       if (o1.getValue().getValue() < o2.getValue().getValue()) {
         return 1;
       } else {
@@ -523,11 +523,11 @@ public class ShieldedTRC20Wrapper {
     });
 
     List<String> utxoList = new ArrayList<>();
-    for (Map.Entry<Long, ShieldedTRC20NoteInfo> entry : list) {
+    for (Map.Entry<Long, ShieldedLRC20NoteInfo> entry : list) {
       String string = entry.getKey() + " " + entry.getValue().getPaymentAddress() + " ";
       string += entry.getValue().getRawValue().toString();
       string += " ";
-      string += entry.getValue().getTrxId();
+      string += entry.getValue().getLindId();
       string += " ";
       string += entry.getValue().getIndex();
       string += " ";
@@ -550,7 +550,7 @@ public class ShieldedTRC20Wrapper {
     }
 
     ZenUtils.clearFile(unspendNoteFileName);
-    for (Entry<Long, ShieldedTRC20NoteInfo> entry : utxoMapNote.entrySet()) {
+    for (Entry<Long, ShieldedLRC20NoteInfo> entry : utxoMapNote.entrySet()) {
       String date = entry.getValue().encode(shieldedSkey);
       ZenUtils.appendToFileTail(unspendNoteFileName, date);
     }
@@ -571,7 +571,7 @@ public class ShieldedTRC20Wrapper {
     if (ZenUtils.checkFileExist(unspendNoteFileName)) {
       List<String> list = ZenUtils.getListFromFile(unspendNoteFileName);
       for (int i = 0; i < list.size(); ++i) {
-        ShieldedTRC20NoteInfo noteInfo = new ShieldedTRC20NoteInfo();
+        ShieldedLRC20NoteInfo noteInfo = new ShieldedLRC20NoteInfo();
         noteInfo.decode(list.get(i), shieldedSkey);
         utxoMapNote.put(noteInfo.getNoteIndex(), noteInfo);
 
@@ -589,7 +589,7 @@ public class ShieldedTRC20Wrapper {
    *
    * @return
    */
-  private boolean saveSpendNoteToFile(ShieldedTRC20NoteInfo noteInfo) throws CipherException {
+  private boolean saveSpendNoteToFile(ShieldedLRC20NoteInfo noteInfo) throws CipherException {
     if (ArrayUtils.isEmpty(shieldedSkey)) {
       return false;
     }
@@ -613,7 +613,7 @@ public class ShieldedTRC20Wrapper {
     if (ZenUtils.checkFileExist(spendNoteFileName)) {
       List<String> list = ZenUtils.getListFromFile(spendNoteFileName);
       for (int i = 0; i < list.size(); ++i) {
-        ShieldedTRC20NoteInfo noteInfo = new ShieldedTRC20NoteInfo();
+        ShieldedLRC20NoteInfo noteInfo = new ShieldedLRC20NoteInfo();
         noteInfo.decode(list.get(i), shieldedSkey);
         spendUtxoList.add(noteInfo);
 
@@ -683,7 +683,7 @@ public class ShieldedTRC20Wrapper {
     SKeyCapsule skey = WalletUtils.loadSkeyFile(file);
 
     byte[] passwd = null;
-    System.out.println("Please input your password for shieldedTRC20 wallet.");
+    System.out.println("Please input your password for shieldedLRC20 wallet.");
     for (int i = 6; i > 0; i--) {
       char[] password = Utils.inputPassword(false);
       passwd = StringUtils.char2Byte(password);
@@ -698,7 +698,7 @@ public class ShieldedTRC20Wrapper {
       }
     }
     if (passwd == null) {
-      System.out.println("Load skey " + failedHighlight() + ", you can not use operation for shieldedTRC20 "
+      System.out.println("Load skey " + failedHighlight() + ", you can not use operation for shieldedLRC20 "
           + "transaction.");
       return null;
     }
@@ -710,7 +710,7 @@ public class ShieldedTRC20Wrapper {
     byte[] skey = new byte[16];
     new SecureRandom().nextBytes(skey);
 
-    System.out.println("ShieldedTRC20 wallet does not exist, will build it.");
+    System.out.println("ShieldedLRC20 wallet does not exist, will build it.");
     char[] password = Utils.inputPassword2Twice(false);
     byte[] passwd = StringUtils.char2Byte(password);
 
@@ -719,7 +719,7 @@ public class ShieldedTRC20Wrapper {
     return skey;
   }
 
-  public void initShieldedTRC20WalletFile() throws IOException, CipherException {
+  public void initShieldedLRC20WalletFile() throws IOException, CipherException {
     ZenUtils.checkFoldersExist(prefixFolder);
 
     if (ArrayUtils.isEmpty(shieldedSkey)) {
@@ -728,11 +728,11 @@ public class ShieldedTRC20Wrapper {
       } else {
         shieldedSkey = generateSkey();
       }
-      loadShieldTRC20Wallet();
+      loadShieldLRC20Wallet();
     }
   }
 
-  public ShieldedAddressInfo backupShieldedTRC20Wallet() throws IOException,
+  public ShieldedAddressInfo backupShieldedLRC20Wallet() throws IOException,
       CipherException {
     ZenUtils.checkFoldersExist(prefixFolder);
 
@@ -741,27 +741,27 @@ public class ShieldedTRC20Wrapper {
       if (!ArrayUtils.isEmpty(tempShieldedKey)) {
         if (ArrayUtils.isEmpty(shieldedSkey)) {
           shieldedSkey = tempShieldedKey;
-          loadShieldTRC20Wallet();
+          loadShieldLRC20Wallet();
         }
       } else {
         System.out.println("Invalid password.");
         return null;
       }
     } else {
-      System.out.println("ShieldedTRC20 wallet does not exist, please build it first.");
+      System.out.println("ShieldedLRC20 wallet does not exist, please build it first.");
       return null;
     }
 
     if (shieldedAddressInfoMap.size() <= 0) {
-      System.out.println("ShieldedTRC20 addresses is empty, please use command to generate "
-          + "ShieldedTRC20 address.");
+      System.out.println("ShieldedLRC20 addresses is empty, please use command to generate "
+          + "ShieldedLRC20 address.");
       return null;
     }
 
     List<ShieldedAddressInfo> shieldedAddressInfoList = new ArrayList(
         shieldedAddressInfoMap.values());
     for (int i = 0; i < shieldedAddressInfoList.size(); i++) {
-      System.out.println("The " + (i + 1) + "th shieldedTRC20 address is "
+      System.out.println("The " + (i + 1) + "th shieldedLRC20 address is "
           + shieldedAddressInfoList.get(i).getAddress());
     }
 
@@ -792,7 +792,7 @@ public class ShieldedTRC20Wrapper {
     }
   }
 
-  public byte[] importShieldedTRC20Wallet() throws IOException, CipherException {
+  public byte[] importShieldedLRC20Wallet() throws IOException, CipherException {
     ZenUtils.checkFoldersExist(prefixFolder);
 
     if (shieldedSkeyFileExist()) {
@@ -806,10 +806,10 @@ public class ShieldedTRC20Wrapper {
     } else {
       shieldedSkey = generateSkey();
     }
-    loadShieldTRC20Wallet();
+    loadShieldLRC20Wallet();
 
     byte[] result = null;
-    System.out.println("Please input shieldedTRC20 wallet hex string. "
+    System.out.println("Please input shieldedLRC20 wallet hex string. "
         + "such as 'sk d',Max retry time:" + 3);
     int nTime = 0;
 
@@ -818,7 +818,7 @@ public class ShieldedTRC20Wrapper {
       String input = in.nextLine().trim();
       String[] array = Client.getCmd(input.trim());
       if (array.length == 2 && Utils.isHexString(array[0]) && Utils.isHexString(array[1])) {
-        System.out.println("Import shieldedTRC20 wallet hex string is : ");
+        System.out.println("Import shieldedLRC20 wallet hex string is : ");
         System.out.println("sk:" + array[0]);
         System.out.println("d :" + array[1]);
 
@@ -831,7 +831,7 @@ public class ShieldedTRC20Wrapper {
       }
 
       StringUtils.clear(result);
-      System.out.println("Invalid shieldedTRC20 wallet hex string, please input again.");
+      System.out.println("Invalid shieldedLRC20 wallet hex string, please input again.");
       ++nTime;
     }
     return result;

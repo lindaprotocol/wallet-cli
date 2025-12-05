@@ -1,4 +1,4 @@
-package org.tron.ledger;
+package org.linda.ledger;
 
 public class LedgerConst {
   public static final int READ_TIMEOUT_MILLIS = 10000;

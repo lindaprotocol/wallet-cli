@@ -1,15 +1,15 @@
-package org.tron.mnemonic;
+package org.linda.mnemonic;
 
 import org.bouncycastle.crypto.digests.SHA256Digest;
 import org.bouncycastle.crypto.generators.PKCS5S2ParametersGenerator;
 import org.bouncycastle.crypto.generators.SCrypt;
 import org.bouncycastle.crypto.params.KeyParameter;
-import org.tron.common.crypto.Hash;
-import org.tron.common.crypto.SignInterface;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.exception.CipherException;
-import org.tron.keystore.StringUtils;
-import org.tron.walletserver.WalletApi;
+import org.linda.common.crypto.Hash;
+import org.linda.common.crypto.SignInterface;
+import org.linda.common.utils.ByteArray;
+import org.linda.core.exception.CipherException;
+import org.linda.keystore.StringUtils;
+import org.linda.walletserver.WalletApi;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;

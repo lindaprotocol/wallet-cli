@@ -1,20 +1,20 @@
-package org.tron.walletserver;
+package org.linda.walletserver;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static org.tron.common.enums.NetType.CUSTOM;
-import static org.tron.common.enums.NetType.MAIN;
-import static org.tron.common.enums.NetType.NILE;
-import static org.tron.common.enums.NetType.SHASTA;
-import static org.tron.common.utils.Base58.encode;
-import static org.tron.common.utils.Utils.LOCK_WARNING;
-import static org.tron.common.utils.Utils.blueBoldHighlight;
-import static org.tron.common.utils.Utils.failedHighlight;
-import static org.tron.common.utils.Utils.greenBoldHighlight;
-import static org.tron.common.utils.Utils.inputPassword;
-import static org.tron.keystore.StringUtils.char2Byte;
-import static org.tron.keystore.Wallet.validPassword;
-import static org.tron.keystore.WalletUtils.show;
-import static org.tron.walletcli.WalletApiWrapper.getLedgerPath;
+import static org.linda.common.enums.NetType.CUSTOM;
+import static org.linda.common.enums.NetType.MAIN;
+import static org.linda.common.enums.NetType.NILE;
+import static org.linda.common.enums.NetType.SHASTA;
+import static org.linda.common.utils.Base58.encode;
+import static org.linda.common.utils.Utils.LOCK_WARNING;
+import static org.linda.common.utils.Utils.blueBoldHighlight;
+import static org.linda.common.utils.Utils.failedHighlight;
+import static org.linda.common.utils.Utils.greenBoldHighlight;
+import static org.linda.common.utils.Utils.inputPassword;
+import static org.linda.keystore.StringUtils.char2Byte;
+import static org.linda.keystore.Wallet.validPassword;
+import static org.linda.keystore.WalletUtils.show;
+import static org.linda.walletcli.WalletApiWrapper.getLedgerPath;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -59,145 +59,145 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bouncycastle.util.encoders.Hex;
 import org.hid4java.HidDevice;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.AccountNetMessage;
-import org.tron.api.GrpcAPI.AccountResourceMessage;
-import org.tron.api.GrpcAPI.AssetIssueList;
-import org.tron.api.GrpcAPI.BlockExtention;
-import org.tron.api.GrpcAPI.BlockList;
-import org.tron.api.GrpcAPI.BlockListExtention;
-import org.tron.api.GrpcAPI.BytesMessage;
-import org.tron.api.GrpcAPI.DecryptNotes;
-import org.tron.api.GrpcAPI.DecryptNotesMarked;
-import org.tron.api.GrpcAPI.DecryptNotesTRC20;
-import org.tron.api.GrpcAPI.DelegatedResourceList;
-import org.tron.api.GrpcAPI.DiversifierMessage;
-import org.tron.api.GrpcAPI.EstimateEnergyMessage;
-import org.tron.api.GrpcAPI.ExchangeList;
-import org.tron.api.GrpcAPI.ExpandedSpendingKeyMessage;
-import org.tron.api.GrpcAPI.IncomingViewingKeyDiversifierMessage;
-import org.tron.api.GrpcAPI.IncomingViewingKeyMessage;
-import org.tron.api.GrpcAPI.IvkDecryptAndMarkParameters;
-import org.tron.api.GrpcAPI.IvkDecryptParameters;
-import org.tron.api.GrpcAPI.IvkDecryptTRC20Parameters;
-import org.tron.api.GrpcAPI.NfParameters;
-import org.tron.api.GrpcAPI.NfTRC20Parameters;
-import org.tron.api.GrpcAPI.NodeList;
-import org.tron.api.GrpcAPI.NoteParameters;
-import org.tron.api.GrpcAPI.NullifierResult;
-import org.tron.api.GrpcAPI.OvkDecryptParameters;
-import org.tron.api.GrpcAPI.OvkDecryptTRC20Parameters;
-import org.tron.api.GrpcAPI.PaymentAddressMessage;
-import org.tron.api.GrpcAPI.PricesResponseMessage;
-import org.tron.api.GrpcAPI.PrivateParameters;
-import org.tron.api.GrpcAPI.PrivateParametersWithoutAsk;
-import org.tron.api.GrpcAPI.PrivateShieldedTRC20Parameters;
-import org.tron.api.GrpcAPI.PrivateShieldedTRC20ParametersWithoutAsk;
-import org.tron.api.GrpcAPI.ProposalList;
-import org.tron.api.GrpcAPI.Return;
-import org.tron.api.GrpcAPI.ShieldedTRC20Parameters;
-import org.tron.api.GrpcAPI.ShieldedTRC20TriggerContractParameters;
-import org.tron.api.GrpcAPI.SpendAuthSigParameters;
-import org.tron.api.GrpcAPI.SpendResult;
-import org.tron.api.GrpcAPI.TransactionApprovedList;
-import org.tron.api.GrpcAPI.TransactionExtention;
-import org.tron.api.GrpcAPI.TransactionInfoList;
-import org.tron.api.GrpcAPI.TransactionList;
-import org.tron.api.GrpcAPI.TransactionListExtention;
-import org.tron.api.GrpcAPI.TransactionSignWeight;
-import org.tron.api.GrpcAPI.TransactionSignWeight.Result.response_code;
-import org.tron.api.GrpcAPI.ViewingKeyMessage;
-import org.tron.api.GrpcAPI.WitnessList;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.Hash;
-import org.tron.common.crypto.Sha256Sm3Hash;
-import org.tron.common.crypto.SignInterface;
-import org.tron.common.crypto.sm2.SM2;
-import org.tron.common.enums.NetType;
-import org.tron.common.utils.Base58;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.TransactionUtils;
-import org.tron.common.utils.Utils;
-import org.tron.common.zksnark.JLibrustzcash;
-import org.tron.common.zksnark.LibrustzcashParam.SpendSigParams;
-import org.tron.core.config.Configuration;
-import org.tron.core.config.Parameter.CommonConstant;
-import org.tron.core.exception.CancelException;
-import org.tron.core.exception.CipherException;
-import org.tron.keystore.CheckStrength;
-import org.tron.keystore.ClearWalletUtils;
-import org.tron.keystore.Credentials;
-import org.tron.ledger.LedgerFileUtil;
-import org.tron.ledger.LedgerSignUtil;
-import org.tron.ledger.TronLedgerGetAddress;
-import org.tron.ledger.listener.TransactionSignManager;
-import org.tron.ledger.wrapper.HidServicesWrapper;
-import org.tron.ledger.wrapper.LedgerSignResult;
-import org.tron.mnemonic.Mnemonic;
-import org.tron.mnemonic.MnemonicFile;
-import org.tron.mnemonic.MnemonicUtils;
-import org.tron.keystore.Wallet;
-import org.tron.keystore.WalletFile;
-import org.tron.keystore.WalletUtils;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.ChainParameters;
-import org.tron.protos.Protocol.Exchange;
-import org.tron.protos.Protocol.Key;
-import org.tron.protos.Protocol.MarketOrder;
-import org.tron.protos.Protocol.MarketOrderList;
-import org.tron.protos.Protocol.MarketOrderPairList;
-import org.tron.protos.Protocol.MarketPriceList;
-import org.tron.protos.Protocol.Permission;
-import org.tron.protos.Protocol.Proposal;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.Transaction.Contract.ContractType;
-import org.tron.protos.Protocol.Transaction.Result;
-import org.tron.protos.Protocol.TransactionInfo;
-import org.tron.protos.Protocol.Witness;
-import org.tron.protos.contract.AccountContract.AccountCreateContract;
-import org.tron.protos.contract.AccountContract.AccountPermissionUpdateContract;
-import org.tron.protos.contract.AccountContract.AccountUpdateContract;
-import org.tron.protos.contract.AccountContract.SetAccountIdContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.UnfreezeAssetContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.UpdateAssetContract;
-import org.tron.protos.contract.BalanceContract;
-import org.tron.protos.contract.BalanceContract.CancelAllUnfreezeV2Contract;
-import org.tron.protos.contract.BalanceContract.FreezeBalanceContract;
-import org.tron.protos.contract.BalanceContract.TransferContract;
-import org.tron.protos.contract.BalanceContract.UnfreezeBalanceContract;
-import org.tron.protos.contract.BalanceContract.WithdrawBalanceContract;
-import org.tron.protos.contract.ExchangeContract.ExchangeCreateContract;
-import org.tron.protos.contract.ExchangeContract.ExchangeInjectContract;
-import org.tron.protos.contract.ExchangeContract.ExchangeTransactionContract;
-import org.tron.protos.contract.ExchangeContract.ExchangeWithdrawContract;
-import org.tron.protos.contract.MarketContract.MarketCancelOrderContract;
-import org.tron.protos.contract.MarketContract.MarketSellAssetContract;
-import org.tron.protos.contract.ProposalContract.ProposalApproveContract;
-import org.tron.protos.contract.ProposalContract.ProposalCreateContract;
-import org.tron.protos.contract.ProposalContract.ProposalDeleteContract;
-import org.tron.protos.contract.ShieldContract.IncrementalMerkleVoucherInfo;
-import org.tron.protos.contract.ShieldContract.OutputPointInfo;
-import org.tron.protos.contract.ShieldContract.ShieldedTransferContract;
-import org.tron.protos.contract.ShieldContract.SpendDescription;
-import org.tron.protos.contract.SmartContractOuterClass.ClearABIContract;
-import org.tron.protos.contract.SmartContractOuterClass.CreateSmartContract;
-import org.tron.protos.contract.SmartContractOuterClass.SmartContract;
-import org.tron.protos.contract.SmartContractOuterClass.SmartContractDataWrapper;
-import org.tron.protos.contract.SmartContractOuterClass.TriggerSmartContract;
-import org.tron.protos.contract.SmartContractOuterClass.UpdateEnergyLimitContract;
-import org.tron.protos.contract.SmartContractOuterClass.UpdateSettingContract;
-import org.tron.protos.contract.StorageContract.BuyStorageBytesContract;
-import org.tron.protos.contract.StorageContract.BuyStorageContract;
-import org.tron.protos.contract.StorageContract.SellStorageContract;
-import org.tron.protos.contract.StorageContract.UpdateBrokerageContract;
-import org.tron.protos.contract.WitnessContract.VoteWitnessContract;
-import org.tron.protos.contract.WitnessContract.WitnessCreateContract;
-import org.tron.protos.contract.WitnessContract.WitnessUpdateContract;
+import org.linda.api.GrpcAPI;
+import org.linda.api.GrpcAPI.AccountNetMessage;
+import org.linda.api.GrpcAPI.AccountResourceMessage;
+import org.linda.api.GrpcAPI.AssetIssueList;
+import org.linda.api.GrpcAPI.BlockExtention;
+import org.linda.api.GrpcAPI.BlockList;
+import org.linda.api.GrpcAPI.BlockListExtention;
+import org.linda.api.GrpcAPI.BytesMessage;
+import org.linda.api.GrpcAPI.DecryptNotes;
+import org.linda.api.GrpcAPI.DecryptNotesMarked;
+import org.linda.api.GrpcAPI.DecryptNotesLRC20;
+import org.linda.api.GrpcAPI.DelegatedResourceList;
+import org.linda.api.GrpcAPI.DiversifierMessage;
+import org.linda.api.GrpcAPI.EstimateEnergyMessage;
+import org.linda.api.GrpcAPI.ExchangeList;
+import org.linda.api.GrpcAPI.ExpandedSpendingKeyMessage;
+import org.linda.api.GrpcAPI.IncomingViewingKeyDiversifierMessage;
+import org.linda.api.GrpcAPI.IncomingViewingKeyMessage;
+import org.linda.api.GrpcAPI.IvkDecryptAndMarkParameters;
+import org.linda.api.GrpcAPI.IvkDecryptParameters;
+import org.linda.api.GrpcAPI.IvkDecryptLRC20Parameters;
+import org.linda.api.GrpcAPI.NfParameters;
+import org.linda.api.GrpcAPI.NfLRC20Parameters;
+import org.linda.api.GrpcAPI.NodeList;
+import org.linda.api.GrpcAPI.NoteParameters;
+import org.linda.api.GrpcAPI.NullifierResult;
+import org.linda.api.GrpcAPI.OvkDecryptParameters;
+import org.linda.api.GrpcAPI.OvkDecryptLRC20Parameters;
+import org.linda.api.GrpcAPI.PaymentAddressMessage;
+import org.linda.api.GrpcAPI.PricesResponseMessage;
+import org.linda.api.GrpcAPI.PrivateParameters;
+import org.linda.api.GrpcAPI.PrivateParametersWithoutAsk;
+import org.linda.api.GrpcAPI.PrivateShieldedLRC20Parameters;
+import org.linda.api.GrpcAPI.PrivateShieldedLRC20ParametersWithoutAsk;
+import org.linda.api.GrpcAPI.ProposalList;
+import org.linda.api.GrpcAPI.Return;
+import org.linda.api.GrpcAPI.ShieldedLRC20Parameters;
+import org.linda.api.GrpcAPI.ShieldedLRC20TriggerContractParameters;
+import org.linda.api.GrpcAPI.SpendAuthSigParameters;
+import org.linda.api.GrpcAPI.SpendResult;
+import org.linda.api.GrpcAPI.TransactionApprovedList;
+import org.linda.api.GrpcAPI.TransactionExtention;
+import org.linda.api.GrpcAPI.TransactionInfoList;
+import org.linda.api.GrpcAPI.TransactionList;
+import org.linda.api.GrpcAPI.TransactionListExtention;
+import org.linda.api.GrpcAPI.TransactionSignWeight;
+import org.linda.api.GrpcAPI.TransactionSignWeight.Result.response_code;
+import org.linda.api.GrpcAPI.ViewingKeyMessage;
+import org.linda.api.GrpcAPI.WitnessList;
+import org.linda.common.crypto.ECKey;
+import org.linda.common.crypto.Hash;
+import org.linda.common.crypto.Sha256Sm3Hash;
+import org.linda.common.crypto.SignInterface;
+import org.linda.common.crypto.sm2.SM2;
+import org.linda.common.enums.NetType;
+import org.linda.common.utils.Base58;
+import org.linda.common.utils.ByteArray;
+import org.linda.common.utils.TransactionUtils;
+import org.linda.common.utils.Utils;
+import org.linda.common.zksnark.JLibrustzcash;
+import org.linda.common.zksnark.LibrustzcashParam.SpendSigParams;
+import org.linda.core.config.Configuration;
+import org.linda.core.config.Parameter.CommonConstant;
+import org.linda.core.exception.CancelException;
+import org.linda.core.exception.CipherException;
+import org.linda.keystore.CheckStrength;
+import org.linda.keystore.ClearWalletUtils;
+import org.linda.keystore.Credentials;
+import org.linda.ledger.LedgerFileUtil;
+import org.linda.ledger.LedgerSignUtil;
+import org.linda.ledger.LindaLedgerGetAddress;
+import org.linda.ledger.listener.TransactionSignManager;
+import org.linda.ledger.wrapper.HidServicesWrapper;
+import org.linda.ledger.wrapper.LedgerSignResult;
+import org.linda.mnemonic.Mnemonic;
+import org.linda.mnemonic.MnemonicFile;
+import org.linda.mnemonic.MnemonicUtils;
+import org.linda.keystore.Wallet;
+import org.linda.keystore.WalletFile;
+import org.linda.keystore.WalletUtils;
+import org.linda.protos.Protocol;
+import org.linda.protos.Protocol.Account;
+import org.linda.protos.Protocol.Block;
+import org.linda.protos.Protocol.ChainParameters;
+import org.linda.protos.Protocol.Exchange;
+import org.linda.protos.Protocol.Key;
+import org.linda.protos.Protocol.MarketOrder;
+import org.linda.protos.Protocol.MarketOrderList;
+import org.linda.protos.Protocol.MarketOrderPairList;
+import org.linda.protos.Protocol.MarketPriceList;
+import org.linda.protos.Protocol.Permission;
+import org.linda.protos.Protocol.Proposal;
+import org.linda.protos.Protocol.Transaction;
+import org.linda.protos.Protocol.Transaction.Contract.ContractType;
+import org.linda.protos.Protocol.Transaction.Result;
+import org.linda.protos.Protocol.TransactionInfo;
+import org.linda.protos.Protocol.Witness;
+import org.linda.protos.contract.AccountContract.AccountCreateContract;
+import org.linda.protos.contract.AccountContract.AccountPermissionUpdateContract;
+import org.linda.protos.contract.AccountContract.AccountUpdateContract;
+import org.linda.protos.contract.AccountContract.SetAccountIdContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.UnfreezeAssetContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.UpdateAssetContract;
+import org.linda.protos.contract.BalanceContract;
+import org.linda.protos.contract.BalanceContract.CancelAllUnfreezeV2Contract;
+import org.linda.protos.contract.BalanceContract.FreezeBalanceContract;
+import org.linda.protos.contract.BalanceContract.TransferContract;
+import org.linda.protos.contract.BalanceContract.UnfreezeBalanceContract;
+import org.linda.protos.contract.BalanceContract.WithdrawBalanceContract;
+import org.linda.protos.contract.ExchangeContract.ExchangeCreateContract;
+import org.linda.protos.contract.ExchangeContract.ExchangeInjectContract;
+import org.linda.protos.contract.ExchangeContract.ExchangeTransactionContract;
+import org.linda.protos.contract.ExchangeContract.ExchangeWithdrawContract;
+import org.linda.protos.contract.MarketContract.MarketCancelOrderContract;
+import org.linda.protos.contract.MarketContract.MarketSellAssetContract;
+import org.linda.protos.contract.ProposalContract.ProposalApproveContract;
+import org.linda.protos.contract.ProposalContract.ProposalCreateContract;
+import org.linda.protos.contract.ProposalContract.ProposalDeleteContract;
+import org.linda.protos.contract.ShieldContract.IncrementalMerkleVoucherInfo;
+import org.linda.protos.contract.ShieldContract.OutputPointInfo;
+import org.linda.protos.contract.ShieldContract.ShieldedTransferContract;
+import org.linda.protos.contract.ShieldContract.SpendDescription;
+import org.linda.protos.contract.SmartContractOuterClass.ClearABIContract;
+import org.linda.protos.contract.SmartContractOuterClass.CreateSmartContract;
+import org.linda.protos.contract.SmartContractOuterClass.SmartContract;
+import org.linda.protos.contract.SmartContractOuterClass.SmartContractDataWrapper;
+import org.linda.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.linda.protos.contract.SmartContractOuterClass.UpdateEnergyLimitContract;
+import org.linda.protos.contract.SmartContractOuterClass.UpdateSettingContract;
+import org.linda.protos.contract.StorageContract.BuyStorageBytesContract;
+import org.linda.protos.contract.StorageContract.BuyStorageContract;
+import org.linda.protos.contract.StorageContract.SellStorageContract;
+import org.linda.protos.contract.StorageContract.UpdateBrokerageContract;
+import org.linda.protos.contract.WitnessContract.VoteWitnessContract;
+import org.linda.protos.contract.WitnessContract.WitnessCreateContract;
+import org.linda.protos.contract.WitnessContract.WitnessUpdateContract;
 
 @Slf4j
 public class WalletApi {
@@ -2579,9 +2579,9 @@ public class WalletApi {
     return builder.build();
   }
 
-  public byte[] generateContractAddress(byte[] ownerAddress, Transaction trx) {
+  public byte[] generateContractAddress(byte[] ownerAddress, Transaction lind) {
     // get tx hash
-    byte[] txRawDataHash = Sha256Sm3Hash.of(trx.getRawData().toByteArray()).getBytes();
+    byte[] txRawDataHash = Sha256Sm3Hash.of(lind.getRawData().toByteArray()).getBytes();
 
     // combine
     byte[] combined = new byte[txRawDataHash.length + ownerAddress.length];
@@ -2605,7 +2605,7 @@ public class WalletApi {
 
     TransactionExtention transactionExtention = rpcCli.updateSetting(updateSettingContract);
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create trx " + failedHighlight() + "!");
+      System.out.println("RPC create lind " + failedHighlight() + "!");
       if (transactionExtention != null) {
         System.out.println("Code = " + transactionExtention.getResult().getCode());
         System.out
@@ -2632,7 +2632,7 @@ public class WalletApi {
 
     TransactionExtention transactionExtention = rpcCli.updateEnergyLimit(updateEnergyLimitContract);
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create trx " + failedHighlight() + "!");
+      System.out.println("RPC create lind " + failedHighlight() + "!");
       if (transactionExtention != null) {
         System.out.println("Code = " + transactionExtention.getResult().getCode());
         System.out
@@ -2657,7 +2657,7 @@ public class WalletApi {
     ClearABIContract clearABIContract = createClearABIContract(owner, contractAddress);
     TransactionExtention transactionExtention = rpcCli.clearContractABI(clearABIContract);
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create trx " + failedHighlight() + "!");
+      System.out.println("RPC create lind " + failedHighlight() + "!");
       if (transactionExtention != null) {
         System.out.println("Code = " + transactionExtention.getResult().getCode());
         System.out
@@ -2688,7 +2688,7 @@ public class WalletApi {
 
     if (this.isLedgerUser && this.path != null && !this.path.isEmpty()) {
       try {
-        HidDevice matchedDevice = TronLedgerGetAddress.getInstance().getMatchedDevice(path, ownerAddress);
+        HidDevice matchedDevice = LindaLedgerGetAddress.getInstance().getMatchedDevice(path, ownerAddress);
         LedgerFileUtil.removePathFromFile(this.path, matchedDevice);
       } catch (Exception e) {
         System.err.println("Error removing path from file: " + e.getMessage());
@@ -2742,7 +2742,7 @@ public class WalletApi {
 
     TransactionExtention transactionExtention = rpcCli.deployContract(contractDeployContract);
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create trx " + failedHighlight() + "!");
+      System.out.println("RPC create lind " + failedHighlight() + "!");
       if (transactionExtention != null) {
         System.out.println("Code = " + transactionExtention.getResult().getCode());
         System.out
@@ -2804,7 +2804,7 @@ public class WalletApi {
     }
 
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create call trx" + failedHighlight() + "!");
+      System.out.println("RPC create call lind" + failedHighlight() + "!");
       System.out.println("Code = " + transactionExtention.getResult().getCode());
       System.out
           .println("Message = " + transactionExtention.getResult().getMessage().toStringUtf8());
@@ -2871,7 +2871,7 @@ public class WalletApi {
     EstimateEnergyMessage estimateEnergyMessage = rpcCli.estimateEnergy(triggerContract);
 
     if (estimateEnergyMessage == null) {
-      System.out.println("RPC create call trx " + failedHighlight() + "!");
+      System.out.println("RPC create call lind " + failedHighlight() + "!");
       return false;
     }
 
@@ -3130,8 +3130,8 @@ public class WalletApi {
       return false;
     }
 
-    BytesMessage trxHash = rpcCli.getShieldedTransactionHash(transactionExtention.getTransaction());
-    if (trxHash == null || trxHash.getValue().toByteArray().length != 32) {
+    BytesMessage lindHash = rpcCli.getShieldedTransactionHash(transactionExtention.getTransaction());
+    if (lindHash == null || lindHash.getValue().toByteArray().length != 32) {
       System.out.println("sendShieldedCoinWithoutAsk get transaction hash failure.");
       return false;
     }
@@ -3152,7 +3152,7 @@ public class WalletApi {
       SpendDescription.Builder spendDescription = spendDescList.get(i).toBuilder();
       SpendAuthSigParameters.Builder builder = SpendAuthSigParameters.newBuilder();
       builder.setAsk(ByteString.copyFrom(ask));
-      builder.setTxHash(ByteString.copyFrom(trxHash.getValue().toByteArray()));
+      builder.setTxHash(ByteString.copyFrom(lindHash.getValue().toByteArray()));
       builder.setAlpha(privateParameters.getShieldedSpends(i).getAlpha());
 
       BytesMessage authSig = rpcCli.createSpendAuthSig(builder.build());
@@ -3255,7 +3255,7 @@ public class WalletApi {
     TransactionExtention transactionExtention =
         rpcCli.updateBrokerage(updateBrokerageContract.build());
     if (transactionExtention == null || !transactionExtention.getResult().getResult()) {
-      System.out.println("RPC create trx " + failedHighlight() + "!");
+      System.out.println("RPC create lind " + failedHighlight() + "!");
       if (transactionExtention != null) {
         System.out.println("Code = " + transactionExtention.getResult().getCode());
         System.out.println(
@@ -3287,27 +3287,27 @@ public class WalletApi {
     return rpcCli.getMemoFee();
   }
 
-  public static Optional<DecryptNotesTRC20> scanShieldedTRC20NoteByIvk(
-      IvkDecryptTRC20Parameters parameters, boolean showErrorMsg) {
+  public static Optional<DecryptNotesLRC20> scanShieldedLRC20NoteByIvk(
+      IvkDecryptLRC20Parameters parameters, boolean showErrorMsg) {
     try {
-      return Optional.of(rpcCli.scanShieldedTRC20NoteByIvk(parameters));
+      return Optional.of(rpcCli.scanShieldedLRC20NoteByIvk(parameters));
     } catch (Exception e) {
       if (showErrorMsg) {
         Status status = Status.fromThrowable(e);
-        System.out.println("ScanShieldedTRC20NoteByIvk failed,error " + status.getDescription());
+        System.out.println("ScanShieldedLRC20NoteByIvk failed,error " + status.getDescription());
       }
     }
     return Optional.empty();
   }
 
-  public static Optional<DecryptNotesTRC20> scanShieldedTRC20NoteByOvk(
-      OvkDecryptTRC20Parameters parameters, boolean showErrorMsg) {
+  public static Optional<DecryptNotesLRC20> scanShieldedLRC20NoteByOvk(
+      OvkDecryptLRC20Parameters parameters, boolean showErrorMsg) {
     try {
-      return Optional.of(rpcCli.scanShieldedTRC20NoteByOvk(parameters));
+      return Optional.of(rpcCli.scanShieldedLRC20NoteByOvk(parameters));
     } catch (Exception e) {
       if (showErrorMsg) {
         Status status = Status.fromThrowable(e);
-        System.out.println("ScanShieldedTRC20NoteByOvk failed,error " + status.getDescription());
+        System.out.println("ScanShieldedLRC20NoteByOvk failed,error " + status.getDescription());
       }
     }
     return Optional.empty();
@@ -3338,8 +3338,8 @@ public class WalletApi {
     }
   }
 
-  public static ShieldedTRC20Parameters createShieldedContractParameters(
-      PrivateShieldedTRC20Parameters privateParameters) {
+  public static ShieldedLRC20Parameters createShieldedContractParameters(
+      PrivateShieldedLRC20Parameters privateParameters) {
     try {
       return rpcCli.createShieldedContractParameters(privateParameters);
     } catch (Exception e) {
@@ -3349,9 +3349,9 @@ public class WalletApi {
     return null;
   }
 
-  public static ShieldedTRC20Parameters createShieldedContractParametersWithoutAsk(
-      PrivateShieldedTRC20ParametersWithoutAsk privateParameters, byte[] ask) {
-    ShieldedTRC20Parameters parameters;
+  public static ShieldedLRC20Parameters createShieldedContractParametersWithoutAsk(
+      PrivateShieldedLRC20ParametersWithoutAsk privateParameters, byte[] ask) {
+    ShieldedLRC20Parameters parameters;
     try {
       parameters = rpcCli.createShieldedContractParametersWithoutAsk(privateParameters);
     } catch (Exception e) {
@@ -3370,17 +3370,17 @@ public class WalletApi {
       return parameters;
     }
     //generate spendAuthority signature and trigger input data
-    ShieldedTRC20TriggerContractParameters.Builder stBuilder =
-        ShieldedTRC20TriggerContractParameters.newBuilder();
-    stBuilder.setShieldedTRC20Parameters(parameters);
+    ShieldedLRC20TriggerContractParameters.Builder stBuilder =
+        ShieldedLRC20TriggerContractParameters.newBuilder();
+    stBuilder.setShieldedLRC20Parameters(parameters);
     if (parameters.getParameterType().equals("burn")) {
       stBuilder.setAmount(privateParameters.getToAmount());
       stBuilder.setTransparentToAddress(privateParameters.getTransparentToAddress());
     }
     ByteString messageHash = parameters.getMessageHash();
     List<SpendDescription> spendDescList = parameters.getSpendDescriptionList();
-    ShieldedTRC20Parameters.Builder newBuilder =
-        ShieldedTRC20Parameters.newBuilder().mergeFrom(parameters);
+    ShieldedLRC20Parameters.Builder newBuilder =
+        ShieldedLRC20Parameters.newBuilder().mergeFrom(parameters);
     for (int i = 0; i < spendDescList.size(); i++) {
       BytesMessage authSig;
       try {
@@ -3409,10 +3409,10 @@ public class WalletApi {
     }
     BytesMessage triggerInputData;
     try {
-      triggerInputData = rpcCli.getTriggerInputForShieldedTRC20Contract(stBuilder.build());
+      triggerInputData = rpcCli.getTriggerInputForShieldedLRC20Contract(stBuilder.build());
     } catch (Exception e) {
       triggerInputData = null;
-      System.out.println("getTriggerInputForShieldedTRC20Contract error, please retry!");
+      System.out.println("getTriggerInputForShieldedLRC20Contract error, please retry!");
     }
     if (triggerInputData == null) {
       return null;
@@ -3422,20 +3422,20 @@ public class WalletApi {
     return newBuilder.build();
   }
 
-  public static Optional<NullifierResult> isShieldedTRC20ContractNoteSpent(
-      NfTRC20Parameters parameters, boolean showErrorMsg) {
+  public static Optional<NullifierResult> isShieldedLRC20ContractNoteSpent(
+      NfLRC20Parameters parameters, boolean showErrorMsg) {
     if (showErrorMsg) {
       try {
-        return Optional.of(rpcCli.isShieldedTRC20ContractNoteSpent(parameters));
+        return Optional.of(rpcCli.isShieldedLRC20ContractNoteSpent(parameters));
       } catch (Exception e) {
         if (showErrorMsg) {
           Status status = Status.fromThrowable(e);
-          System.out.println("IsShieldedTRC20ContractNoteSpent failed, error "
+          System.out.println("IsShieldedLRC20ContractNoteSpent failed, error "
               + status.getDescription());
         }
       }
     } else {
-      return Optional.of(rpcCli.isShieldedTRC20ContractNoteSpent(parameters));
+      return Optional.of(rpcCli.isShieldedLRC20ContractNoteSpent(parameters));
     }
     return Optional.empty();
   }

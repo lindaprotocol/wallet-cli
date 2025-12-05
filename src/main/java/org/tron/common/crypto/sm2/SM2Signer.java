@@ -1,4 +1,4 @@
-package org.tron.common.crypto.sm2;
+package org.linda.common.crypto.sm2;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;

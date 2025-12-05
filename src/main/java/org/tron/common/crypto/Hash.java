@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.crypto;
+package org.linda.common.crypto;
 
 import static java.util.Arrays.copyOfRange;
 
@@ -25,9 +25,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Provider;
 import java.security.Security;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.crypto.jce.TronCastleProvider;
-import org.tron.common.utils.ByteArray;
-import org.tron.walletserver.WalletApi;
+import org.linda.common.crypto.jce.LindaCastleProvider;
+import org.linda.common.utils.ByteArray;
+import org.linda.walletserver.WalletApi;
 
 @Slf4j
 public class Hash {
@@ -38,10 +38,10 @@ public class Hash {
   private static final String HASH_512_ALGORITHM_NAME;
 
   static {
-    Security.addProvider(TronCastleProvider.getInstance());
+    Security.addProvider(LindaCastleProvider.getInstance());
     CRYPTO_PROVIDER = Security.getProvider("BC");
-    HASH_256_ALGORITHM_NAME = "TRON-KECCAK-256";
-    HASH_512_ALGORITHM_NAME = "TRON-KECCAK-512";
+    HASH_256_ALGORITHM_NAME = "LINDA-KECCAK-256";
+    HASH_512_ALGORITHM_NAME = "LINDA-KECCAK-512";
   }
 
   public static byte[] sha3(byte[] input) {

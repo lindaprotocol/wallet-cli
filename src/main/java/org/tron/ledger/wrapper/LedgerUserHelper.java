@@ -1,22 +1,22 @@
-package org.tron.ledger.wrapper;
+package org.linda.ledger.wrapper;
 
 import org.hid4java.HidDevice;
-import org.tron.walletcli.WalletApiWrapper;
+import org.linda.walletcli.WalletApiWrapper;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import org.tron.walletserver.WalletApi;
+import org.linda.walletserver.WalletApi;
 
-import static org.tron.ledger.console.ConsoleColor.ANSI_RED;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RESET;
-import static org.tron.ledger.console.ConsoleColor.ANSI_YELLOW;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RED;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RESET;
+import static org.linda.ledger.console.ConsoleColor.ANSI_YELLOW;
 
 public class LedgerUserHelper {
 
   private static final String[] LEDGER_FORBID_OP_ARR = {
       "addtransactionsign",
-      "backupshieldedtrc20wallet",
+      "backupshieldedlrc20wallet",
       "backupwallet",
       "backupwallet2base64",
       "exportwalletmnemonic",
@@ -71,10 +71,10 @@ public class LedgerUserHelper {
     System.out.println(ANSI_RED + "Please ensure the following steps are OK:" + ANSI_RESET);
     System.out.println(ANSI_YELLOW + "\t1.The Ledger device is connected to your computer.");
     System.out.println("\t2.The Ledger device is unlocked (PIN code entered).");
-    System.out.println("\t3.The Tron app is installed in your Ledger device.");
-    System.out.println("\t4.The Tron app is open in your Ledger device. Usually, 'Application is ready' will be displayed on your ledger device.");
+    System.out.println("\t3.The Linda app is installed in your Ledger device.");
+    System.out.println("\t4.The Linda app is open in your Ledger device. Usually, 'Application is ready' will be displayed on your ledger device.");
     System.out.println("\t5.Ledger may have hardware response timeout, please try again.");
-    System.out.println("\tIf it still doesn't work after above steps are OK, please Quit&Reopen Tron app in Ledger to ensure the connection is OK." + ANSI_RESET);
+    System.out.println("\tIf it still doesn't work after above steps are OK, please Quit&Reopen Linda app in Ledger to ensure the connection is OK." + ANSI_RESET);
   }
 
   // return true, check ok , false, check failed

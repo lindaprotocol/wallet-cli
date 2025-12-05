@@ -1,4 +1,4 @@
-package org.tron.common.crypto;
+package org.linda.common.crypto;
 
 /*
  * Copyright 2011 Google Inc.
@@ -33,8 +33,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import org.bouncycastle.crypto.digests.SM3Digest;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.config.Configuration;
+import org.linda.common.utils.ByteArray;
+import org.linda.core.config.Configuration;
 
 
 /**

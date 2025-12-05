@@ -1,10 +1,10 @@
-package org.tron.core.zen.address;
+package org.linda.core.zen.address;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.tron.common.zksnark.JLibrustzcash;
-import org.tron.core.exception.ZksnarkException;
+import org.linda.common.zksnark.JLibrustzcash;
+import org.linda.core.exception.ZksnarkException;
 
 @AllArgsConstructor
 public class DiversifierT {
@@ -20,7 +20,7 @@ public class DiversifierT {
   public DiversifierT random() throws ZksnarkException {
     byte[] d;
     while (true) {
-      d = org.tron.keystore.Wallet.generateRandomBytes(ZC_DIVERSIFIER_SIZE);
+      d = org.linda.keystore.Wallet.generateRandomBytes(ZC_DIVERSIFIER_SIZE);
       if (JLibrustzcash.librustzcashCheckDiversifier(d)) {
         break;
       }

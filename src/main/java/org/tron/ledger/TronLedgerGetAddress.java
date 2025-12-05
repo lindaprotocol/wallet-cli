@@ -1,13 +1,13 @@
-package org.tron.ledger;
+package org.linda.ledger;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.tron.common.utils.Utils.greenBoldHighlight;
-import static org.tron.common.utils.Utils.yellowBoldHighlight;
-import static org.tron.ledger.LedgerAddressUtil.getTronAddress;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RED;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RESET;
-import static org.tron.ledger.sdk.LedgerConstant.DEFAULT_PATH;
-import static org.tron.ledger.sdk.LedgerConstant.LEDGER_VENDOR_ID;
+import static org.linda.common.utils.Utils.greenBoldHighlight;
+import static org.linda.common.utils.Utils.yellowBoldHighlight;
+import static org.linda.ledger.LedgerAddressUtil.getLindaAddress;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RED;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RESET;
+import static org.linda.ledger.sdk.LedgerConstant.DEFAULT_PATH;
+import static org.linda.ledger.sdk.LedgerConstant.LEDGER_VENDOR_ID;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +19,18 @@ import org.hid4java.HidDevice;
 import org.hid4java.HidManager;
 import org.hid4java.HidServices;
 import org.hid4java.HidServicesSpecification;
-import org.tron.ledger.sdk.ApduExchangeHandler;
-import org.tron.ledger.sdk.ApduMessageBuilder;
-import org.tron.ledger.sdk.CommonUtil;
-import org.tron.ledger.sdk.LedgerConstant;
-import org.tron.ledger.wrapper.DebugConfig;
+import org.linda.ledger.sdk.ApduExchangeHandler;
+import org.linda.ledger.sdk.ApduMessageBuilder;
+import org.linda.ledger.sdk.CommonUtil;
+import org.linda.ledger.sdk.LedgerConstant;
+import org.linda.ledger.wrapper.DebugConfig;
 
-public class TronLedgerGetAddress {
+public class LindaLedgerGetAddress {
   private final HidServices hidServices;
   @Getter
   private HidDevice device;
 
-  private TronLedgerGetAddress() {
+  private LindaLedgerGetAddress() {
     HidServicesSpecification spec = new HidServicesSpecification();
     // hidServicesSpecification need the same in the program
     spec.setAutoStart(false);
@@ -41,10 +41,10 @@ public class TronLedgerGetAddress {
   }
 
   private static class Holder {
-    private static final TronLedgerGetAddress INSTANCE = new TronLedgerGetAddress();
+    private static final LindaLedgerGetAddress INSTANCE = new LindaLedgerGetAddress();
   }
 
-  public static TronLedgerGetAddress getInstance() {
+  public static LindaLedgerGetAddress getInstance() {
     return Holder.INSTANCE;
   }
 
@@ -68,7 +68,7 @@ public class TronLedgerGetAddress {
     List<HidDevice> hidDeviceList = new ArrayList<>();
     for (HidDevice hidDevice : list) {
       try {
-        if (hidDevice.open() && (StringUtils.isNotEmpty(getTronAddress(DEFAULT_PATH, hidDevice)))) {
+        if (hidDevice.open() && (StringUtils.isNotEmpty(getLindaAddress(DEFAULT_PATH, hidDevice)))) {
           hidDeviceList.add(hidDevice);
         }
       } catch (Exception e) {
@@ -125,7 +125,7 @@ public class TronLedgerGetAddress {
       try {
         return hidDeviceList.stream()
             .filter(hidDevice -> hidDevice.open()
-                && StringUtils.equals(ownerAddress, getTronAddress(path, hidDevice)))
+                && StringUtils.equals(ownerAddress, getLindaAddress(path, hidDevice)))
             .findFirst()
             .orElse(null);
       } catch (Exception e) {
@@ -160,11 +160,11 @@ public class TronLedgerGetAddress {
     }
   }
 
-  public String getTronAddressByPath(String path, HidDevice hidDevice) {
+  public String getLindaAddressByPath(String path, HidDevice hidDevice) {
     int readTimeoutMillis = 5000;
     int totalWaitTimeoutMillis = 5000;
     try {
-      byte[] apdu = ApduMessageBuilder.buildTronAddressApduMessage(path);
+      byte[] apdu = ApduMessageBuilder.buildLindaAddressApduMessage(path);
       if (DebugConfig.isDebugEnabled()) {
         System.out.println("Get Address Request: " + path);
       }

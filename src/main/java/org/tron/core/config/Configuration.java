@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.core.config;
+package org.linda.core.config;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;

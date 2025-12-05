@@ -1,11 +1,11 @@
-package org.tron.common.zksnark;
+package org.linda.common.zksnark;
 
-import org.tron.common.zksnark.JLibsodiumParam.Black2bSaltPersonalParams;
-import org.tron.common.zksnark.JLibsodiumParam.Blake2bFinalParams;
-import org.tron.common.zksnark.JLibsodiumParam.Blake2bInitSaltPersonalParams;
-import org.tron.common.zksnark.JLibsodiumParam.Blake2bUpdateParams;
-import org.tron.common.zksnark.JLibsodiumParam.Chacha20Poly1305IetfEncryptParams;
-import org.tron.common.zksnark.JLibsodiumParam.Chacha20poly1305IetfDecryptParams;
+import org.linda.common.zksnark.JLibsodiumParam.Black2bSaltPersonalParams;
+import org.linda.common.zksnark.JLibsodiumParam.Blake2bFinalParams;
+import org.linda.common.zksnark.JLibsodiumParam.Blake2bInitSaltPersonalParams;
+import org.linda.common.zksnark.JLibsodiumParam.Blake2bUpdateParams;
+import org.linda.common.zksnark.JLibsodiumParam.Chacha20Poly1305IetfEncryptParams;
+import org.linda.common.zksnark.JLibsodiumParam.Chacha20poly1305IetfDecryptParams;
 
 public class JLibsodium {
   public static final int CRYPTO_GENERICHASH_BLAKE2B_PERSONALBYTES = 16;

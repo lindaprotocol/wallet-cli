@@ -1,16 +1,16 @@
-package org.tron.core.exception;
+package org.linda.core.exception;
 
-public class TronException extends Exception {
+public class LindaException extends Exception {
 
-  public TronException() {
+  public LindaException() {
     super();
   }
 
-  public TronException(String message) {
+  public LindaException(String message) {
     super(message);
   }
 
-  public TronException(String message, Throwable cause) {
+  public LindaException(String message, Throwable cause) {
     super(message, cause);
   }
 

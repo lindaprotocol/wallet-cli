@@ -1,10 +1,10 @@
-package org.tron.ledger.wrapper;
+package org.linda.ledger.wrapper;
 
-import static org.tron.ledger.LedgerAddressUtil.getTronAddress;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RED;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RESET;
-import static org.tron.ledger.console.ConsoleColor.ANSI_YELLOW;
-import static org.tron.ledger.sdk.LedgerConstant.LEDGER_VENDOR_ID;
+import static org.linda.ledger.LedgerAddressUtil.getLindaAddress;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RED;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RESET;
+import static org.linda.ledger.console.ConsoleColor.ANSI_YELLOW;
+import static org.linda.ledger.sdk.LedgerConstant.LEDGER_VENDOR_ID;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import org.hid4java.HidDevice;
 import org.hid4java.HidManager;
 import org.hid4java.HidServices;
 import org.hid4java.HidServicesSpecification;
-import org.tron.ledger.listener.LedgerEventListener;
+import org.linda.ledger.listener.LedgerEventListener;
 
 public class HidServicesWrapper {
   private HidServices hidServices;
@@ -75,7 +75,7 @@ public class HidServicesWrapper {
       }
       if (hidDeviceList.size() > 1) {
         fidoDevice = hidDeviceList.stream()
-            .filter(hidDevice -> StringUtils.equals(address, getTronAddress(path, hidDevice)))
+            .filter(hidDevice -> StringUtils.equals(address, getLindaAddress(path, hidDevice)))
             .findFirst()
             .orElse(null);
         System.out.println("fidoDevice is not null:" + (fidoDevice != null));

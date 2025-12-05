@@ -1,10 +1,10 @@
-package org.tron.common.crypto;
+package org.linda.common.crypto;
 
 import java.security.SecureRandom;
 import java.security.SignatureException;
-import org.tron.common.crypto.ECKey.ECDSASignature;
-import org.tron.common.crypto.sm2.SM2;
-import org.tron.common.crypto.sm2.SM2.SM2Signature;
+import org.linda.common.crypto.ECKey.ECDSASignature;
+import org.linda.common.crypto.sm2.SM2;
+import org.linda.common.crypto.sm2.SM2.SM2Signature;
 
 public class SignUtils {
    public static SignInterface getGeneratedRandomSign(boolean isECKeyCryptoEngine) {

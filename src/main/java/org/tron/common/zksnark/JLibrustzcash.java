@@ -1,24 +1,24 @@
-package org.tron.common.zksnark;
+package org.linda.common.zksnark;
 
-import org.tron.common.zksnark.LibrustzcashParam.BindingSigParams;
-import org.tron.common.zksnark.LibrustzcashParam.CheckOutputNewParams;
-import org.tron.common.zksnark.LibrustzcashParam.CheckOutputParams;
-import org.tron.common.zksnark.LibrustzcashParam.CheckSpendNewParams;
-import org.tron.common.zksnark.LibrustzcashParam.CheckSpendParams;
-import org.tron.common.zksnark.LibrustzcashParam.ComputeCmParams;
-import org.tron.common.zksnark.LibrustzcashParam.ComputeNfParams;
-import org.tron.common.zksnark.LibrustzcashParam.CrhIvkParams;
-import org.tron.common.zksnark.LibrustzcashParam.FinalCheckNewParams;
-import org.tron.common.zksnark.LibrustzcashParam.FinalCheckParams;
-import org.tron.common.zksnark.LibrustzcashParam.InitZksnarkParams;
-import org.tron.common.zksnark.LibrustzcashParam.IvkToPkdParams;
-import org.tron.common.zksnark.LibrustzcashParam.KaAgreeParams;
-import org.tron.common.zksnark.LibrustzcashParam.KaDerivepublicParams;
-import org.tron.common.zksnark.LibrustzcashParam.MerkleHashParams;
-import org.tron.common.zksnark.LibrustzcashParam.OutputProofParams;
-import org.tron.common.zksnark.LibrustzcashParam.SpendProofParams;
-import org.tron.common.zksnark.LibrustzcashParam.SpendSigParams;
-import org.tron.core.exception.ZksnarkException;
+import org.linda.common.zksnark.LibrustzcashParam.BindingSigParams;
+import org.linda.common.zksnark.LibrustzcashParam.CheckOutputNewParams;
+import org.linda.common.zksnark.LibrustzcashParam.CheckOutputParams;
+import org.linda.common.zksnark.LibrustzcashParam.CheckSpendNewParams;
+import org.linda.common.zksnark.LibrustzcashParam.CheckSpendParams;
+import org.linda.common.zksnark.LibrustzcashParam.ComputeCmParams;
+import org.linda.common.zksnark.LibrustzcashParam.ComputeNfParams;
+import org.linda.common.zksnark.LibrustzcashParam.CrhIvkParams;
+import org.linda.common.zksnark.LibrustzcashParam.FinalCheckNewParams;
+import org.linda.common.zksnark.LibrustzcashParam.FinalCheckParams;
+import org.linda.common.zksnark.LibrustzcashParam.InitZksnarkParams;
+import org.linda.common.zksnark.LibrustzcashParam.IvkToPkdParams;
+import org.linda.common.zksnark.LibrustzcashParam.KaAgreeParams;
+import org.linda.common.zksnark.LibrustzcashParam.KaDerivepublicParams;
+import org.linda.common.zksnark.LibrustzcashParam.MerkleHashParams;
+import org.linda.common.zksnark.LibrustzcashParam.OutputProofParams;
+import org.linda.common.zksnark.LibrustzcashParam.SpendProofParams;
+import org.linda.common.zksnark.LibrustzcashParam.SpendSigParams;
+import org.linda.core.exception.ZksnarkException;
 
 public class JLibrustzcash {
   private static Librustzcash INSTANCE = LibrustzcashWrapper.getInstance();

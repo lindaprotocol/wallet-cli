@@ -1,12 +1,12 @@
-package org.tron.ledger.sdk;
+package org.linda.ledger.sdk;
 
-import static org.tron.ledger.sdk.CommonUtil.hexStringToByteArray;
+import static org.linda.ledger.sdk.CommonUtil.hexStringToByteArray;
 
-import org.tron.ledger.wrapper.DebugConfig;
+import org.linda.ledger.wrapper.DebugConfig;
 
 public class ApduMessageBuilder {
 
-  public static byte[] buildTronAddressApduMessage(String path) {
+  public static byte[] buildLindaAddressApduMessage(String path) {
     String donglePathHex = BIP32PathParser.convertBip32PathToHex(path);
     StringBuilder apduMessage = new StringBuilder();
     apduMessage.append("e0020000");

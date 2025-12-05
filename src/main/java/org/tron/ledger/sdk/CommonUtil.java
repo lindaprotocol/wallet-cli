@@ -1,4 +1,4 @@
-package org.tron.ledger.sdk;
+package org.linda.ledger.sdk;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.hid4java.HidDevice;

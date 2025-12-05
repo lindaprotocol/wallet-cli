@@ -1,4 +1,4 @@
-package org.tron.gasfree.request;
+package org.linda.gasfree.request;
 
 import lombok.Getter;
 import lombok.Setter;

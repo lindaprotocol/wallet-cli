@@ -1,19 +1,19 @@
-package org.tron.ledger;
+package org.linda.ledger;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.tron.common.utils.Utils.failedHighlight;
-import static org.tron.ledger.LedgerConst.READ_TIMEOUT_MILLIS;
-import static org.tron.ledger.LedgerConst.TOTAL_WAIT_TIMEOUT_MILLIS;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RED;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RESET;
+import static org.linda.common.utils.Utils.failedHighlight;
+import static org.linda.ledger.LedgerConst.READ_TIMEOUT_MILLIS;
+import static org.linda.ledger.LedgerConst.TOTAL_WAIT_TIMEOUT_MILLIS;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RED;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RESET;
 
 import org.hid4java.HidDevice;
-import org.tron.ledger.sdk.ApduExchangeHandler;
-import org.tron.ledger.sdk.ApduMessageBuilder;
-import org.tron.ledger.sdk.CommonUtil;
-import org.tron.ledger.sdk.LedgerConstant;
-import org.tron.ledger.wrapper.DebugConfig;
+import org.linda.ledger.sdk.ApduExchangeHandler;
+import org.linda.ledger.sdk.ApduMessageBuilder;
+import org.linda.ledger.sdk.CommonUtil;
+import org.linda.ledger.sdk.LedgerConstant;
+import org.linda.ledger.wrapper.DebugConfig;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,15 +23,15 @@ public class LedgerAddressUtil {
 
   public static String getImportAddress(String path, HidDevice device) {
     String importAddress = "";
-    TronLedgerGetAddress tronLedgerGetAddress = TronLedgerGetAddress.getInstance();
+    LindaLedgerGetAddress lindaLedgerGetAddress = LindaLedgerGetAddress.getInstance();
     try {
-      importAddress = tronLedgerGetAddress.getTronAddressByPath(path, device);
+      importAddress = lindaLedgerGetAddress.getLindaAddressByPath(path, device);
     } catch (Exception e) {
       if (DebugConfig.isDebugEnabled()) {
         e.printStackTrace();
       }
     } finally {
-      tronLedgerGetAddress.close();
+      lindaLedgerGetAddress.close();
     }
 
     if (isEmpty(importAddress)) {
@@ -48,7 +48,7 @@ public class LedgerAddressUtil {
     for (String path : paths) {
       try {
         long startTime = System.currentTimeMillis();
-        String importAddress = TronLedgerGetAddress.getInstance().getTronAddressByPath(path, hidDevice);
+        String importAddress = LindaLedgerGetAddress.getInstance().getLindaAddressByPath(path, hidDevice);
         long endTime = System.currentTimeMillis();
         if (DebugConfig.isDebugEnabled()) {
           long duration = endTime - startTime;
@@ -73,9 +73,9 @@ public class LedgerAddressUtil {
     return addressMap;
   }
 
-  public static String getTronAddress(String path, HidDevice hidDevice) {
+  public static String getLindaAddress(String path, HidDevice hidDevice) {
     try {
-      byte[] apdu = ApduMessageBuilder.buildTronAddressApduMessage(path);
+      byte[] apdu = ApduMessageBuilder.buildLindaAddressApduMessage(path);
       if (DebugConfig.isDebugEnabled()) {
         System.out.println("Get Address Request: " + path);
       }

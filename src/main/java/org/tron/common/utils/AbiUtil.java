@@ -1,4 +1,4 @@
-package org.tron.common.utils;
+package org.linda.common.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -9,8 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.util.encoders.Hex;
-import org.tron.common.crypto.Hash;
-import org.tron.walletserver.WalletApi;
+import org.linda.common.crypto.Hash;
+import org.linda.walletserver.WalletApi;
 
 public class AbiUtil {
 
@@ -46,7 +46,7 @@ public class AbiUtil {
         return new CoderBool();
       case "bytes":
         return new CoderDynamicBytes();
-      case "trcToken":
+      case "lrcToken":
         return new CoderNumber();
     }
 
@@ -400,7 +400,7 @@ public class AbiUtil {
     String arrayMethod2 = "test(uint,uint256[])";
     String arrayMethod3 = "test(uint,address[])";
     String byteMethod1 = "test(bytes32,bytes11)";
-    String tokenMethod = "test(trcToken,uint256)";
+    String tokenMethod = "test(lrcToken,uint256)";
     String tokenParams = "\"nmb\",111";
 
     System.out.println("token:" + parseMethod(tokenMethod, tokenParams));

@@ -16,17 +16,17 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.utils;
+package org.linda.common.utils;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.tron.common.utils.DomainValidator.isDomainOrIP;
-import static org.tron.ledger.console.ConsoleColor.ANSI_BLUE;
-import static org.tron.ledger.console.ConsoleColor.ANSI_BOLD;
-import static org.tron.ledger.console.ConsoleColor.ANSI_GREEN;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RED;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RESET;
-import static org.tron.ledger.console.ConsoleColor.ANSI_YELLOW;
+import static org.linda.common.utils.DomainValidator.isDomainOrIP;
+import static org.linda.ledger.console.ConsoleColor.ANSI_BLUE;
+import static org.linda.ledger.console.ConsoleColor.ANSI_BOLD;
+import static org.linda.ledger.console.ConsoleColor.ANSI_GREEN;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RED;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RESET;
+import static org.linda.ledger.console.ConsoleColor.ANSI_YELLOW;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -54,50 +54,50 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.jetbrains.annotations.Nullable;
-import org.tron.api.GrpcAPI.*;
-import org.tron.common.crypto.Hash;
-import org.tron.common.crypto.Sha256Sm3Hash;
-import org.tron.keystore.StringUtils;
-import org.tron.protos.contract.BalanceContract;
-import org.tron.walletcli.Client;
-import org.tron.walletserver.WalletApi;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.Protocol.TransactionInfo;
-import org.tron.protos.contract.AccountContract.AccountCreateContract;
-import org.tron.protos.contract.AccountContract.AccountPermissionUpdateContract;
-import org.tron.protos.contract.AccountContract.AccountUpdateContract;
-import org.tron.protos.contract.AccountContract.SetAccountIdContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.UnfreezeAssetContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.UpdateAssetContract;
-import org.tron.protos.contract.BalanceContract.CancelAllUnfreezeV2Contract;
-import org.tron.protos.contract.BalanceContract.FreezeBalanceContract;
-import org.tron.protos.contract.BalanceContract.TransferContract;
-import org.tron.protos.contract.BalanceContract.UnfreezeBalanceContract;
-import org.tron.protos.contract.BalanceContract.WithdrawBalanceContract;
-import org.tron.protos.contract.ExchangeContract.ExchangeCreateContract;
-import org.tron.protos.contract.ExchangeContract.ExchangeInjectContract;
-import org.tron.protos.contract.ExchangeContract.ExchangeTransactionContract;
-import org.tron.protos.contract.ExchangeContract.ExchangeWithdrawContract;
-import org.tron.protos.contract.ProposalContract.ProposalApproveContract;
-import org.tron.protos.contract.ProposalContract.ProposalCreateContract;
-import org.tron.protos.contract.ProposalContract.ProposalDeleteContract;
-import org.tron.protos.contract.SmartContractOuterClass.ClearABIContract;
-import org.tron.protos.contract.SmartContractOuterClass.CreateSmartContract;
-import org.tron.protos.contract.SmartContractOuterClass.TriggerSmartContract;
-import org.tron.protos.contract.SmartContractOuterClass.UpdateEnergyLimitContract;
-import org.tron.protos.contract.SmartContractOuterClass.UpdateSettingContract;
-import org.tron.protos.contract.StorageContract.UpdateBrokerageContract;
-import org.tron.protos.contract.VoteAssetContractOuterClass.VoteAssetContract;
-import org.tron.protos.contract.WitnessContract.VoteWitnessContract;
-import org.tron.protos.contract.WitnessContract.WitnessCreateContract;
-import org.tron.protos.contract.WitnessContract.WitnessUpdateContract;
-import org.tron.protos.contract.ShieldContract.ShieldedTransferContract;
-import org.tron.protos.contract.MarketContract.MarketCancelOrderContract;
-import org.tron.protos.contract.MarketContract.MarketSellAssetContract;
+import org.linda.api.GrpcAPI.*;
+import org.linda.common.crypto.Hash;
+import org.linda.common.crypto.Sha256Sm3Hash;
+import org.linda.keystore.StringUtils;
+import org.linda.protos.contract.BalanceContract;
+import org.linda.walletcli.Client;
+import org.linda.walletserver.WalletApi;
+import org.linda.protos.Protocol.Block;
+import org.linda.protos.Protocol.Transaction;
+import org.linda.protos.Protocol.TransactionInfo;
+import org.linda.protos.contract.AccountContract.AccountCreateContract;
+import org.linda.protos.contract.AccountContract.AccountPermissionUpdateContract;
+import org.linda.protos.contract.AccountContract.AccountUpdateContract;
+import org.linda.protos.contract.AccountContract.SetAccountIdContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.UnfreezeAssetContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.UpdateAssetContract;
+import org.linda.protos.contract.BalanceContract.CancelAllUnfreezeV2Contract;
+import org.linda.protos.contract.BalanceContract.FreezeBalanceContract;
+import org.linda.protos.contract.BalanceContract.TransferContract;
+import org.linda.protos.contract.BalanceContract.UnfreezeBalanceContract;
+import org.linda.protos.contract.BalanceContract.WithdrawBalanceContract;
+import org.linda.protos.contract.ExchangeContract.ExchangeCreateContract;
+import org.linda.protos.contract.ExchangeContract.ExchangeInjectContract;
+import org.linda.protos.contract.ExchangeContract.ExchangeTransactionContract;
+import org.linda.protos.contract.ExchangeContract.ExchangeWithdrawContract;
+import org.linda.protos.contract.ProposalContract.ProposalApproveContract;
+import org.linda.protos.contract.ProposalContract.ProposalCreateContract;
+import org.linda.protos.contract.ProposalContract.ProposalDeleteContract;
+import org.linda.protos.contract.SmartContractOuterClass.ClearABIContract;
+import org.linda.protos.contract.SmartContractOuterClass.CreateSmartContract;
+import org.linda.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.linda.protos.contract.SmartContractOuterClass.UpdateEnergyLimitContract;
+import org.linda.protos.contract.SmartContractOuterClass.UpdateSettingContract;
+import org.linda.protos.contract.StorageContract.UpdateBrokerageContract;
+import org.linda.protos.contract.VoteAssetContractOuterClass.VoteAssetContract;
+import org.linda.protos.contract.WitnessContract.VoteWitnessContract;
+import org.linda.protos.contract.WitnessContract.WitnessCreateContract;
+import org.linda.protos.contract.WitnessContract.WitnessUpdateContract;
+import org.linda.protos.contract.ShieldContract.ShieldedTransferContract;
+import org.linda.protos.contract.MarketContract.MarketCancelOrderContract;
+import org.linda.protos.contract.MarketContract.MarketSellAssetContract;
 
 public class Utils {
   public static final String PERMISSION_ID = "Permission_id";
@@ -332,9 +332,9 @@ public class Utils {
     return password;
   }
 
-  public static byte[] generateContractAddress(Transaction trx, byte[] ownerAddress) {
+  public static byte[] generateContractAddress(Transaction lind, byte[] ownerAddress) {
     // get tx hash
-    byte[] txRawDataHash = Sha256Sm3Hash.of(trx.getRawData().toByteArray()).getBytes();
+    byte[] txRawDataHash = Sha256Sm3Hash.of(lind.getRawData().toByteArray()).getBytes();
 
     // combine
     byte[] combined = new byte[txRawDataHash.length + ownerAddress.length];

@@ -1,6 +1,6 @@
-package org.tron.mnemonic;
+package org.linda.mnemonic;
 
-import static org.tron.common.utils.Utils.failedHighlight;
+import static org.linda.common.utils.Utils.failedHighlight;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.ArrayUtils;
-import org.tron.common.crypto.SignInterface;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.exception.CipherException;
+import org.linda.common.crypto.SignInterface;
+import org.linda.common.utils.ByteArray;
+import org.linda.core.exception.CipherException;
 import org.web3j.crypto.Bip32ECKeyPair;
 import org.web3j.crypto.Credentials;
 

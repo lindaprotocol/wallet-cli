@@ -1,4 +1,4 @@
-package org.tron.gasfree.response;
+package org.linda.gasfree.response;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Getter;

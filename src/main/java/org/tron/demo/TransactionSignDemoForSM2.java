@@ -1,16 +1,16 @@
-package org.tron.demo;
+package org.linda.demo;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
-import org.tron.common.crypto.Sha256Sm3Hash;
-import org.tron.common.crypto.sm2.SM2;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.exception.CancelException;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.contract.BalanceContract.TransferContract;
-import org.tron.walletserver.WalletApi;
+import org.linda.common.crypto.Sha256Sm3Hash;
+import org.linda.common.crypto.sm2.SM2;
+import org.linda.common.utils.ByteArray;
+import org.linda.core.exception.CancelException;
+import org.linda.protos.Protocol.Block;
+import org.linda.protos.Protocol.Transaction;
+import org.linda.protos.contract.BalanceContract.TransferContract;
+import org.linda.walletserver.WalletApi;
 
 public class TransactionSignDemoForSM2 {
 
@@ -86,13 +86,13 @@ public class TransactionSignDemoForSM2 {
   }
 
   private static void base58checkToHexString() {
-    String base58check = "TGehVcNhud84JDCGrNHKVz9jEAVKUpbuiv";
+    String base58check = "LRuSkmJoqZFAPqpoSEcuFrXMXb7HL1dyNx";
     String hexString = ByteArray.toHexString(WalletApi.decodeFromBase58Check(base58check));
     System.out.println(hexString);
   }
 
   private static void hexStringTobase58check() {
-    String hexString = "414948c2e8a756d9437037dcd8c7e0c73d560ca38d";
+    String hexString = "304948c2e8a756d9437037dcd8c7e0c73d560ca38d";
     String base58check = WalletApi.encode58Check(ByteArray.fromHexString(hexString));
     System.out.println(base58check);
   }
@@ -102,8 +102,8 @@ public class TransactionSignDemoForSM2 {
     byte[] privateBytes = ByteArray.fromHexString(privateStr);
     SM2 sm2 = SM2.fromPrivate(privateBytes);
     byte[] from = sm2.getAddress();
-    byte[] to = WalletApi.decodeFromBase58Check("TGehVcNhud84JDCGrNHKVz9jEAVKUpbuiv");
-    long amount = 100_000_000L; // 100 TRX, api only receive trx in Sun, and 1 TRX = 1000000 Sun
+    byte[] to = WalletApi.decodeFromBase58Check("LRuSkmJoqZFAPqpoSEcuFrXMXb7HL1dyNx");
+    long amount = 100_000_000L; // 100 LIND, api only receive lind in Sun, and 1 LIND = 1000000 Sun
     Transaction transaction = createTransaction(from, to, amount);
     byte[] transactionBytes = transaction.toByteArray();
 

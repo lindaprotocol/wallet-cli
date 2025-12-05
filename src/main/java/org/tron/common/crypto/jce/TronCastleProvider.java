@@ -16,13 +16,13 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.crypto.jce;
+package org.linda.common.crypto.jce;
 
 import java.security.Provider;
 import java.security.Security;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-public final class TronCastleProvider {
+public final class LindaCastleProvider {
 
     public static Provider getInstance() {
         return Holder.INSTANCE;
@@ -36,9 +36,9 @@ public final class TronCastleProvider {
 
             INSTANCE = (p != null) ? p : new BouncyCastleProvider();
 
-            INSTANCE.put("MessageDigest.TRON-KECCAK-256", "org.tron.common.crypto" +
+            INSTANCE.put("MessageDigest.LINDA-KECCAK-256", "org.linda.common.crypto" +
                     ".cryptohash.Keccak256");
-            INSTANCE.put("MessageDigest.TRON-KECCAK-512", "org.tron.common.crypto" +
+            INSTANCE.put("MessageDigest.LINDA-KECCAK-512", "org.linda.common.crypto" +
                     ".cryptohash.Keccak512");
         }
     }

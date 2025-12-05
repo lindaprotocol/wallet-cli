@@ -1,10 +1,10 @@
-package org.tron.common.zksnark;
+package org.linda.common.zksnark;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.ByteUtil;
-import org.tron.core.exception.ZksnarkException;
+import org.linda.common.utils.ByteArray;
+import org.linda.common.utils.ByteUtil;
+import org.linda.core.exception.ZksnarkException;
 
 public class LibrustzcashParam {
   public static void validNull(byte[] value) throws ZksnarkException {

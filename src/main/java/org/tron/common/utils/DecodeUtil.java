@@ -1,13 +1,13 @@
-package org.tron.common.utils;
+package org.linda.common.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 
-//import static org.tron.core.Constant.ADD_PRE_FIX_BYTE_MAINNET;
+//import static org.linda.core.Constant.ADD_PRE_FIX_BYTE_MAINNET;
 
 @Slf4j(topic = "Commons")
 public class DecodeUtil {
-  public static final byte ADD_PRE_FIX_BYTE_MAINNET = (byte) 0x41;   //41 + address
+  public static final byte ADD_PRE_FIX_BYTE_MAINNET = (byte) 0x30;   //0 + address
   public static final int ADDRESS_SIZE = 42;
   public static byte addressPreFixByte = ADD_PRE_FIX_BYTE_MAINNET;
 

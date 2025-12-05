@@ -1,7 +1,7 @@
-package org.tron.ledger.wrapper;
+package org.linda.ledger.wrapper;
 
 import com.typesafe.config.Config;
-import org.tron.core.config.Configuration;
+import org.linda.core.config.Configuration;
 
 public class DebugConfig {
   private static DebugConfig instance;

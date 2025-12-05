@@ -1,13 +1,13 @@
-package org.tron.ledger.listener;
+package org.linda.ledger.listener;
 
-import static org.tron.common.utils.TransactionUtils.getTransactionId;
-import static org.tron.common.utils.Utils.greenBoldHighlight;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RED;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RESET;
-import static org.tron.ledger.console.ConsoleColor.ANSI_YELLOW;
-import static org.tron.ledger.sdk.ApduMessageBuilder.buildTransactionSignApduMessage;
-import static org.tron.ledger.sdk.CommonUtil.bytesToHex;
-import static org.tron.ledger.sdk.LedgerConstant.LEDGER_SIGN_CANCEL;
+import static org.linda.common.utils.TransactionUtils.getTransactionId;
+import static org.linda.common.utils.Utils.greenBoldHighlight;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RED;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RESET;
+import static org.linda.ledger.console.ConsoleColor.ANSI_YELLOW;
+import static org.linda.ledger.sdk.ApduMessageBuilder.buildTransactionSignApduMessage;
+import static org.linda.ledger.sdk.CommonUtil.bytesToHex;
+import static org.linda.ledger.sdk.LedgerConstant.LEDGER_SIGN_CANCEL;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -16,14 +16,14 @@ import lombok.Setter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.hid4java.HidDevice;
 import org.hid4java.event.HidServicesEvent;
-import org.tron.ledger.sdk.ApduExchangeHandler;
-import org.tron.ledger.sdk.CommonUtil;
-import org.tron.ledger.sdk.LedgerConstant;
-import org.tron.ledger.sdk.LedgerProtocol;
-import org.tron.ledger.wrapper.DebugConfig;
-import org.tron.ledger.wrapper.LedgerSignResult;
-import org.tron.protos.Protocol;
-import org.tron.protos.Protocol.Transaction;
+import org.linda.ledger.sdk.ApduExchangeHandler;
+import org.linda.ledger.sdk.CommonUtil;
+import org.linda.ledger.sdk.LedgerConstant;
+import org.linda.ledger.sdk.LedgerProtocol;
+import org.linda.ledger.wrapper.DebugConfig;
+import org.linda.ledger.wrapper.LedgerSignResult;
+import org.linda.protos.Protocol;
+import org.linda.protos.Protocol.Transaction;
 
 public class LedgerEventListener extends BaseListener {
   private static final int TRANSACTION_SIGN_TIMEOUT = 60;
@@ -133,10 +133,10 @@ public class LedgerEventListener extends BaseListener {
 
     if (ArrayUtils.isNotEmpty(response)) {
       if (SIGN_BY_HASH.equals(bytesToHex(response))) {
-        System.out.println(ANSI_RED + "Please first set 'Sign By Hash' to 'Allowed' in Ledger TRON Settings." + ANSI_RESET);
+        System.out.println(ANSI_RED + "Please first set 'Sign By Hash' to 'Allowed' in Ledger LINDA Settings." + ANSI_RESET);
       }
       if (APP_IS_OPEN.equals(bytesToHex(response))) {
-        System.out.println(ANSI_RED + "Please ensure The Tron app is open in your Ledger device. Usually, 'Application is ready' will be displayed on your ledger device." + ANSI_RESET);
+        System.out.println(ANSI_RED + "Please ensure The Linda app is open in your Ledger device. Usually, 'Application is ready' will be displayed on your ledger device." + ANSI_RESET);
       }
       if (DebugConfig.isDebugEnabled()) {
         System.out.println("HandleTransSign response: " + bytesToHex(response));

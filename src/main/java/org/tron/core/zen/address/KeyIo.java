@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package org.tron.core.zen.address;
+package org.linda.core.zen.address;
 
-import org.tron.common.utils.Bech32;
-import org.tron.common.utils.Bech32.Bech32Data;
+import org.linda.common.utils.Bech32;
+import org.linda.common.utils.Bech32.Bech32Data;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.List;
 public class KeyIo {
 
   private static int ConvertedSaplingPaymentAddressSize = ((32 + 11) * 8 + 4) / 5;
-  private static String SAPLING_PAYMENT_ADDRESS = "ztron";
+  private static String SAPLING_PAYMENT_ADDRESS = "zlinda";
 
   public static PaymentAddress decodePaymentAddress(String str) {
     byte[] data;

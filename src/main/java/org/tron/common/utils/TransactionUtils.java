@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-linda is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-linda is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -13,40 +13,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.utils;
+package org.linda.common.utils;
 
 import com.google.protobuf.ByteString;
 import java.security.SignatureException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.ECKey.ECDSASignature;
-import org.tron.common.crypto.Sha256Sm3Hash;
-import org.tron.common.crypto.SignInterface;
-import org.tron.common.crypto.SignatureInterface;
-import org.tron.core.exception.CancelException;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.contract.AccountContract;
-import org.tron.protos.contract.AccountContract.AccountCreateContract;
-import org.tron.protos.contract.AccountContract.AccountPermissionUpdateContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.UnfreezeAssetContract;
-import org.tron.protos.contract.AssetIssueContractOuterClass.UpdateAssetContract;
-import org.tron.protos.contract.BalanceContract;
-import org.tron.protos.contract.BalanceContract.FreezeBalanceContract;
-import org.tron.protos.contract.BalanceContract.TransferContract;
-import org.tron.protos.contract.BalanceContract.UnfreezeBalanceContract;
-import org.tron.protos.contract.BalanceContract.WithdrawBalanceContract;
-import org.tron.protos.contract.ExchangeContract;
-import org.tron.protos.contract.ProposalContract;
-import org.tron.protos.contract.SmartContractOuterClass.CreateSmartContract;
-import org.tron.protos.contract.SmartContractOuterClass.TriggerSmartContract;
-import org.tron.protos.contract.VoteAssetContractOuterClass.VoteAssetContract;
-import org.tron.protos.contract.WitnessContract.VoteWitnessContract;
-import org.tron.protos.contract.WitnessContract.WitnessCreateContract;
+import org.linda.common.crypto.ECKey;
+import org.linda.common.crypto.ECKey.ECDSASignature;
+import org.linda.common.crypto.Sha256Sm3Hash;
+import org.linda.common.crypto.SignInterface;
+import org.linda.common.crypto.SignatureInterface;
+import org.linda.core.exception.CancelException;
+import org.linda.protos.Protocol.Transaction;
+import org.linda.protos.contract.AccountContract;
+import org.linda.protos.contract.AccountContract.AccountCreateContract;
+import org.linda.protos.contract.AccountContract.AccountPermissionUpdateContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.UnfreezeAssetContract;
+import org.linda.protos.contract.AssetIssueContractOuterClass.UpdateAssetContract;
+import org.linda.protos.contract.BalanceContract;
+import org.linda.protos.contract.BalanceContract.FreezeBalanceContract;
+import org.linda.protos.contract.BalanceContract.TransferContract;
+import org.linda.protos.contract.BalanceContract.UnfreezeBalanceContract;
+import org.linda.protos.contract.BalanceContract.WithdrawBalanceContract;
+import org.linda.protos.contract.ExchangeContract;
+import org.linda.protos.contract.ProposalContract;
+import org.linda.protos.contract.SmartContractOuterClass.CreateSmartContract;
+import org.linda.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.linda.protos.contract.VoteAssetContractOuterClass.VoteAssetContract;
+import org.linda.protos.contract.WitnessContract.VoteWitnessContract;
+import org.linda.protos.contract.WitnessContract.WitnessCreateContract;
 
 public class TransactionUtils {
 
@@ -339,7 +339,7 @@ public class TransactionUtils {
   public static Transaction setTimestamp(Transaction transaction) {
     long currentTime = System.currentTimeMillis(); // *1000000 + System.nanoTime()%1000000;
     Transaction.Builder builder = transaction.toBuilder();
-    org.tron.protos.Protocol.Transaction.raw.Builder rowBuilder =
+    org.linda.protos.Protocol.Transaction.raw.Builder rowBuilder =
         transaction.getRawData().toBuilder();
     rowBuilder.setTimestamp(currentTime);
     builder.setRawData(rowBuilder.build());
@@ -350,7 +350,7 @@ public class TransactionUtils {
     if (transaction.getSignatureCount() == 0) {
       long expirationTime = System.currentTimeMillis() + 6 * 60 * 60 * 1000;
       Transaction.Builder builder = transaction.toBuilder();
-      org.tron.protos.Protocol.Transaction.raw.Builder rowBuilder =
+      org.linda.protos.Protocol.Transaction.raw.Builder rowBuilder =
           transaction.getRawData().toBuilder();
       rowBuilder.setExpiration(expirationTime);
       builder.setRawData(rowBuilder.build());

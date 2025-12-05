@@ -1,4 +1,4 @@
-package org.tron.common.crypto;
+package org.linda.common.crypto;
 /*
  * Copyright (c) [2016] [ <ether.camp> ]
  * This file is part of the ethereumJ library.
@@ -65,15 +65,15 @@ import org.bouncycastle.math.ec.ECPoint;
 import org.bouncycastle.util.BigIntegers;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
-import org.tron.common.crypto.cryptohash.Keccak256;
-import org.tron.common.crypto.jce.ECKeyAgreement;
-import org.tron.common.crypto.jce.ECKeyFactory;
-import org.tron.common.crypto.jce.ECKeyPairGenerator;
-import org.tron.common.crypto.jce.ECSignatureFactory;
-import org.tron.common.crypto.jce.TronCastleProvider;
-import org.tron.common.utils.BIUtil;
-import org.tron.common.utils.ByteUtil;
-import org.tron.common.utils.Hash;
+import org.linda.common.crypto.cryptohash.Keccak256;
+import org.linda.common.crypto.jce.ECKeyAgreement;
+import org.linda.common.crypto.jce.ECKeyFactory;
+import org.linda.common.crypto.jce.ECKeyPairGenerator;
+import org.linda.common.crypto.jce.ECSignatureFactory;
+import org.linda.common.crypto.jce.LindaCastleProvider;
+import org.linda.common.utils.BIUtil;
+import org.linda.common.utils.ByteUtil;
+import org.linda.common.utils.Hash;
 
 @Slf4j(topic = "crypto")
 public class ECKey implements Serializable, SignInterface {
@@ -170,7 +170,7 @@ public class ECKey implements Serializable, SignInterface {
    * @param secureRandom -
    */
   public ECKey(SecureRandom secureRandom) {
-    this(TronCastleProvider.getInstance(), secureRandom);
+    this(LindaCastleProvider.getInstance(), secureRandom);
   }
 
   /**
@@ -189,7 +189,7 @@ public class ECKey implements Serializable, SignInterface {
       this.privKey = null;
       this.pub = CURVE.getCurve().decodePoint(key);
     }
-    this.provider = TronCastleProvider.getInstance();
+    this.provider = LindaCastleProvider.getInstance();
   }
 
   public ECKey(Provider provider, @Nullable PrivateKey privKey, ECPoint pub) {
@@ -219,7 +219,7 @@ public class ECKey implements Serializable, SignInterface {
    * <p>BouncyCastle will be used as the Java Security Provider
    */
   public ECKey(@Nullable BigInteger priv, ECPoint pub) {
-    this(TronCastleProvider.getInstance(), privateKeyFromBigInteger(priv), pub);
+    this(LindaCastleProvider.getInstance(), privateKeyFromBigInteger(priv), pub);
   }
 
   /* Convert a Java JCE ECPublicKey into a BouncyCastle ECPoint
@@ -249,7 +249,7 @@ public class ECKey implements Serializable, SignInterface {
       return null;
     } else {
       try {
-        return ECKeyFactory.getInstance(TronCastleProvider.getInstance())
+        return ECKeyFactory.getInstance(LindaCastleProvider.getInstance())
             .generatePrivate(new ECPrivateKeySpec(priv, CURVE_SPEC));
       } catch (InvalidKeySpecException ex) {
         throw new AssertionError("Assumed correct key spec statically");

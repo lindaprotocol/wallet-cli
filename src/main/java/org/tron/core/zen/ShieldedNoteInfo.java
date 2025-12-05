@@ -1,12 +1,12 @@
-package org.tron.core.zen;
+package org.linda.core.zen;
 
 import io.netty.util.internal.StringUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.tron.common.utils.Base58;
-import org.tron.common.utils.ByteArray;
-import org.tron.core.exception.CipherException;
+import org.linda.common.utils.Base58;
+import org.linda.common.utils.ByteArray;
+import org.linda.core.exception.CipherException;
 
 @AllArgsConstructor
 public class ShieldedNoteInfo {
@@ -21,7 +21,7 @@ public class ShieldedNoteInfo {
   public byte[] r; // 256
   @Setter
   @Getter
-  public String trxId;
+  public String lindId;
   @Setter
   @Getter
   public int index;
@@ -45,7 +45,7 @@ public class ShieldedNoteInfo {
     encodeString += ";";
     encodeString += ByteArray.toHexString(r);
     encodeString += ";";
-    encodeString += trxId;
+    encodeString += lindId;
     encodeString += ";";
     encodeString += String.valueOf(value);
     encodeString += ";";
@@ -80,7 +80,7 @@ public class ShieldedNoteInfo {
     noteIndex = Long.valueOf(sourceStrArray[0]);
     paymentAddress = sourceStrArray[1];
     r = ByteArray.fromHexString(sourceStrArray[2]);
-    trxId = sourceStrArray[3];
+    lindId = sourceStrArray[3];
     value = Long.valueOf(sourceStrArray[4]);
     index = Integer.valueOf(sourceStrArray[5]);
     if (sourceStrArray[6].equals("null")) {

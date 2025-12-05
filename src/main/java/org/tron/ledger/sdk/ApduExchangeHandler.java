@@ -1,7 +1,7 @@
-package org.tron.ledger.sdk;
+package org.linda.ledger.sdk;
 
 import org.hid4java.HidDevice;
-import org.tron.ledger.wrapper.DebugConfig;
+import org.linda.ledger.wrapper.DebugConfig;
 
 public class ApduExchangeHandler {
   private static final int CHANNEL = 0x0101;

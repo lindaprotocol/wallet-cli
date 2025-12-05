@@ -1,37 +1,37 @@
-package org.tron.walletcli;
+package org.linda.walletcli;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.tron.common.enums.NetType.CUSTOM;
-import static org.tron.common.enums.NetType.MAIN;
-import static org.tron.common.enums.NetType.NILE;
-import static org.tron.common.enums.NetType.SHASTA;
-import static org.tron.common.utils.Utils.LOCK_WARNING;
-import static org.tron.common.utils.Utils.blueBoldHighlight;
-import static org.tron.common.utils.Utils.failedHighlight;
-import static org.tron.common.utils.Utils.greenBoldHighlight;
-import static org.tron.common.utils.Utils.inputPassword;
-import static org.tron.common.utils.Utils.isValid;
-import static org.tron.gasfree.GasFreeApi.concat;
-import static org.tron.gasfree.GasFreeApi.gasFreeSubmit;
-import static org.tron.gasfree.GasFreeApi.getDomainSeparator;
-import static org.tron.gasfree.GasFreeApi.getMessage;
-import static org.tron.gasfree.GasFreeApi.keccak256;
-import static org.tron.gasfree.GasFreeApi.signOffChain;
-import static org.tron.gasfree.GasFreeApi.validateSignOffChain;
-import static org.tron.keystore.StringUtils.byte2Char;
-import static org.tron.keystore.StringUtils.char2Byte;
-import static org.tron.keystore.StringUtils.clear;
-import static org.tron.keystore.Wallet.validPassword;
-import static org.tron.keystore.WalletUtils.loadCredentials;
-import static org.tron.keystore.WalletUtils.show;
-import static org.tron.ledger.LedgerFileUtil.LEDGER_DIR_NAME;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RED;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RESET;
-import static org.tron.walletserver.WalletApi.addressValid;
-import static org.tron.walletserver.WalletApi.decodeFromBase58Check;
-import static org.tron.walletserver.WalletApi.getAllWalletFile;
+import static org.linda.common.enums.NetType.CUSTOM;
+import static org.linda.common.enums.NetType.MAIN;
+import static org.linda.common.enums.NetType.NILE;
+import static org.linda.common.enums.NetType.SHASTA;
+import static org.linda.common.utils.Utils.LOCK_WARNING;
+import static org.linda.common.utils.Utils.blueBoldHighlight;
+import static org.linda.common.utils.Utils.failedHighlight;
+import static org.linda.common.utils.Utils.greenBoldHighlight;
+import static org.linda.common.utils.Utils.inputPassword;
+import static org.linda.common.utils.Utils.isValid;
+import static org.linda.gasfree.GasFreeApi.concat;
+import static org.linda.gasfree.GasFreeApi.gasFreeSubmit;
+import static org.linda.gasfree.GasFreeApi.getDomainSeparator;
+import static org.linda.gasfree.GasFreeApi.getMessage;
+import static org.linda.gasfree.GasFreeApi.keccak256;
+import static org.linda.gasfree.GasFreeApi.signOffChain;
+import static org.linda.gasfree.GasFreeApi.validateSignOffChain;
+import static org.linda.keystore.StringUtils.byte2Char;
+import static org.linda.keystore.StringUtils.char2Byte;
+import static org.linda.keystore.StringUtils.clear;
+import static org.linda.keystore.Wallet.validPassword;
+import static org.linda.keystore.WalletUtils.loadCredentials;
+import static org.linda.keystore.WalletUtils.show;
+import static org.linda.ledger.LedgerFileUtil.LEDGER_DIR_NAME;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RED;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RESET;
+import static org.linda.walletserver.WalletApi.addressValid;
+import static org.linda.walletserver.WalletApi.decodeFromBase58Check;
+import static org.linda.walletserver.WalletApi.getAllWalletFile;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -67,93 +67,93 @@ import org.jline.reader.LineReaderBuilder;
 import org.jline.reader.UserInterruptException;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
-import org.tron.api.GrpcAPI;
-import org.tron.api.GrpcAPI.AssetIssueList;
-import org.tron.api.GrpcAPI.BlockExtention;
-import org.tron.api.GrpcAPI.BytesMessage;
-import org.tron.api.GrpcAPI.DecryptNotes;
-import org.tron.api.GrpcAPI.DecryptNotesMarked;
-import org.tron.api.GrpcAPI.DecryptNotesTRC20;
-import org.tron.api.GrpcAPI.DiversifierMessage;
-import org.tron.api.GrpcAPI.ExchangeList;
-import org.tron.api.GrpcAPI.ExpandedSpendingKeyMessage;
-import org.tron.api.GrpcAPI.IncomingViewingKeyDiversifierMessage;
-import org.tron.api.GrpcAPI.IncomingViewingKeyMessage;
-import org.tron.api.GrpcAPI.IvkDecryptAndMarkParameters;
-import org.tron.api.GrpcAPI.IvkDecryptParameters;
-import org.tron.api.GrpcAPI.IvkDecryptTRC20Parameters;
-import org.tron.api.GrpcAPI.NfParameters;
-import org.tron.api.GrpcAPI.NodeList;
-import org.tron.api.GrpcAPI.Note;
-import org.tron.api.GrpcAPI.OvkDecryptParameters;
-import org.tron.api.GrpcAPI.OvkDecryptTRC20Parameters;
-import org.tron.api.GrpcAPI.PaymentAddressMessage;
-import org.tron.api.GrpcAPI.PricesResponseMessage;
-import org.tron.api.GrpcAPI.PrivateParameters;
-import org.tron.api.GrpcAPI.PrivateParametersWithoutAsk;
-import org.tron.api.GrpcAPI.PrivateShieldedTRC20Parameters;
-import org.tron.api.GrpcAPI.PrivateShieldedTRC20ParametersWithoutAsk;
-import org.tron.api.GrpcAPI.ProposalList;
-import org.tron.api.GrpcAPI.ReceiveNote;
-import org.tron.api.GrpcAPI.ShieldedTRC20Parameters;
-import org.tron.api.GrpcAPI.SpendNote;
-import org.tron.api.GrpcAPI.SpendNoteTRC20;
-import org.tron.api.GrpcAPI.TransactionInfoList;
-import org.tron.api.GrpcAPI.ViewingKeyMessage;
-import org.tron.api.GrpcAPI.WitnessList;
-import org.tron.common.enums.NetType;
-import org.tron.common.utils.AbiUtil;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.utils.ByteUtil;
-import org.tron.common.utils.Utils;
-import org.tron.core.config.Configuration;
-import org.tron.core.exception.CancelException;
-import org.tron.core.exception.CipherException;
-import org.tron.core.exception.ZksnarkException;
-import org.tron.core.zen.ShieldedAddressInfo;
-import org.tron.core.zen.ShieldedNoteInfo;
-import org.tron.core.zen.ShieldedTRC20NoteInfo;
-import org.tron.core.zen.ShieldedTRC20Wrapper;
-import org.tron.core.zen.ShieldedWrapper;
-import org.tron.core.zen.ZenUtils;
-import org.tron.core.zen.address.DiversifierT;
-import org.tron.core.zen.address.ExpandedSpendingKey;
-import org.tron.core.zen.address.FullViewingKey;
-import org.tron.core.zen.address.SpendingKey;
-import org.tron.gasfree.GasFreeApi;
-import org.tron.gasfree.request.GasFreeSubmitRequest;
-import org.tron.gasfree.response.GasFreeAddressResponse;
-import org.tron.keystore.ClearWalletUtils;
-import org.tron.keystore.Credentials;
-import org.tron.keystore.Wallet;
-import org.tron.keystore.WalletFile;
-import org.tron.keystore.WalletUtils;
-import org.tron.ledger.LedgerAddressUtil;
-import org.tron.ledger.LedgerFileUtil;
-import org.tron.ledger.LedgerSignUtil;
-import org.tron.ledger.console.ConsoleColor;
-import org.tron.ledger.console.ImportAccount;
-import org.tron.ledger.console.TronLedgerImportAccount;
-import org.tron.ledger.listener.TransactionSignManager;
-import org.tron.ledger.wrapper.DebugConfig;
-import org.tron.mnemonic.MnemonicUtils;
-import org.tron.mnemonic.SubAccount;
-import org.tron.protos.Protocol.Account;
-import org.tron.protos.Protocol.Block;
-import org.tron.protos.Protocol.ChainParameters;
-import org.tron.protos.Protocol.Exchange;
-import org.tron.protos.Protocol.MarketOrder;
-import org.tron.protos.Protocol.MarketOrderList;
-import org.tron.protos.Protocol.MarketOrderPairList;
-import org.tron.protos.Protocol.MarketPriceList;
-import org.tron.protos.Protocol.Proposal;
-import org.tron.protos.Protocol.Transaction;
-import org.tron.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.tron.protos.contract.ShieldContract.IncrementalMerkleVoucherInfo;
-import org.tron.protos.contract.ShieldContract.OutputPoint;
-import org.tron.protos.contract.ShieldContract.OutputPointInfo;
-import org.tron.walletserver.GrpcClient;
-import org.tron.walletserver.WalletApi;
+import org.linda.api.GrpcAPI;
+import org.linda.api.GrpcAPI.AssetIssueList;
+import org.linda.api.GrpcAPI.BlockExtention;
+import org.linda.api.GrpcAPI.BytesMessage;
+import org.linda.api.GrpcAPI.DecryptNotes;
+import org.linda.api.GrpcAPI.DecryptNotesMarked;
+import org.linda.api.GrpcAPI.DecryptNotesLRC20;
+import org.linda.api.GrpcAPI.DiversifierMessage;
+import org.linda.api.GrpcAPI.ExchangeList;
+import org.linda.api.GrpcAPI.ExpandedSpendingKeyMessage;
+import org.linda.api.GrpcAPI.IncomingViewingKeyDiversifierMessage;
+import org.linda.api.GrpcAPI.IncomingViewingKeyMessage;
+import org.linda.api.GrpcAPI.IvkDecryptAndMarkParameters;
+import org.linda.api.GrpcAPI.IvkDecryptParameters;
+import org.linda.api.GrpcAPI.IvkDecryptLRC20Parameters;
+import org.linda.api.GrpcAPI.NfParameters;
+import org.linda.api.GrpcAPI.NodeList;
+import org.linda.api.GrpcAPI.Note;
+import org.linda.api.GrpcAPI.OvkDecryptParameters;
+import org.linda.api.GrpcAPI.OvkDecryptLRC20Parameters;
+import org.linda.api.GrpcAPI.PaymentAddressMessage;
+import org.linda.api.GrpcAPI.PricesResponseMessage;
+import org.linda.api.GrpcAPI.PrivateParameters;
+import org.linda.api.GrpcAPI.PrivateParametersWithoutAsk;
+import org.linda.api.GrpcAPI.PrivateShieldedLRC20Parameters;
+import org.linda.api.GrpcAPI.PrivateShieldedLRC20ParametersWithoutAsk;
+import org.linda.api.GrpcAPI.ProposalList;
+import org.linda.api.GrpcAPI.ReceiveNote;
+import org.linda.api.GrpcAPI.ShieldedLRC20Parameters;
+import org.linda.api.GrpcAPI.SpendNote;
+import org.linda.api.GrpcAPI.SpendNoteLRC20;
+import org.linda.api.GrpcAPI.TransactionInfoList;
+import org.linda.api.GrpcAPI.ViewingKeyMessage;
+import org.linda.api.GrpcAPI.WitnessList;
+import org.linda.common.enums.NetType;
+import org.linda.common.utils.AbiUtil;
+import org.linda.common.utils.ByteArray;
+import org.linda.common.utils.ByteUtil;
+import org.linda.common.utils.Utils;
+import org.linda.core.config.Configuration;
+import org.linda.core.exception.CancelException;
+import org.linda.core.exception.CipherException;
+import org.linda.core.exception.ZksnarkException;
+import org.linda.core.zen.ShieldedAddressInfo;
+import org.linda.core.zen.ShieldedNoteInfo;
+import org.linda.core.zen.ShieldedLRC20NoteInfo;
+import org.linda.core.zen.ShieldedLRC20Wrapper;
+import org.linda.core.zen.ShieldedWrapper;
+import org.linda.core.zen.ZenUtils;
+import org.linda.core.zen.address.DiversifierT;
+import org.linda.core.zen.address.ExpandedSpendingKey;
+import org.linda.core.zen.address.FullViewingKey;
+import org.linda.core.zen.address.SpendingKey;
+import org.linda.gasfree.GasFreeApi;
+import org.linda.gasfree.request.GasFreeSubmitRequest;
+import org.linda.gasfree.response.GasFreeAddressResponse;
+import org.linda.keystore.ClearWalletUtils;
+import org.linda.keystore.Credentials;
+import org.linda.keystore.Wallet;
+import org.linda.keystore.WalletFile;
+import org.linda.keystore.WalletUtils;
+import org.linda.ledger.LedgerAddressUtil;
+import org.linda.ledger.LedgerFileUtil;
+import org.linda.ledger.LedgerSignUtil;
+import org.linda.ledger.console.ConsoleColor;
+import org.linda.ledger.console.ImportAccount;
+import org.linda.ledger.console.LindaLedgerImportAccount;
+import org.linda.ledger.listener.TransactionSignManager;
+import org.linda.ledger.wrapper.DebugConfig;
+import org.linda.mnemonic.MnemonicUtils;
+import org.linda.mnemonic.SubAccount;
+import org.linda.protos.Protocol.Account;
+import org.linda.protos.Protocol.Block;
+import org.linda.protos.Protocol.ChainParameters;
+import org.linda.protos.Protocol.Exchange;
+import org.linda.protos.Protocol.MarketOrder;
+import org.linda.protos.Protocol.MarketOrderList;
+import org.linda.protos.Protocol.MarketOrderPairList;
+import org.linda.protos.Protocol.MarketPriceList;
+import org.linda.protos.Protocol.Proposal;
+import org.linda.protos.Protocol.Transaction;
+import org.linda.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.linda.protos.contract.ShieldContract.IncrementalMerkleVoucherInfo;
+import org.linda.protos.contract.ShieldContract.OutputPoint;
+import org.linda.protos.contract.ShieldContract.OutputPointInfo;
+import org.linda.walletserver.GrpcClient;
+import org.linda.walletserver.WalletApi;
 import org.web3j.utils.Numeric;
 
 @Slf4j
@@ -216,12 +216,12 @@ public class WalletApiWrapper {
       Terminal terminal = TerminalBuilder.builder().system(true).dumb(true).build();
       LineReader lineReader = LineReaderBuilder.builder().terminal(terminal).build();
 
-      String defaultPath = TronLedgerImportAccount.findFirstMissingPath(
+      String defaultPath = LindaLedgerImportAccount.findFirstMissingPath(
           LedgerFileUtil.getFileName(device));
 
       String defaultImportAddress = LedgerAddressUtil.getImportAddress(defaultPath, device);
       if (defaultImportAddress == null || defaultImportAddress.isEmpty()) {
-        System.out.println(ANSI_RED + "No available address to import, please open 'tron app' and try again!" + ANSI_RESET);
+        System.out.println(ANSI_RED + "No available address to import, please open 'linda app' and try again!" + ANSI_RESET);
         return null;
       }
 
@@ -287,7 +287,7 @@ public class WalletApiWrapper {
   }
 
   public String doChangeAccount(char[] password, HidDevice device) throws IOException {
-    ImportAccount account = TronLedgerImportAccount.changeAccount(device);
+    ImportAccount account = LindaLedgerImportAccount.changeAccount(device);
     if (account == null) {
       return null;
     }
@@ -311,7 +311,7 @@ public class WalletApiWrapper {
       try {
         String input = lineReader.readLine("Enter 'y' to continue or 'c' to cancel: ").trim().toLowerCase();
         if ("y".equals(input)) {
-          ImportAccount account = TronLedgerImportAccount.enterMnemonicPath(device);
+          ImportAccount account = LindaLedgerImportAccount.enterMnemonicPath(device);
           if (account == null) {
             return null;
           }
@@ -803,7 +803,7 @@ public class WalletApiWrapper {
   }
 
   public boolean assetIssue(byte[] ownerAddress, String name, String abbrName, long totalSupply,
-      int trxNum, int icoNum,
+      int lindNum, int icoNum,
       int precision, long startTime, long endTime, int voteScore, String description, String url,
       long freeNetLimit, long publicFreeNetLimit, HashMap<String, String> frozenSupply)
       throws CipherException, IOException, CancelException {
@@ -826,11 +826,11 @@ public class WalletApiWrapper {
     }
     builder.setTotalSupply(totalSupply);
 
-    if (trxNum <= 0) {
-      System.out.println("trxNum should greater than 0. but really is " + trxNum);
+    if (lindNum <= 0) {
+      System.out.println("lindNum should greater than 0. but really is " + lindNum);
       return false;
     }
-    builder.setTrxNum(trxNum);
+    builder.setLindNum(lindNum);
 
     if (icoNum <= 0) {
       System.out.println("num should greater than 0. but really is " + icoNum);
@@ -1442,7 +1442,7 @@ public class WalletApiWrapper {
         ShieldedNoteInfo noteInfo = ShieldedWrapper.getInstance().getUtxoMapNote()
             .get(shieldedInputList.get(i));
         OutputPoint.Builder outPointBuild = OutputPoint.newBuilder();
-        outPointBuild.setHash(ByteString.copyFrom(ByteArray.fromHexString(noteInfo.getTrxId())));
+        outPointBuild.setHash(ByteString.copyFrom(ByteArray.fromHexString(noteInfo.getLindId())));
         outPointBuild.setIndex(noteInfo.getIndex());
         request.addOutPoints(outPointBuild.build());
       }
@@ -1478,7 +1478,7 @@ public class WalletApiWrapper {
         System.out.println("address " + noteInfo.getPaymentAddress());
         System.out.println("value " + noteInfo.getValue());
         System.out.println("rcm " + ByteArray.toHexString(noteInfo.getR()));
-        System.out.println("trxId " + noteInfo.getTrxId());
+        System.out.println("lindId " + noteInfo.getLindId());
         System.out.println("index " + noteInfo.getIndex());
         System.out.println("memo " + ZenUtils.getMemo(noteInfo.getMemo()));
 
@@ -1540,7 +1540,7 @@ public class WalletApiWrapper {
         ShieldedNoteInfo noteInfo = ShieldedWrapper.getInstance().getUtxoMapNote()
             .get(shieldedInputList.get(i));
         OutputPoint.Builder outPointBuild = OutputPoint.newBuilder();
-        outPointBuild.setHash(ByteString.copyFrom(ByteArray.fromHexString(noteInfo.getTrxId())));
+        outPointBuild.setHash(ByteString.copyFrom(ByteArray.fromHexString(noteInfo.getLindId())));
         outPointBuild.setIndex(noteInfo.getIndex());
         request.addOutPoints(outPointBuild.build());
       }
@@ -1578,7 +1578,7 @@ public class WalletApiWrapper {
         System.out.println("address " + noteInfo.getPaymentAddress());
         System.out.println("value " + noteInfo.getValue());
         System.out.println("rcm " + ByteArray.toHexString(noteInfo.getR()));
-        System.out.println("trxId " + noteInfo.getTrxId());
+        System.out.println("lindId " + noteInfo.getLindId());
         System.out.println("index " + noteInfo.getIndex());
         System.out.println("memo " + ZenUtils.getMemo(noteInfo.getMemo()));
 
@@ -1628,18 +1628,18 @@ public class WalletApiWrapper {
       System.out.println("scanNoteByIvk failed !!!");
     } else {
       System.out.println(Utils.formatMessageString(decryptNotes.get()));
-//            for (int i = 0; i < decryptNotes.get().getNoteTxsList().size(); i++) {
-//                NoteTx noteTx = decryptNotes.get().getNoteTxs(i);
-//                Note note = noteTx.getNote();
-//                System.out.println("\ntxid:{}\nindex:{}\naddress:{}\nrcm:{}\nvalue:{}\nmemo:{}",
-//                        ByteArray.toHexString(noteTx.getTxid().toByteArray()),
-//                        noteTx.getIndex(),
-//                        note.getPaymentAddress(),
-//                        ByteArray.toHexString(note.getRcm().toByteArray()),
-//                        note.getValue(),
-//                        ZenUtils.getMemo(note.getMemo().toByteArray()));
-//            }
-//            System.out.println("complete.");
+           for (int i = 0; i < decryptNotes.get().getNoteTxsList().size(); i++) {
+               NoteTx noteTx = decryptNotes.get().getNoteTxs(i);
+               Note note = noteTx.getNote();
+               System.out.println("\ntxid:{}\nindex:{}\naddress:{}\nrcm:{}\nvalue:{}\nmemo:{}",
+                       ByteArray.toHexString(noteTx.getTxid().toByteArray()),
+                       noteTx.getIndex(),
+                       note.getPaymentAddress(),
+                       ByteArray.toHexString(note.getRcm().toByteArray()),
+                       note.getValue(),
+                       ZenUtils.getMemo(note.getMemo().toByteArray()));
+           }
+           System.out.println("complete.");
     }
     return true;
   }
@@ -1664,18 +1664,18 @@ public class WalletApiWrapper {
       if (decryptNotes.isPresent()) {
         System.out.println(Utils.formatMessageString(decryptNotes.get()));
 
-//                for (int i = 0; i < decryptNotes.get().getNoteTxsList().size(); i++) {
-//                    DecryptNotesMarked.NoteTx noteTx = decryptNotes.get().getNoteTxs(i);
-//                    Note note = noteTx.getNote();
-//                    System.out.println("\ntxid:{}\nindex:{}\nisSpend:{}\naddress:{}\nrcm:{}\nvalue:{}\nmemo:{}",
-//                            ByteArray.toHexString(noteTx.getTxid().toByteArray()),
-//                            noteTx.getIndex(),
-//                            noteTx.getIsSpend(),
-//                            note.getPaymentAddress(),
-//                            ByteArray.toHexString(note.getRcm().toByteArray()),
-//                            note.getValue(),
-//                            ZenUtils.getMemo(note.getMemo().toByteArray()));
-//                }
+               for (int i = 0; i < decryptNotes.get().getNoteTxsList().size(); i++) {
+                   DecryptNotesMarked.NoteTx noteTx = decryptNotes.get().getNoteTxs(i);
+                   Note note = noteTx.getNote();
+                   System.out.println("\ntxid:{}\nindex:{}\nisSpend:{}\naddress:{}\nrcm:{}\nvalue:{}\nmemo:{}",
+                           ByteArray.toHexString(noteTx.getTxid().toByteArray()),
+                           noteTx.getIndex(),
+                           noteTx.getIsSpend(),
+                           note.getPaymentAddress(),
+                           ByteArray.toHexString(note.getRcm().toByteArray()),
+                           note.getValue(),
+                           ZenUtils.getMemo(note.getMemo().toByteArray()));
+               }
       } else {
         System.out.println("scanAndMarkNoteByIvk failed !!!");
       }
@@ -1698,17 +1698,17 @@ public class WalletApiWrapper {
       System.out.println("ScanNoteByOvk failed !!!");
     } else {
       System.out.println(Utils.formatMessageString(decryptNotes.get()));
-//            for (int i = 0; i < decryptNotes.get().getNoteTxsList().size(); i++) {
-//                NoteTx noteTx = decryptNotes.get().getNoteTxs(i);
-//                Note note = noteTx.getNote();
-//                System.out.println("\ntxid:{}\nindex:{}\npaymentAddress:{}\nrcm:{}\nmemo:{}\nvalue:{}",
-//                        ByteArray.toHexString(noteTx.getTxid().toByteArray()),
-//                        noteTx.getIndex(),
-//                        note.getPaymentAddress(),
-//                        ByteArray.toHexString(note.getRcm().toByteArray()),
-//                        ZenUtils.getMemo(note.getMemo().toByteArray()),
-//                        note.getValue());
-//            }
+           for (int i = 0; i < decryptNotes.get().getNoteTxsList().size(); i++) {
+               NoteTx noteTx = decryptNotes.get().getNoteTxs(i);
+               Note note = noteTx.getNote();
+               System.out.println("\ntxid:{}\nindex:{}\npaymentAddress:{}\nrcm:{}\nmemo:{}\nvalue:{}",
+                       ByteArray.toHexString(noteTx.getTxid().toByteArray()),
+                       noteTx.getIndex(),
+                       note.getPaymentAddress(),
+                       ByteArray.toHexString(note.getRcm().toByteArray()),
+                       ZenUtils.getMemo(note.getMemo().toByteArray()),
+                       note.getValue());
+           }
       System.out.println("complete.");
     }
     return true;
@@ -1749,8 +1749,8 @@ public class WalletApiWrapper {
       addressInfo.setOvk(expandedSpendingKeyMessage.get().getOvk().toByteArray());
       addressInfo.setPkD(addressMessage.get().getPkD().toByteArray());
 
-//            System.out.println("ivk " + ByteArray.toHexString(ivk.get().getIvk().toByteArray()));
-//            System.out.println("ovk " + ByteArray.toHexString(expandedSpendingKeyMessage.get().getOvk().toByteArray()));
+           System.out.println("ivk " + ByteArray.toHexString(ivk.get().getIvk().toByteArray()));
+           System.out.println("ovk " + ByteArray.toHexString(expandedSpendingKeyMessage.get().getOvk().toByteArray()));
 
       if (addressInfo.validateCheck()) {
         return Optional.of(addressInfo);
@@ -1830,7 +1830,7 @@ public class WalletApiWrapper {
 
     OutputPointInfo.Builder request = OutputPointInfo.newBuilder();
     OutputPoint.Builder outPointBuild = OutputPoint.newBuilder();
-    outPointBuild.setHash(ByteString.copyFrom(ByteArray.fromHexString(noteInfo.getTrxId())));
+    outPointBuild.setHash(ByteString.copyFrom(ByteArray.fromHexString(noteInfo.getLindId())));
     outPointBuild.setIndex(noteInfo.getIndex());
     request.addOutPoints(outPointBuild.build());
     Optional<IncrementalMerkleVoucherInfo> merkleVoucherInfo =
@@ -1849,7 +1849,7 @@ public class WalletApiWrapper {
     System.out.println("address " + noteInfo.getPaymentAddress());
     System.out.println("value " + noteInfo.getValue());
     System.out.println("rcm " + ByteArray.toHexString(noteInfo.getR()));
-    System.out.println("trxId " + noteInfo.getTrxId());
+    System.out.println("lindId " + noteInfo.getLindId());
     System.out.println("index " + noteInfo.getIndex());
     System.out.println("memo " + ZenUtils.getMemo(noteInfo.getMemo()));
 
@@ -1909,14 +1909,14 @@ public class WalletApiWrapper {
     return WalletApi.getMemoFee();
   }
 
-  public boolean scanShieldedTRC20NoteByIvk(byte[] address, final String ivk,
+  public boolean scanShieldedLRC20NoteByIvk(byte[] address, final String ivk,
                                             final String ak, final String nk,
                                             long start, long end, String[] events) {
-    GrpcAPI.IvkDecryptTRC20Parameters.Builder builder = IvkDecryptTRC20Parameters
+    GrpcAPI.IvkDecryptLRC20Parameters.Builder builder = IvkDecryptLRC20Parameters
         .newBuilder();
     builder.setStartBlockIndex(start)
            .setEndBlockIndex(end)
-           .setShieldedTRC20ContractAddress(ByteString.copyFrom(address))
+           .setShieldedLRC20ContractAddress(ByteString.copyFrom(address))
            .setIvk(ByteString.copyFrom(ByteArray.fromHexString(ivk)))
            .setAk(ByteString.copyFrom(ByteArray.fromHexString(ak)))
            .setNk(ByteString.copyFrom(ByteArray.fromHexString(nk)));
@@ -1925,19 +1925,19 @@ public class WalletApiWrapper {
         builder.addEvents(event);
       }
     }
-    GrpcAPI.IvkDecryptTRC20Parameters parameters = builder.build();
+    GrpcAPI.IvkDecryptLRC20Parameters parameters = builder.build();
 
-    Optional<DecryptNotesTRC20> notes = WalletApi.scanShieldedTRC20NoteByIvk(
+    Optional<DecryptNotesLRC20> notes = WalletApi.scanShieldedLRC20NoteByIvk(
         parameters, true);
     if (!notes.isPresent()) {
       return false;
     }
     if (notes.get().getNoteTxsList().size() > 0) {
       BigInteger scalingFactor;
-      if (ShieldedTRC20Wrapper.getInstance().ifShieldedTRC20WalletLoaded()
+      if (ShieldedLRC20Wrapper.getInstance().ifShieldedLRC20WalletLoaded()
           && ByteUtil.equals(address, WalletApi.decodeFromBase58Check(
-              ShieldedTRC20Wrapper.getInstance().getShieldedTRC20ContractAddress()))) {
-        scalingFactor = ShieldedTRC20Wrapper.getInstance().getScalingFactor();
+              ShieldedLRC20Wrapper.getInstance().getShieldedLRC20ContractAddress()))) {
+        scalingFactor = ShieldedLRC20Wrapper.getInstance().getScalingFactor();
       } else {
         try {
           String scalingFactorHexStr = getScalingFactor(address);
@@ -1948,7 +1948,7 @@ public class WalletApiWrapper {
       }
 
       System.out.println("[");
-      for(DecryptNotesTRC20.NoteTx noteTx : notes.get().getNoteTxsList()) {
+      for(DecryptNotesLRC20.NoteTx noteTx : notes.get().getNoteTxsList()) {
         System.out.println("\t{");
         System.out.println("\t\t note: {");
         BigInteger showValue =
@@ -1972,29 +1972,29 @@ public class WalletApiWrapper {
     return true;
   }
 
-  public boolean scanShieldedTRC20NoteByOvk(final String ovk, long start, long end,
+  public boolean scanShieldedLRC20NoteByOvk(final String ovk, long start, long end,
                                             byte[] contractAddress, String[] events) {
-    GrpcAPI.OvkDecryptTRC20Parameters.Builder builder = OvkDecryptTRC20Parameters.newBuilder();
+    GrpcAPI.OvkDecryptLRC20Parameters.Builder builder = OvkDecryptLRC20Parameters.newBuilder();
     builder.setStartBlockIndex(start)
            .setEndBlockIndex(end)
            .setOvk(ByteString.copyFrom(ByteArray.fromHexString(ovk)))
-           .setShieldedTRC20ContractAddress(ByteString.copyFrom(contractAddress));
+           .setShieldedLRC20ContractAddress(ByteString.copyFrom(contractAddress));
     if (events != null ) {
       for (String event : events) {
         builder.addEvents(event);
       }
     }
-    GrpcAPI.OvkDecryptTRC20Parameters parameters = builder.build();
-    Optional<DecryptNotesTRC20> notes = WalletApi.scanShieldedTRC20NoteByOvk(parameters, true);
+    GrpcAPI.OvkDecryptLRC20Parameters parameters = builder.build();
+    Optional<DecryptNotesLRC20> notes = WalletApi.scanShieldedLRC20NoteByOvk(parameters, true);
     if (!notes.isPresent()) {
       return false;
     }
     if (notes.get().getNoteTxsList().size() > 0) {
       BigInteger scalingFactor;
-      if (ShieldedTRC20Wrapper.getInstance().ifShieldedTRC20WalletLoaded()
+      if (ShieldedLRC20Wrapper.getInstance().ifShieldedLRC20WalletLoaded()
           && ByteUtil.equals(contractAddress, WalletApi.decodeFromBase58Check(
-          ShieldedTRC20Wrapper.getInstance().getShieldedTRC20ContractAddress()))) {
-        scalingFactor = ShieldedTRC20Wrapper.getInstance().getScalingFactor();
+          ShieldedLRC20Wrapper.getInstance().getShieldedLRC20ContractAddress()))) {
+        scalingFactor = ShieldedLRC20Wrapper.getInstance().getScalingFactor();
       } else {
         try {
           String scalingFactorHexStr = getScalingFactor(contractAddress);
@@ -2005,7 +2005,7 @@ public class WalletApiWrapper {
       }
 
       System.out.println("[");
-      for(DecryptNotesTRC20.NoteTx noteTx : notes.get().getNoteTxsList()) {
+      for(DecryptNotesLRC20.NoteTx noteTx : notes.get().getNoteTxsList()) {
         System.out.println("\t{");
         //note
         if (noteTx.hasNote()) {
@@ -2040,13 +2040,13 @@ public class WalletApiWrapper {
     return true;
   }
 
-  public boolean sendShieldedTRC20Coin(int shieldedContractType, BigInteger fromAmount,
+  public boolean sendShieldedLRC20Coin(int shieldedContractType, BigInteger fromAmount,
                                        List<Long> shieldedInputList,
                                        List<GrpcAPI.Note> shieldedOutputList,
                                        String toAddress, BigInteger toAmount,
                                        String contractAddress, String shieldedContractAddress)
       throws CipherException, IOException, CancelException, ZksnarkException {
-    BigInteger scalingFactor = ShieldedTRC20Wrapper.getInstance().getScalingFactor();
+    BigInteger scalingFactor = ShieldedLRC20Wrapper.getInstance().getScalingFactor();
     if (shieldedContractType == 0
         && BigInteger.valueOf(shieldedOutputList.get(0).getValue())
                      .multiply(scalingFactor)
@@ -2055,7 +2055,7 @@ public class WalletApiWrapper {
       return false;
     }
     if (shieldedContractType == 2) {
-      ShieldedTRC20NoteInfo noteInfo = ShieldedTRC20Wrapper.getInstance().getUtxoMapNote()
+      ShieldedLRC20NoteInfo noteInfo = ShieldedLRC20Wrapper.getInstance().getUtxoMapNote()
           .get(shieldedInputList.get(0));
       BigInteger valueBalanceBi = noteInfo.getRawValue();
       if (shieldedOutputList.size() > 0) {
@@ -2068,14 +2068,14 @@ public class WalletApiWrapper {
       }
     }
 
-    PrivateShieldedTRC20Parameters.Builder builder = PrivateShieldedTRC20Parameters.newBuilder();
+    PrivateShieldedLRC20Parameters.Builder builder = PrivateShieldedLRC20Parameters.newBuilder();
     builder.setFromAmount(fromAmount.toString());
     byte[] shieldedContractAddressBytes = WalletApi.decodeFromBase58Check(shieldedContractAddress);
     if (shieldedContractAddressBytes == null) {
       System.out.println("Invalid shieldedContractAddress.");
       return false;
     }
-    builder.setShieldedTRC20ContractAddress(ByteString.copyFrom(shieldedContractAddressBytes));
+    builder.setShieldedLRC20ContractAddress(ByteString.copyFrom(shieldedContractAddressBytes));
 
     if (!StringUtil.isNullOrEmpty(toAddress)) {
       byte[] to = WalletApi.decodeFromBase58Check(toAddress);
@@ -2090,7 +2090,7 @@ public class WalletApiWrapper {
     if (!shieldedInputList.isEmpty()) {
       List<String> rootAndPath = new ArrayList<>();
       for (int i = 0; i < shieldedInputList.size(); i++) {
-        ShieldedTRC20NoteInfo noteInfo = ShieldedTRC20Wrapper.getInstance().getUtxoMapNote()
+        ShieldedLRC20NoteInfo noteInfo = ShieldedLRC20Wrapper.getInstance().getUtxoMapNote()
             .get(shieldedInputList.get(i));
         long position = noteInfo.getPosition();
         rootAndPath.add(getRootAndPath(shieldedContractAddress, position));
@@ -2108,12 +2108,12 @@ public class WalletApiWrapper {
       }
 
       for (int i = 0; i < shieldedInputList.size(); ++i) {
-        ShieldedTRC20NoteInfo noteInfo = ShieldedTRC20Wrapper.getInstance().getUtxoMapNote()
+        ShieldedLRC20NoteInfo noteInfo = ShieldedLRC20Wrapper.getInstance().getUtxoMapNote()
             .get(shieldedInputList.get(i));
         if (i == 0) {
           String shieldedAddress = noteInfo.getPaymentAddress();
           ShieldedAddressInfo addressInfo =
-              ShieldedTRC20Wrapper.getInstance().getShieldedAddressInfoMap().get(shieldedAddress);
+              ShieldedLRC20Wrapper.getInstance().getShieldedAddressInfoMap().get(shieldedAddress);
           SpendingKey spendingKey = new SpendingKey(addressInfo.getSk());
           ExpandedSpendingKey expandedSpendingKey = spendingKey.expandedSpendingKey();
 
@@ -2131,7 +2131,7 @@ public class WalletApiWrapper {
         System.out.println("address " + noteInfo.getPaymentAddress());
         System.out.println("value " + noteInfo.getRawValue().toString());
         System.out.println("rcm " + ByteArray.toHexString(noteInfo.getR()));
-        System.out.println("trxId " + noteInfo.getTrxId());
+        System.out.println("lindId " + noteInfo.getLindId());
         System.out.println("index " + noteInfo.getIndex());
         System.out.println("position " + noteInfo.getPosition());
         System.out.println("memo " + ZenUtils.getMemo(noteInfo.getMemo()));
@@ -2139,15 +2139,15 @@ public class WalletApiWrapper {
         byte[] eachRootAndPath = ByteArray.fromHexString(rootAndPath.get(i));
         byte[] root = Arrays.copyOfRange(eachRootAndPath, 0, 32);
         byte[] path = Arrays.copyOfRange(eachRootAndPath, 32, 1056);
-        SpendNoteTRC20.Builder spendTRC20NoteBuilder = SpendNoteTRC20.newBuilder();
-        spendTRC20NoteBuilder.setNote(noteBuild.build());
-        spendTRC20NoteBuilder.setAlpha(ByteString.copyFrom(getRcm()));
-        spendTRC20NoteBuilder.setRoot(ByteString.copyFrom(root));
-        spendTRC20NoteBuilder.setPath(ByteString.copyFrom(path));
-        spendTRC20NoteBuilder.setPos(noteInfo.getPosition());
+        SpendNoteLRC20.Builder spendLRC20NoteBuilder = SpendNoteLRC20.newBuilder();
+        spendLRC20NoteBuilder.setNote(noteBuild.build());
+        spendLRC20NoteBuilder.setAlpha(ByteString.copyFrom(getRcm()));
+        spendLRC20NoteBuilder.setRoot(ByteString.copyFrom(root));
+        spendLRC20NoteBuilder.setPath(ByteString.copyFrom(path));
+        spendLRC20NoteBuilder.setPos(noteInfo.getPosition());
 
         valueBalance = Math.addExact(valueBalance, noteInfo.getValue());
-        builder.addShieldedSpends(spendTRC20NoteBuilder.build());
+        builder.addShieldedSpends(spendLRC20NoteBuilder.build());
       }
     } else {
       byte[] ovk = getRandomOvk();
@@ -2172,7 +2172,7 @@ public class WalletApiWrapper {
               "sum of shielded output amount");
       return false;
     }
-    ShieldedTRC20Parameters parameters =
+    ShieldedLRC20Parameters parameters =
         WalletApi.createShieldedContractParameters(builder.build());
     if (parameters == null) {
       System.out.println("CreateShieldedContractParameters failed, please check input data!");
@@ -2223,14 +2223,14 @@ public class WalletApiWrapper {
     }
   }
 
-  public boolean sendShieldedTRC20CoinWithoutAsk(int shieldedContractType, BigInteger fromAmount,
+  public boolean sendShieldedLRC20CoinWithoutAsk(int shieldedContractType, BigInteger fromAmount,
                                                  List<Long> shieldedInputList,
                                                  List<GrpcAPI.Note> shieldedOutputList,
                                                  String toAddress, BigInteger toAmount,
                                                  String contractAddress,
                                                  String shieldedContractAddress)
       throws CipherException, IOException, CancelException, ZksnarkException {
-    BigInteger scalingFactor = ShieldedTRC20Wrapper.getInstance().getScalingFactor();
+    BigInteger scalingFactor = ShieldedLRC20Wrapper.getInstance().getScalingFactor();
     if (shieldedContractType == 0
         && BigInteger.valueOf(shieldedOutputList.get(0).getValue())
                      .multiply(scalingFactor)
@@ -2239,7 +2239,7 @@ public class WalletApiWrapper {
       return false;
     }
     if (shieldedContractType == 2) {
-      ShieldedTRC20NoteInfo noteInfo = ShieldedTRC20Wrapper.getInstance().getUtxoMapNote()
+      ShieldedLRC20NoteInfo noteInfo = ShieldedLRC20Wrapper.getInstance().getUtxoMapNote()
           .get(shieldedInputList.get(0));
       BigInteger valueBalanceBi = noteInfo.getRawValue();
       if (shieldedOutputList.size() > 0) {
@@ -2252,15 +2252,15 @@ public class WalletApiWrapper {
       }
     }
 
-    PrivateShieldedTRC20ParametersWithoutAsk.Builder builder =
-        PrivateShieldedTRC20ParametersWithoutAsk.newBuilder();
+    PrivateShieldedLRC20ParametersWithoutAsk.Builder builder =
+        PrivateShieldedLRC20ParametersWithoutAsk.newBuilder();
     builder.setFromAmount(fromAmount.toString());
     byte[] shieldedContractAddressBytes = WalletApi.decodeFromBase58Check(shieldedContractAddress);
     if (shieldedContractAddressBytes == null) {
       System.out.println("Invalid shieldedContractAddress.");
       return false;
     }
-    builder.setShieldedTRC20ContractAddress(ByteString.copyFrom(shieldedContractAddressBytes));
+    builder.setShieldedLRC20ContractAddress(ByteString.copyFrom(shieldedContractAddressBytes));
 
     if (!StringUtil.isNullOrEmpty(toAddress)) {
       byte[] to = WalletApi.decodeFromBase58Check(toAddress);
@@ -2276,7 +2276,7 @@ public class WalletApiWrapper {
     if (!shieldedInputList.isEmpty()) {
       List<String> rootAndPath = new ArrayList<>();
       for (int i = 0; i < shieldedInputList.size(); i++) {
-        ShieldedTRC20NoteInfo noteInfo = ShieldedTRC20Wrapper.getInstance().getUtxoMapNote()
+        ShieldedLRC20NoteInfo noteInfo = ShieldedLRC20Wrapper.getInstance().getUtxoMapNote()
             .get(shieldedInputList.get(i));
         long position = noteInfo.getPosition();
         rootAndPath.add(getRootAndPath(shieldedContractAddress, position));
@@ -2294,12 +2294,12 @@ public class WalletApiWrapper {
       }
 
       for (int i = 0; i < shieldedInputList.size(); i++) {
-        ShieldedTRC20NoteInfo noteInfo = ShieldedTRC20Wrapper.getInstance().getUtxoMapNote()
+        ShieldedLRC20NoteInfo noteInfo = ShieldedLRC20Wrapper.getInstance().getUtxoMapNote()
             .get(shieldedInputList.get(i));
         if (i == 0) {
           String shieldAddress = noteInfo.getPaymentAddress();
           ShieldedAddressInfo addressInfo =
-              ShieldedTRC20Wrapper.getInstance().getShieldedAddressInfoMap().get(shieldAddress);
+              ShieldedLRC20Wrapper.getInstance().getShieldedAddressInfoMap().get(shieldAddress);
           SpendingKey spendingKey = new SpendingKey(addressInfo.getSk());
           ExpandedSpendingKey expandedSpendingKey = spendingKey.expandedSpendingKey();
 
@@ -2319,7 +2319,7 @@ public class WalletApiWrapper {
         System.out.println("address " + noteInfo.getPaymentAddress());
         System.out.println("value " + noteInfo.getRawValue().toString());
         System.out.println("rcm " + ByteArray.toHexString(noteInfo.getR()));
-        System.out.println("trxId " + noteInfo.getTrxId());
+        System.out.println("lindId " + noteInfo.getLindId());
         System.out.println("index " + noteInfo.getIndex());
         System.out.println("position " + noteInfo.getPosition());
         System.out.println("memo " + ZenUtils.getMemo(noteInfo.getMemo()));
@@ -2327,14 +2327,14 @@ public class WalletApiWrapper {
         byte[] eachRootAndPath = ByteArray.fromHexString(rootAndPath.get(i));
         byte[] root = Arrays.copyOfRange(eachRootAndPath, 0, 32);
         byte[] path = Arrays.copyOfRange(eachRootAndPath, 32, 1056);
-        SpendNoteTRC20.Builder spendTRC20NoteBuilder = SpendNoteTRC20.newBuilder();
-        spendTRC20NoteBuilder.setNote(noteBuild.build());
-        spendTRC20NoteBuilder.setAlpha(ByteString.copyFrom(getRcm()));
-        spendTRC20NoteBuilder.setRoot(ByteString.copyFrom(root));
-        spendTRC20NoteBuilder.setPath(ByteString.copyFrom(path));
-        spendTRC20NoteBuilder.setPos(noteInfo.getPosition());
+        SpendNoteLRC20.Builder spendLRC20NoteBuilder = SpendNoteLRC20.newBuilder();
+        spendLRC20NoteBuilder.setNote(noteBuild.build());
+        spendLRC20NoteBuilder.setAlpha(ByteString.copyFrom(getRcm()));
+        spendLRC20NoteBuilder.setRoot(ByteString.copyFrom(root));
+        spendLRC20NoteBuilder.setPath(ByteString.copyFrom(path));
+        spendLRC20NoteBuilder.setPos(noteInfo.getPosition());
 
-        builder.addShieldedSpends(spendTRC20NoteBuilder.build());
+        builder.addShieldedSpends(spendLRC20NoteBuilder.build());
         valueBalance = Math.addExact(valueBalance, noteInfo.getValue());
       }
     } else {
@@ -2362,7 +2362,7 @@ public class WalletApiWrapper {
       return false;
     }
 
-    ShieldedTRC20Parameters parameters =
+    ShieldedLRC20Parameters parameters =
         WalletApi.createShieldedContractParametersWithoutAsk(builder.build(), ask);
     if (parameters == null) {
       System.out.println("CreateShieldedContractParametersWithoutAsk failed,"

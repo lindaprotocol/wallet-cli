@@ -1,8 +1,8 @@
-package org.tron.common.crypto.sm2;
+package org.linda.common.crypto.sm2;
 
-import static org.tron.common.utils.BIUtil.isLessThan;
-import static org.tron.common.utils.ByteUtil.bigIntegerToBytes;
-import static org.tron.common.utils.Hash.computeAddress;
+import static org.linda.common.utils.BIUtil.isLessThan;
+import static org.linda.common.utils.ByteUtil.bigIntegerToBytes;
+import static org.linda.common.utils.Hash.computeAddress;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -35,12 +35,12 @@ import org.bouncycastle.math.ec.ECCurve;
 import org.bouncycastle.math.ec.ECPoint;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
-import org.tron.common.crypto.ECKey;
-import org.tron.common.crypto.SignInterface;
-import org.tron.common.crypto.SignatureInterface;
-import org.tron.common.crypto.jce.ECKeyFactory;
-import org.tron.common.crypto.jce.TronCastleProvider;
-import org.tron.common.utils.ByteUtil;
+import org.linda.common.crypto.ECKey;
+import org.linda.common.crypto.SignInterface;
+import org.linda.common.crypto.SignatureInterface;
+import org.linda.common.crypto.jce.ECKeyFactory;
+import org.linda.common.crypto.jce.LindaCastleProvider;
+import org.linda.common.utils.ByteUtil;
 
 /** Implement Chinese Commercial Cryptographic Standard of SM2 */
 @Slf4j(topic = "crypto")
@@ -175,7 +175,7 @@ public class SM2 implements Serializable, SignInterface {
       return null;
     } else {
       try {
-        return ECKeyFactory.getInstance(TronCastleProvider.getInstance())
+        return ECKeyFactory.getInstance(LindaCastleProvider.getInstance())
             .generatePrivate(new ECPrivateKeySpec(priv, ecc_spec));
       } catch (InvalidKeySpecException ex) {
         throw new AssertionError("Assumed correct key spec statically");

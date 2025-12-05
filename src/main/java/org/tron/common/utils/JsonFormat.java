@@ -1,4 +1,4 @@
-package org.tron.common.utils;
+package org.linda.common.utils;
 
 /*
   Copyright (c) 2009, Orbitz World Wide
@@ -35,7 +35,7 @@ import com.google.protobuf.Descriptors.EnumDescriptor;
 import com.google.protobuf.Descriptors.EnumValueDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
 import org.apache.commons.lang3.StringUtils;
-import org.tron.walletserver.WalletApi;
+import org.linda.walletserver.WalletApi;
 
 import java.io.IOException;
 import java.math.BigInteger;

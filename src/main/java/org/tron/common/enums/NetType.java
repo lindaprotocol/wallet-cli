@@ -1,4 +1,4 @@
-package org.tron.common.enums;
+package org.linda.common.enums;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,28 +6,28 @@ import lombok.Setter;
 @Getter
 public enum NetType {
   MAIN(
-      "https://api.trongrid.io",
-      new Grpc("grpc.trongrid.io:50051", "grpc.trongrid.io:50052"),
+      "https://api.lindagrid.io",
+      new Grpc("grpc.lindagrid.io:50051", "grpc.lindagrid.io:50052"),
       new GasFree(
           728126428L,
-          "TFFAMQLZybALaLb4uxHA9RBE7pxhUAjF3U",
+          "LQVucZGfuXHSfyDbVpcjuHYrRFafKYDiZn",
           "https://open.gasfree.io",
-          "/tron")
+          "/linda")
   ),
-  NILE("https://nile.trongrid.io",
-      new Grpc("grpc.nile.trongrid.io:50051", "grpc.nile.trongrid.io:50061"),
+  NILE("https://nile.lindagrid.io",
+      new Grpc("grpc.nile.lindagrid.io:50051", "grpc.nile.lindagrid.io:50061"),
       new GasFree(
           3448148188L,
-          "THQGuFzL87ZqhxkgqYEryRAd7gqFqL5rdc",
+          "LSf2AQvS43gwobPDRQaSjHYFR7TDmRui9x",
           "https://open-test.gasfree.io",
           "/nile")
   ),
   SHASTA(
-      "https://api.shasta.trongrid.io",
-      new Grpc("grpc.shasta.trongrid.io:50051", "grpc.shasta.trongrid.io:50052"),
+      "https://api.shasta.lindagrid.io",
+      new Grpc("grpc.shasta.lindagrid.io:50051", "grpc.shasta.lindagrid.io:50052"),
       new GasFree(
           2494104990L,
-          "TSwCtDum13k1PodgNgTWx5be7k1c6eWaNP",
+          "LcBx9Nqrvys7VSGCxYo6hwyGRAda3ibnrQ",
           "https://open-test.gasfree.io",
           "/shasta")
   ),

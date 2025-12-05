@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.linda.core.exception;
 
-public class EncodingException extends TronException {
+public class EncodingException extends LindaException {
   public EncodingException() {
     super();
   }

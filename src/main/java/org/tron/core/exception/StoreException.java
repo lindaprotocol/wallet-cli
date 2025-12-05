@@ -1,6 +1,6 @@
-package org.tron.core.exception;
+package org.linda.core.exception;
 
-public class StoreException extends TronException {
+public class StoreException extends LindaException {
 
   public StoreException() {
     super();

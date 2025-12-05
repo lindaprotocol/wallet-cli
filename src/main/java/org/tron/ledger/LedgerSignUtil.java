@@ -1,20 +1,20 @@
-package org.tron.ledger;
+package org.linda.ledger;
 
-import static org.tron.common.utils.Utils.failedHighlight;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RED;
-import static org.tron.ledger.console.ConsoleColor.ANSI_RESET;
+import static org.linda.common.utils.Utils.failedHighlight;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RED;
+import static org.linda.ledger.console.ConsoleColor.ANSI_RESET;
 
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.hid4java.HidDevice;
-import org.tron.ledger.listener.LedgerEventListener;
-import org.tron.ledger.listener.TransactionSignManager;
-import org.tron.ledger.wrapper.ContractTypeChecker;
-import org.tron.ledger.wrapper.DebugConfig;
-import org.tron.ledger.wrapper.HidServicesWrapper;
-import org.tron.ledger.wrapper.LedgerSignResult;
-import org.tron.ledger.wrapper.LedgerUserHelper;
-import org.tron.protos.Protocol;
+import org.linda.ledger.listener.LedgerEventListener;
+import org.linda.ledger.listener.TransactionSignManager;
+import org.linda.ledger.wrapper.ContractTypeChecker;
+import org.linda.ledger.wrapper.DebugConfig;
+import org.linda.ledger.wrapper.HidServicesWrapper;
+import org.linda.ledger.wrapper.LedgerSignResult;
+import org.linda.ledger.wrapper.LedgerUserHelper;
+import org.linda.protos.Protocol;
 
 public class LedgerSignUtil {
 
@@ -57,7 +57,7 @@ public class LedgerSignUtil {
         if (state.isPresent() && LedgerSignResult.SIGN_RESULT_SIGNING.equals(state.get())) {
           System.out.println("Last transaction is signing");
           System.out.println(ANSI_RED
-              + "Please confirm/cancel the transaction in Ledger, or Quit&Reopen Tron app in Ledger" +
+              + "Please confirm/cancel the transaction in Ledger, or Quit&Reopen Linda app in Ledger" +
               ANSI_RESET);
           System.out.println("Transaction sign is rejected");
           return false;
@@ -94,7 +94,7 @@ public class LedgerSignUtil {
       } else {
         System.out.println("Please check your last sign with Ledger");
         System.out.println(ANSI_RED
-            + "Please confirm/cancel the transaction in Ledger, or Quit&Reopen Tron app in Ledger" +
+            + "Please confirm/cancel the transaction in Ledger, or Quit&Reopen Linda app in Ledger" +
             ANSI_RESET);
         System.out.println("Sign with Ledger rejected");
         return false;

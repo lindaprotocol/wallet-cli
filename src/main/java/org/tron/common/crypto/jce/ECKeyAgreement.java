@@ -16,7 +16,7 @@
  * along with the ethereumJ library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.tron.common.crypto.jce;
+package org.linda.common.crypto.jce;
 
 import javax.crypto.KeyAgreement;
 import java.security.NoSuchAlgorithmException;

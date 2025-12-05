@@ -1,12 +1,12 @@
-package org.tron.core.zen.address;
+package org.linda.core.zen.address;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.utils.ByteArray;
-import org.tron.common.zksnark.JLibrustzcash;
-import org.tron.core.exception.ZksnarkException;
+import org.linda.common.utils.ByteArray;
+import org.linda.common.zksnark.JLibrustzcash;
+import org.linda.core.exception.ZksnarkException;
 
 @Slf4j(topic = "shieldTransaction")
 @AllArgsConstructor

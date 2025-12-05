@@ -1,4 +1,4 @@
-package org.tron.common.utils;
+package org.linda.common.utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -125,7 +125,7 @@ public class HttpSelfFormatFieldName {
     AddressFieldNameMap.put("protocol.GetAvailableUnfreezeCountRequestMessage.owner_address", 1);
     AddressFieldNameMap.put("protocol.CanWithdrawUnfreezeAmountRequestMessage.owner_address", 1);
 
-    //***** Tron.proto *****
+    //***** Linda.proto *****
     //AccountId
     AddressFieldNameMap.put("protocol.AccountId.address", 1);
     //Vote
@@ -204,7 +204,7 @@ public class HttpSelfFormatFieldName {
     //ExchangeTransactionContract
     NameFieldNameMap.put("protocol.ExchangeTransactionContract.token_id", 1);
 
-    //***** Tron.proto *****
+    //***** Linda.proto *****
     //AccountId
     NameFieldNameMap.put("protocol.AccountId.name", 1);
     //Exchange

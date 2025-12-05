@@ -1,7 +1,7 @@
-package org.tron.common.utils;
+package org.linda.common.utils;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.tron.common.utils.Utils.greenBoldHighlight;
+import static org.linda.common.utils.Utils.greenBoldHighlight;
 
 import java.io.IOException;
 import java.util.Map;

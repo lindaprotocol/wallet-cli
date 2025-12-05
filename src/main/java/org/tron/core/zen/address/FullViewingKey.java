@@ -1,12 +1,12 @@
-package org.tron.core.zen.address;
+package org.linda.core.zen.address;
 
 import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.tron.common.zksnark.JLibrustzcash;
-import org.tron.common.zksnark.LibrustzcashParam;
-import org.tron.core.exception.ZksnarkException;
+import org.linda.common.zksnark.JLibrustzcash;
+import org.linda.common.zksnark.LibrustzcashParam;
+import org.linda.core.exception.ZksnarkException;
 
 @AllArgsConstructor
 public class FullViewingKey {

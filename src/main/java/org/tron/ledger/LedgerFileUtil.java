@@ -1,8 +1,8 @@
-package org.tron.ledger;
+package org.linda.ledger;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.tron.ledger.LedgerAddressUtil.getTronAddress;
-import static org.tron.ledger.sdk.LedgerConstant.DEFAULT_PATH;
+import static org.linda.ledger.LedgerAddressUtil.getLindaAddress;
+import static org.linda.ledger.sdk.LedgerConstant.DEFAULT_PATH;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,13 +14,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.hid4java.HidDevice;
-import org.tron.ledger.wrapper.DebugConfig;
+import org.linda.ledger.wrapper.DebugConfig;
 
 public class LedgerFileUtil {
   public static final String LEDGER_DIR_NAME = "Ledger";
 
   public static String getFileName(HidDevice hidDevice) {
-//    HidDevice device = TronLedgerGetAddress.getInstance().getConnectedDevice();
+//    HidDevice device = LindaLedgerGetAddress.getInstance().getConnectedDevice();
     return getFileNameByDevice(hidDevice);
   }
 
@@ -87,7 +87,7 @@ public class LedgerFileUtil {
   public static String getFileNameByDevice(HidDevice device) {
     try {
       if (device.open()) {
-        String defaultAddress = getTronAddress(DEFAULT_PATH, device);
+        String defaultAddress = getLindaAddress(DEFAULT_PATH, device);
         return String.format("%s.txt", defaultAddress);
       }
     } catch (Exception e) {

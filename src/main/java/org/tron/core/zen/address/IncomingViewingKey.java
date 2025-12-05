@@ -1,13 +1,13 @@
-package org.tron.core.zen.address;
+package org.linda.core.zen.address;
 
 import com.google.protobuf.ByteString;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.tron.common.zksnark.JLibrustzcash;
-import org.tron.common.zksnark.LibrustzcashParam.IvkToPkdParams;
-import org.tron.core.exception.ZksnarkException;
+import org.linda.common.zksnark.JLibrustzcash;
+import org.linda.common.zksnark.LibrustzcashParam.IvkToPkdParams;
+import org.linda.core.exception.ZksnarkException;
 
 import java.util.Optional;
 

@@ -1,6 +1,6 @@
-package org.tron.core.zen;
+package org.linda.core.zen;
 
-import org.tron.core.exception.CipherException;
+import org.linda.core.exception.CipherException;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;

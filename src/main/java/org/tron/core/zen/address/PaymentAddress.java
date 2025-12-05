@@ -1,4 +1,4 @@
-package org.tron.core.zen.address;
+package org.linda.core.zen.address;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
