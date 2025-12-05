@@ -395,11 +395,11 @@ Example:
 
 ```console
 > AssetIssue TestLIND LIND 75000000000000000 1 1 2 "2019-10-02 15:10:00" "2020-07-11" "just for test121212" www.test.com 100 100000 10000 10 10000 1
-> GetAssetIssueByAccount TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ  # View published information
+> GetAssetIssueByAccount LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb  # View published information
 {
     "assetIssue": [
         {
-            "owner_address": "TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ",
+            "owner_address": "LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb",
             "name": "TestLIND",
             "abbr": "LIND",
             "total_supply": 75000000000000000,
@@ -438,11 +438,11 @@ Example:
 
 ```console
 > UpdateAsset 1000 1000000 "change description" www.changetest.com
-> GetAssetIssueByAccount TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ  # View the modified information
+> GetAssetIssueByAccount LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb  # View the modified information
 {
     "assetIssue": [
         {
-            "owner_address": "TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ",
+            "owner_address": "LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb",
             "name": "TestLIND",
             "abbr": "LIND",
             "total_supply": 75000000000000000,
@@ -527,9 +527,9 @@ The participation process must happen during the release of LRC10, otherwise an 
 Example:
 
 ```console
-> ParticipateAssetIssue TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ 1000001 1000
-> getaccount TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW  # View remaining balance
-address: TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW
+> ParticipateAssetIssue LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb 1000001 1000
+> getaccount LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4  # View remaining balance
+address: LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4
 assetV2
     {
     id: 1000001
@@ -600,7 +600,7 @@ In the example, modification No.4 (modifying token issuance fee) costs 1000LIND 
     "proposals": [
         {
             "proposal_id": 1,
-            "proposer_address": "TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ",
+            "proposer_address": "LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb",
             "parameters": [
                 {
                     "key": 4,
@@ -784,32 +784,32 @@ three types of accesses:
 The rest of the users will be granted
 
 ```console
-> Updateaccountpermission TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ {"owner_permission":{"type":0,"permission_name":"owner","threshold":1,"keys":[{"address":"TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ","weight":1}]},"witness_permission":{"type":1,"permission_name":"owner","threshold":1,"keys":[{"address":"TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ","weight":1}]},"active_permissions":[{"type":2,"permission_name":"active12323","threshold":2,"operations":"7fff1fc0033e0000000000000000000000000000000000000000000000000000","keys":[{"address":"TNhXo1GbRNCuorvYu5JFWN3m2NYr9QQpVR","weight":1},{"address":"TKwhcDup8L2PH5r6hxp5CQvQzZqJLmKvZP","weight":1}]}]}
+> Updateaccountpermission LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb {"owner_permission":{"type":0,"permission_name":"owner","threshold":1,"keys":[{"address":"LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb","weight":1}]},"witness_permission":{"type":1,"permission_name":"owner","threshold":1,"keys":[{"address":"LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb","weight":1}]},"active_permissions":[{"type":2,"permission_name":"active12323","threshold":2,"operations":"7fff1fc0033e0000000000000000000000000000000000000000000000000000","keys":[{"address":"LXxH4AChMJL1uVZ5UwdqGERPKoAp3gRoAy","weight":1},{"address":"LVCSsNqv4G9VNiUdHq9exHJ3HzTGHJtagd","weight":1}]}]}
 ```
 
-The account TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ gives the owner access to itself, active access to
-TNhXo1GbRNCuorvYu5JFWN3m2NYr9QQpVR and TKwhcDup8L2PH5r6hxp5CQvQzZqJLmKvZP. Active access will
+The account LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb gives the owner access to itself, active access to
+LXxH4AChMJL1uVZ5UwdqGERPKoAp3gRoAy and LVCSsNqv4G9VNiUdHq9exHJ3HzTGHJtagd. Active access will
 need signatures from both accounts in order to take effect.
 
 If the account is not a witness, it's not necessary to set witness_permission, otherwise an error will occur.
 
 ### Signed transaction
 
-> SendCoin TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW 10000000000000000
+> SendCoin LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4 10000000000000000
 
 Will show "Please confirm and input your permission id, if input y or Y means default 0, other
 non-numeric characters will cancel transaction."
 
 This will require the transfer authorization of active access. Enter: 2
 
-Then select accounts and put in local password, i.e. TNhXo1GbRNCuorvYu5JFWN3m2NYr9QQpVR needs a
-private key TNhXo1GbRNCuorvYu5JFWN3m2NYr9QQpVR to sign a transaction.
+Then select accounts and put in local password, i.e. LXxH4AChMJL1uVZ5UwdqGERPKoAp3gRoAy needs a
+private key LXxH4AChMJL1uVZ5UwdqGERPKoAp3gRoAy to sign a transaction.
 
-Select another account and enter the local password. i.e. TKwhcDup8L2PH5r6hxp5CQvQzZqJLmKvZP will
-need a private key of TKwhcDup8L2PH5r6hxp5CQvQzZqJLmKvZP to sign a transaction.
+Select another account and enter the local password. i.e. LVCSsNqv4G9VNiUdHq9exHJ3HzTGHJtagd will
+need a private key of LVCSsNqv4G9VNiUdHq9exHJ3HzTGHJtagd to sign a transaction.
 
 The weight of each account is 1, threshold of access is 2. When the requirements are met, users
-will be notified with “Send 10000000000000000 Sun to TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW
+will be notified with “Send 10000000000000000 Sun to LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4
 successful !!”.
 
 This is how multiple accounts user multi-signature when using the same cli.
@@ -834,7 +834,7 @@ The information displays as follows:
         "operations":"7fff1fc0033e0100000000000000000000000000000000000000000000000000",
         "keys":[
             {
-                "address":"TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ",
+                "address":"LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb",
                 "weight":1
             }
         ],
@@ -860,8 +860,8 @@ The information displays as follows:
                         "parameter":{
                             "value":{
                                 "amount":10000000000000000,
-                                "owner_address":"TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ",
-                                "to_address":"TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW"
+                                "owner_address":"LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb",
+                                "to_address":"LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4"
                             },
                             "type_url":"type.googleapis.com/protocol.TransferContract"
                         },
@@ -891,8 +891,8 @@ The information displays as follows:
 
     },
     "approved_list":[
-        "TKwhcDup8L2PH5r6hxp5CQvQzZqJLmKvZP",
-        "TNhXo1GbRNCuorvYu5JFWN3m2NYr9QQpVR"
+        "LVCSsNqv4G9VNiUdHq9exHJ3HzTGHJtagd",
+        "LXxH4AChMJL1uVZ5UwdqGERPKoAp3gRoAy"
     ],
     "transaction":{
         "result":{
@@ -911,8 +911,8 @@ The information displays as follows:
                         "parameter":{
                             "value":{
                                 "amount":10000000000000000,
-                                "owner_address":"TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ",
-                                "to_address":"TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW"
+                                "owner_address":"LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb",
+                                "to_address":"LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4"
                             },
                             "type_url":"type.googleapis.com/protocol.TransferContract"
                         },
@@ -989,7 +989,7 @@ Get the result of the contract execution with the getTransactionInfoById command
     "contractResult": [
         "6080604052600436106100405763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663329000b58114610045575b600080fd5b34801561005157600080fd5b5061005d60043561006f565b60408051918252519081900360200190f35b604080516003808252608082019092526000916060919060208201838038833901905050905060018160008151811015156100a657fe5b602090810290910101528051600290829060019081106100c257fe5b602090810290910101528051600390829060029081106100de57fe5b6020908102909101015280518190849081106100f657fe5b906020019060200201519150509190505600a165627a7a72305820b24fc247fdaf3644b3c4c94fcee380aa610ed83415061ff9e65d7fa94a5a50a00029"
     ],
-    "contract_address": "TJMKWmC6mwF1QVax8Sy2AcgT6MqaXmHEds",
+    "contract_address": "LTc4mv8ChsN7W8DUiKJbvV45PnTYSeWXGH",
     "receipt": {
         "energy_fee": 6170500,
         "energy_usage_total": 61705,
@@ -1042,7 +1042,7 @@ Example:
     "contractResult": [
         ""
     ],
-    "contract_address": "TJMKWmC6mwF1QVax8Sy2AcgT6MqaXmHEds",
+    "contract_address": "LTc4mv8ChsN7W8DUiKJbvV45PnTYSeWXGH",
     "receipt": {
         "energy_fee": 8500,
         "energy_usage_total": 85,
@@ -1116,8 +1116,8 @@ Example:
 ```console
 > GetContract TGdtALTPZ1FWQcc5MW7aK3o1ASaookkJxG
 {
-    "origin_address": "TRGhNNfnmgLegT4zHNjEqDSADjgmnHvubJ",
-    "contract_address": "TJMKWmC6mwF1QVax8Sy2AcgT6MqaXmHEds",
+    "origin_address": "LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb",
+    "contract_address": "LTc4mv8ChsN7W8DUiKJbvV45PnTYSeWXGH",
     "abi": {
         "entrys": [
             {
@@ -1245,7 +1245,7 @@ ResourceCode
 
 Example:
 ```console
-wallet> FreezeBalanceV2 TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh 1000000000000000 0
+wallet> FreezeBalanceV2 LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E 1000000000000000 0
 txid is 82244829971b4235d98a9f09ba67ddb09690ac2f879ad93e09ba3ec1ab29177d
 wallet> GetTransactionById  82244829971b4235d98a9f09ba67ddb09690ac2f879ad93e09ba3ec1ab29177d
 {
@@ -1264,7 +1264,7 @@ wallet> GetTransactionById  82244829971b4235d98a9f09ba67ddb09690ac2f879ad93e09ba
                 "parameter":{
                     "value":{
                         "frozen_balance":1000000000000000,
-                        "owner_address":"4159e3741a68ec3e1ebba80ad809d5ccd31674236e"
+                        "owner_address":"3059e3741a68ec3e1ebba80ad809d5ccd31674236e"
                     },
                     "type_url":"type.googleapis.com/protocol.FreezeBalanceV2Contract"
                 },
@@ -1293,7 +1293,7 @@ ResourceCode
 
 Example:
 ```console
-wallet> UnFreezeBalanceV2 TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh 9000000 0
+wallet> UnFreezeBalanceV2 LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E 9000000 0
 txid is dcfea1d92fc928d24c88f7f71a03ae8105d0b5b112d6d48be93d3b9c73bea634
 wallet> GetTransactionById dcfea1d92fc928d24c88f7f71a03ae8105d0b5b112d6d48be93d3b9c73bea634
 {
@@ -1311,7 +1311,7 @@ wallet> GetTransactionById dcfea1d92fc928d24c88f7f71a03ae8105d0b5b112d6d48be93d3
             {
                 "parameter":{
                     "value":{
-                        "owner_address":"4159e3741a68ec3e1ebba80ad809d5ccd31674236e",
+                        "owner_address":"3059e3741a68ec3e1ebba80ad809d5ccd31674236e",
                         "unfreeze_balance":9000000
                     },
                     "type_url":"type.googleapis.com/protocol.UnfreezeBalanceV2Contract"
@@ -1349,7 +1349,7 @@ lock
 
 Example:
 ```console
-wallet> DelegateResource TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh 10000000 0 TQ4gjjpAjLNnE67UFbmK5wVt5fzLfyEVs3 true
+wallet> DelegateResource LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E 10000000 0 LZKRztkGfGVtKijzqU6tqosWP6cJVeSrPL true
 txid is 363ac0b82b6ad3e0d3cad90f7d72b3eceafe36585432a3e013389db36152b6ed
 wallet> GetTransactionById 363ac0b82b6ad3e0d3cad90f7d72b3eceafe36585432a3e013389db36152b6ed
 {
@@ -1368,9 +1368,9 @@ wallet> GetTransactionById 363ac0b82b6ad3e0d3cad90f7d72b3eceafe36585432a3e013389
                 "parameter":{
                     "value":{
                         "balance":10000000,
-                        "receiver_address":"419a9afe56e155ef0ff3f680d00ecf19deff60bdca",
+                        "receiver_address":"309a9afe56e155ef0ff3f680d00ecf19deff60bdca",
                         "lock":true,
-                        "owner_address":"4159e3741a68ec3e1ebba80ad809d5ccd31674236e"
+                        "owner_address":"3059e3741a68ec3e1ebba80ad809d5ccd31674236e"
                     },
                     "type_url":"type.googleapis.com/protocol.DelegateResourceContract"
                 },
@@ -1403,7 +1403,7 @@ ReceiverAddress
 
 Example:
 ```console
-wallet> UnDelegateResource TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh 1000000 0 TQ4gjjpAjLNnE67UFbmK5wVt5fzLfyEVs3
+wallet> UnDelegateResource LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E 1000000 0 LZKRztkGfGVtKijzqU6tqosWP6cJVeSrPL
 txid is feb334794cf361fd351728026ccf7319e6ae90eba622b9eb53c626cdcae4965c
 wallet> GetTransactionById  feb334794cf361fd351728026ccf7319e6ae90eba622b9eb53c626cdcae4965c
 {
@@ -1422,8 +1422,8 @@ wallet> GetTransactionById  feb334794cf361fd351728026ccf7319e6ae90eba622b9eb53c6
                 "parameter":{
                     "value":{
                         "balance":1000000,
-                        "receiver_address":"419a9afe56e155ef0ff3f680d00ecf19deff60bdca",
-                        "owner_address":"4159e3741a68ec3e1ebba80ad809d5ccd31674236e"
+                        "receiver_address":"309a9afe56e155ef0ff3f680d00ecf19deff60bdca",
+                        "owner_address":"3059e3741a68ec3e1ebba80ad809d5ccd31674236e"
                     },
                     "type_url":"type.googleapis.com/protocol.UnDelegateResourceContract"
                 },
@@ -1446,7 +1446,7 @@ OwnerAddress
 
 Example:
 ```console
-wallet> withdrawexpireunfreeze TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh
+wallet> withdrawexpireunfreeze LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E
 txid is e5763ab8dfb1e7ed076770d55cf3c1ddaf36d75e23ec8330f99df7e98f54a147
 wallet> GetTransactionById e5763ab8dfb1e7ed076770d55cf3c1ddaf36d75e23ec8330f99df7e98f54a147
 {
@@ -1464,7 +1464,7 @@ wallet> GetTransactionById e5763ab8dfb1e7ed076770d55cf3c1ddaf36d75e23ec8330f99df
             {
                 "parameter":{
                     "value":{
-                        "owner_address":"4159e3741a68ec3e1ebba80ad809d5ccd31674236e"
+                        "owner_address":"3059e3741a68ec3e1ebba80ad809d5ccd31674236e"
                     },
                     "type_url":"type.googleapis.com/protocol.WithdrawExpireUnfreezeContract"
                 },
@@ -1486,7 +1486,7 @@ OwnerAddress
 
 Example:
 ```console
-wallet> cancelAllUnfreezeV2 TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh
+wallet> cancelAllUnfreezeV2 LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E
 txid is e5763ab8dfb1e7ed076770d55cf3c1ddaf36d75e23ec8330f99df7e98f54a147
 wallet> GetTransactionById e5763ab8dfb1e7ed076770d55cf3c1ddaf36d75e23ec8330f99df7e98f54a147
 {
@@ -1504,7 +1504,7 @@ wallet> GetTransactionById e5763ab8dfb1e7ed076770d55cf3c1ddaf36d75e23ec8330f99df
             {
                 "parameter":{
                     "value":{
-                        "owner_address":"4159e3741a68ec3e1ebba80ad809d5ccd31674236e"
+                        "owner_address":"3059e3741a68ec3e1ebba80ad809d5ccd31674236e"
                     },
                     "type_url":"type.googleapis.com/protocol.CancelAllUnfreezeV2"
                 },
@@ -1533,12 +1533,12 @@ toAddress
 
 Example:
 ```console
-wallet> getDelegatedResourceV2 TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh TQ4gjjpAjLNnE67UFbmK5wVt5fzLfyEVs3
+wallet> getDelegatedResourceV2 LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E LZKRztkGfGVtKijzqU6tqosWP6cJVeSrPL
 {
 	"delegatedResource": [
 		{
-			"from": "TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh",
-			"to": "TQ4gjjpAjLNnE67UFbmK5wVt5fzLfyEVs3",
+			"from": "LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E",
+			"to": "LZKRztkGfGVtKijzqU6tqosWP6cJVeSrPL",
 			"frozen_balance_for_bandwidth": 10000000
 		}
 	]
@@ -1553,11 +1553,11 @@ address
 
 Example:
 ```console
-wallet> getDelegatedResourceAccountIndexV2 TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh
+wallet> getDelegatedResourceAccountIndexV2 LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E
 {
-	"account": "TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh",
+	"account": "LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E",
 	"toAccounts": [
-		"TQ4gjjpAjLNnE67UFbmK5wVt5fzLfyEVs3"
+		"LZKRztkGfGVtKijzqU6tqosWP6cJVeSrPL"
 	]
 }
 ```
@@ -1573,7 +1573,7 @@ type
 
 Example:
 ```console
-wallet> getCanDelegatedMaxSize TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh 0
+wallet> getCanDelegatedMaxSize LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E 0
 {
 	"max_size": 999999978708334
 }
@@ -1587,7 +1587,7 @@ ownerAddress
 
 Example:
 ```console
-wallet> getAvailableUnfreezeCount TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh
+wallet> getAvailableUnfreezeCount LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E
 {
 	"count": 31
 }
@@ -1605,7 +1605,7 @@ timestamp
 
 Example:
 ```console
-wallet> getCanWithdrawUnfreezeAmount TJAVcszse667FmSNCwU2fm6DmfM5D4AyDh 1671100335000
+wallet> getCanWithdrawUnfreezeAmount LTREt2vya2DDMQ4tnoocRdTr55y32xFc5E 1671100335000
 {
 	"amount": 9000000
 }
@@ -1897,7 +1897,7 @@ Example:
 wallet> gasfreeinfo
 balanceOf(address):70a08231
 {
-	"gasFreeAddress":"TCtSt8fCkZcVdrGpaVHUr6P8EmdjysswMF",
+	"gasFreeAddress":"LN9C9HbJgVjbjUuMAMd4bxkkYCFhwzeVrU",
 	"active":true,
 	"tokenBalance":998696000,
 	"activateFee":0,
@@ -1911,7 +1911,7 @@ gasFreeInfo:  successful !!
 wallet> gasfreeinfo TRvVXgqddDGYRMx3FWf2tpVxXQQXDZxJQe
 balanceOf(address):70a08231
 {
-	"gasFreeAddress":"TCtSt8fCkZcVdrGpaVHUr6P8EmdjysswMF",
+	"gasFreeAddress":"LN9C9HbJgVjbjUuMAMd4bxkkYCFhwzeVrU",
 	"active":true,
 	"tokenBalance":998696000,
 	"activateFee":0,
@@ -1927,28 +1927,28 @@ Function: Submit a gas-free token transfer request.
 
 Example:
 ```console
-wallet> gasfreetransfer TEkj3ndMVEmFLYaFrATMwMjBRZ1EAZkucT 100000
+wallet> gasfreetransfer LQ1UJwZTRAtMSBCnS2nwhE6oiydC6yFEnT 100000
 
 GasFreeTransfer result: {
 	"code":200,
 	"data":{
 		"amount":100000,
-		"providerAddress":"TKtWbdzEq5ss9vTS9kwRhBp5mXmBfBns3E",
+		"providerAddress":"LV9FrnvLm1zyFZ5xjdH1T4Bi4xP9ZzQSjW",
 		"apiKey":"",
-		"accountAddress":"TUUSMd58eC3fKx3fn7whxJyr1FR56tgaP8",
+		"accountAddress":"LdjBcn1Ea8AmRagCMzHHiBMUJg32zZDTLv",
 		"signature":"",
-		"targetAddress":"TEkj3ndMVEmFLYaFrATMwMjBRZ1EAZkucT",
+		"targetAddress":"LQ1UJwZTRAtMSBCnS2nwhE6oiydC6yFEnT",
 		"maxFee":2000000,
 		"version":1,
 		"nonce":8,
-		"tokenAddress":"TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf",
+		"tokenAddress":"LgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT",
 		"createdAt":1747909635678,
 		"expiredAt":1747909695000,
 		"estimatedTransferFee":2000,
 		"id":"6c3ff67e-0bf4-4c09-91ca-0c7c254b01a0",
 		"state":"WAITING",
 		"estimatedActivateFee":0,
-		"gasFreeAddress":"TNER12mMVWruqopsW9FQtKxCGfZcEtb3ER",
+		"gasFreeAddress":"LXVAGBhTRSz1wSTQ61azeCKpa6Ba6hcnsi",
 		"updatedAt":1747909635678
 	}
 }
@@ -1967,17 +1967,17 @@ GasFreeTrace result: {
 	"code":200,
 	"data":{
 		"amount":100000,
-		"providerAddress":"TKtWbdzEq5ss9vTS9kwRhBp5mXmBfBns3E",
+		"providerAddress":"LV9FrnvLm1zyFZ5xjdH1T4Bi4xP9ZzQSjW",
 		"txnTotalCost":102000,
-		"accountAddress":"TUUSMd58eC3fKx3fn7whxJyr1FR56tgaP8",
+		"accountAddress":"LdjBcn1Ea8AmRagCMzHHiBMUJg32zZDTLv",
 		"txnActivateFee":0,
 		"estimatedTotalCost":102000,
-		"targetAddress":"TEkj3ndMVEmFLYaFrATMwMjBRZ1EAZkucT",
+		"targetAddress":"LQ1UJwZTRAtMSBCnS2nwhE6oiydC6yFEnT",
 		"txnBlockTimestamp":1747909638000,
 		"txnTotalFee":2000,
 		"nonce":8,
 		"estimatedTotalFee":2000,
-		"tokenAddress":"TXYZopYRdj2D9XRtbG411XZZ3kM5VkAeBf",
+		"tokenAddress":"LgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT",
 		"txnHash":"858f9a00776163b1f8a34467b9c5727657f8971a9f4e9d492f0a247fac0384f9",
 		"txnBlockNum":57175988,
 		"createdAt":1747909635678,
@@ -1987,7 +1987,7 @@ GasFreeTrace result: {
 		"id":"6c3ff67e-0bf4-4c09-91ca-0c7c254b01a0",
 		"state":"CONFIRMING",
 		"estimatedActivateFee":0,
-		"gasFreeAddress":"TNER12mMVWruqopsW9FQtKxCGfZcEtb3ER",
+		"gasFreeAddress":"LXVAGBhTRSz1wSTQ61azeCKpa6Ba6hcnsi",
 		"txnTransferFee":2000,
 		"txnAmount":100000
 	}
@@ -2040,15 +2040,15 @@ Now, you can RegisterWallet or ImportWallet again. Or import the wallet through 
 
 Example:
 ```console
-wallet> createaccount TDJ13zZzT3w91WMBm98gC3mwL7NbA6sQPA
+wallet> createaccount LNYkK9W6Nz4F78yiM1UFwv9ZdXzZ3KVWFr
 {
 	"raw_data":{
 		"contract":[
 			{
 				"parameter":{
 					"value":{
-						"owner_address":"TQLaB7L8o3ikjRVcN7tTjMZsRYPJ23XZbd",
-						"account_address":"TDJ13zZzT3w91WMBm98gC3mwL7NbA6sQPA"
+						"owner_address":"LZbKSGGEiyqrq488wzE3VDwViy1FwTttH5",
+						"account_address":"LNYkK9W6Nz4F78yiM1UFwv9ZdXzZ3KVWFr"
 					},
 					"type_url":"type.googleapis.com/protocol.AccountCreateContract"
 				},
@@ -2254,7 +2254,7 @@ buy_token_id, buy_token_quantity
 Example: 
 
 ```console
-MarketSellAsset TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW  1000001 200 _ 100    
+MarketSellAsset LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4  1000001 200 _ 100    
 
 Get the result of the contract execution with the getTransactionInfoById command:   
 getTransactionInfoById 10040f993cd9452b25bf367f38edadf11176355802baf61f3c49b96b4480d374   
@@ -2284,12 +2284,12 @@ ownerAddress
 Example:
 
 ```console
-GetMarketOrderByAccount TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW   
+GetMarketOrderByAccount LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4   
 {
 	"orders": [
 		{
 			"order_id": "fc9c64dfd48ae58952e85f05ecb8ec87f55e19402493bb2df501ae9d2da75db0",
-			"owner_address": "TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW",
+			"owner_address": "LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4",
 			"create_time": 1578983490000,
 			"sell_token_id": "_",
 			"sell_token_quantity": 100,
@@ -2313,7 +2313,7 @@ Example:
 GetMarketOrderById fc9c64dfd48ae58952e85f05ecb8ec87f55e19402493bb2df501ae9d2da75db0   
 {
 	"order_id": "fc9c64dfd48ae58952e85f05ecb8ec87f55e19402493bb2df501ae9d2da75db0",
-	"owner_address": "TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW",
+	"owner_address": "LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4",
 	"create_time": 1578983490000,
 	"sell_token_id": "_",
 	"sell_token_quantity": 100,
@@ -2360,7 +2360,7 @@ GetMarketOrderListByPair _ 1000001
 	"orders": [
 		{
 			"order_id": "fc9c64dfd48ae58952e85f05ecb8ec87f55e19402493bb2df501ae9d2da75db0",
-			"owner_address": "TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW",
+			"owner_address": "LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4",
 			"create_time": 1578983490000,
 			"sell_token_id": "_",
 			"sell_token_quantity": 100,
@@ -2415,7 +2415,7 @@ order_id
 Example:   
 
 ```console
-MarketCancelOrder TJCnKsPa7y5okkXvQAidZBzqx3QyQ6sxMW fc9c64dfd48ae58952e85f05ecb8ec87f55e19402493bb2df501ae9d2da75db0  
+MarketCancelOrder LTTXb2Kg3uCurPASz34DK4NUFU2wFV8bz4 fc9c64dfd48ae58952e85f05ecb8ec87f55e19402493bb2df501ae9d2da75db0  
 ```
 
 Get the result of the contract execution with the getTransactionInfoById command:  

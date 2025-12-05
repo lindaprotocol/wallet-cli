@@ -683,7 +683,7 @@ Summary:
 Estimate the energy required for the successful execution of smart contract transactions. (Confirmed state)
 Usage example:
 wallet> EstimateEnergy LbcyuEPkznuiFd1sxQ1AD7THs5uBBBDLRV LRJGo8B47gWvFRdAAbZ9dgMsCUoiVj91QX "balanceOf(address)" 000000000000000000000000a614f803b6fd780986a42c78ec9c7f77e6ded13c true
-wallet> EstimateEnergy #LgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT balanceOf(address) "TAB1TVw5N8g1FLcKxPD17h2A3eEpSXvMQd" false 0 0 #
+wallet> EstimateEnergy #LgoK4yUXZf9KFA4RB8PamPwBMAy3RAUqBT balanceOf(address) "LKRkiesBJ4o7LyErYFYasZPnM4rnGp1H9u" false 0 0 #
 Syntax:
 GetChainParameters
 Summary:
@@ -753,7 +753,7 @@ UpdateAccountPermission owner_address permissions
 Summary:
 Update the account's permission.
 Usage example:
-wallet> UpdateAccountPermission LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb {"owner_permission":{"type":0,"permission_name":"owner","threshold":1,"keys":[{"address":"LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb","weight":1}]},"witness_permission":{"type":1,"permission_name":"owner","threshold":1,"keys":[{"address":"LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb","weight":1}]},"active_permissions":[{"type":2,"permission_name":"active12323","threshold":2,"operations":"7fff1fc0033e0000000000000000000000000000000000000000000000000000","keys":[{"address":"TNhXo1GbRNCuorvYu5JFWN3m2NYr9QQpVR","weight":1},{"address":"TKwhcDup8L2PH5r6hxp5CQvQzZqJLmKvZP","weight":1}]}]}
+wallet> UpdateAccountPermission LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb {"owner_permission":{"type":0,"permission_name":"owner","threshold":1,"keys":[{"address":"LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb","weight":1}]},"witness_permission":{"type":1,"permission_name":"owner","threshold":1,"keys":[{"address":"LaXSdXbthcTkn5hWsF4pb5onXAJjh4EHHb","weight":1}]},"active_permissions":[{"type":2,"permission_name":"active12323","threshold":2,"operations":"7fff1fc0033e0000000000000000000000000000000000000000000000000000","keys":[{"address":"LXxH4AChMJL1uVZ5UwdqGERPKoAp3gRoAy","weight":1},{"address":"LVCSsNqv4G9VNiUdHq9exHJ3HzTGHJtagd","weight":1}]}]}
 Syntax:
 ModifyWalletName new_name
 Summary:

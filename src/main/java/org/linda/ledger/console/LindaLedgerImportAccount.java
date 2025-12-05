@@ -254,14 +254,14 @@ public class LindaLedgerImportAccount {
 
   public static void main(String[] args) {
     Map<Integer, ImportAccount> accounts = new LinkedHashMap<>();
-    accounts.put(0, new ImportAccount("m/44'/0'/0'/0/0", "TAT7dA8F9HXGqmhvMCjxCKAD29YxDRw81y", true));
-    accounts.put(1, new ImportAccount("m/44'/0'/0'/0/1", "TAT7dA8F9HXGqmhvMCjxCKAD29YxDRw82y", false));
-    accounts.put(2, new ImportAccount("m/44'/0'/0'/0/2", "TAT7dA8F9HXGqmhvMCjxCKAD29YxDRw83y", true));
-    accounts.put(3, new ImportAccount("m/44'/0'/0'/0/3", "TAT7dA8F9HXGqmhvMCjxCKAD29YxDRw84y", false));
-    accounts.put(4, new ImportAccount("m/44'/0'/0'/0/4", "TAT7dA8F9HXGqmhvMCjxCKAD29YxDRw85y", true));
-    accounts.put(5, new ImportAccount("m/44'/0'/0'/0/5", "TAT7dA8F9HXGqmhvMCjxCKAD29YxDRw86y", false));
-    accounts.put(6, new ImportAccount("m/44'/0'/0'/0/6", "TAT7dA8F9HXGqmhvMCjxCKAD29YxDRw87y", true));
-    accounts.put(7, new ImportAccount("m/44'/0'/0'/0/7", "TAT7dA8F9HXGqmhvMCjxCKAD29YxDRw88y", false));
+    accounts.put(0, new ImportAccount("m/44'/0'/0'/0/0", "LKeqV4bsc67RARrqcqNsMvjUK5Gq41p91F", true));
+    accounts.put(1, new ImportAccount("m/44'/0'/0'/0/1", "LKeqV4bsc67RARrqcqNsMvjUK5Gq41p92F", false));
+    accounts.put(2, new ImportAccount("m/44'/0'/0'/0/2", "LKeqV4bsc67RARrqcqNsMvjUK5Gq41p93F", true));
+    accounts.put(3, new ImportAccount("m/44'/0'/0'/0/3", "LKeqV4bsc67RARrqcqNsMvjUK5Gq41p94F", false));
+    accounts.put(4, new ImportAccount("m/44'/0'/0'/0/4", "LKeqV4bsc67RARrqcqNsMvjUK5Gq41p95F", true));
+    accounts.put(5, new ImportAccount("m/44'/0'/0'/0/5", "LKeqV4bsc67RARrqcqNsMvjUK5Gq41p96F", false));
+    accounts.put(6, new ImportAccount("m/44'/0'/0'/0/6", "LKeqV4bsc67RARrqcqNsMvjUK5Gq41p97F", true));
+    accounts.put(7, new ImportAccount("m/44'/0'/0'/0/7", "LKeqV4bsc67RARrqcqNsMvjUK5Gq41p98F", false));
     // Display the first page
     displayPage(accounts, 0);
     displayPage(accounts, 1);

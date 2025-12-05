@@ -88,13 +88,13 @@ public class TransactionSignDemoForSM2 {
   }
 
   private static void base58checkToHexString() {
-    String base58check = "TGehVcNhud84JDCGrNHKVz9jEAVKUpbuiv";
+    String base58check = "LRuSkmJoqZFAPqpoSEcuFrXMXb7HL1dyNx";
     String hexString = ByteArray.toHexString(WalletApi.decodeFromBase58Check(base58check));
     System.out.println(hexString);
   }
 
   private static void hexStringTobase58check() {
-    String hexString = "414948c2e8a756d9437037dcd8c7e0c73d560ca38d";
+    String hexString = "304948c2e8a756d9437037dcd8c7e0c73d560ca38d";
     String base58check = WalletApi.encode58Check(ByteArray.fromHexString(hexString));
     System.out.println(base58check);
   }
@@ -104,7 +104,7 @@ public class TransactionSignDemoForSM2 {
     byte[] privateBytes = ByteArray.fromHexString(privateStr);
     SM2 sm2 = SM2.fromPrivate(privateBytes);
     byte[] from = sm2.getAddress();
-    byte[] to = WalletApi.decodeFromBase58Check("TGehVcNhud84JDCGrNHKVz9jEAVKUpbuiv");
+    byte[] to = WalletApi.decodeFromBase58Check("LRuSkmJoqZFAPqpoSEcuFrXMXb7HL1dyNx");
     long amount = 100_000_000L; // 100 LIND, api only receive lind in Sun, and 1 LIND = 1000000 Sun
     Transaction transaction = createTransaction(from, to, amount);
     byte[] transactionBytes = transaction.toByteArray();

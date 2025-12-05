@@ -17,7 +17,7 @@ public enum NetType {
       new Grpc(LINDAGRID_MAIN_NET, LINDAGRID_MAIN_NET_SOLIDITY),
       new GasFree(
           728126428L,
-          "TFFAMQLZybALaLb4uxHA9RBE7pxhUAjF3U",
+          "LQVucZGfuXHSfyDbVpcjuHYrRFafKYDiZn",
           "https://open.gasfree.io",
           "/linda")
   ),
@@ -25,7 +25,7 @@ public enum NetType {
       new Grpc(FULLNODE_NILE, FULLNODE_NILE_SOLIDITY),
       new GasFree(
           3448148188L,
-          "THQGuFzL87ZqhxkgqYEryRAd7gqFqL5rdc",
+          "LSf2AQvS43gwobPDRQaSjHYFR7TDmRui9x",
           "https://open-test.gasfree.io",
           "/nile")
   ),
@@ -34,7 +34,7 @@ public enum NetType {
       new Grpc(LINDAGRID_SHASTA, LINDAGRID_SHASTA_SOLIDITY),
       new GasFree(
           2494104990L,
-          "TSwCtDum13k1PodgNgTWx5be7k1c6eWaNP",
+          "LcBx9Nqrvys7VSGCxYo6hwyGRAda3ibnrQ",
           "https://open-test.gasfree.io",
           "/shasta")
   ),
