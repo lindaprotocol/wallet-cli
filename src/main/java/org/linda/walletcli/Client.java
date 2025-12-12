@@ -4984,10 +4984,10 @@ public class Client {
               resetWallet();
               break;
             }
-            // case "loadshieldedwallet": {
-            //   loadShieldedWallet();
-            //   break;
-            // }
+            case "loadshieldedwallet": {
+              loadShieldedWallet();
+              break;
+            }
             case "backupwallet": {
               backupWallet();
               break;
