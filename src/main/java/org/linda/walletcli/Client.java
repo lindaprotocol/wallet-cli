@@ -137,7 +137,7 @@ public class Client {
       "AddTransactionSign",
       "ApproveProposal",
       "AssetIssue",
-      // "BackupShieldedWallet",
+      "BackupShieldedWallet",
       "BackupShieldedLRC20Wallet",
       "BackupWallet",
       "BackupWallet2Base64",
