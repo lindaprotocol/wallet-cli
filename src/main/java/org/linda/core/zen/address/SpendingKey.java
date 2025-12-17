@@ -25,7 +25,7 @@ public class SpendingKey {
   }
 
   private static class PRF {
-    public static final byte[] ZLINDA_EXPANDSEED_PERSONALIZATION = {'Z', 't', 'r', 'o', 'n', '_',
+    public static final byte[] ZLIND_EXPANDSEED_PERSONALIZATION = {'Z', 'l', 'i', 'n', 'd', '_',
         'E', 'x', 'p', 'a', 'n', 'd', 'S', 'e', 'e', 'd'};
 
     public static byte[] prfAsk(byte[] sk) throws ZksnarkException {
@@ -60,7 +60,7 @@ public class SpendingKey {
       long state = JLibsodium.initState();
       try {
         JLibsodium.cryptoGenerichashBlake2bInitSaltPersonal(new JLibsodiumParam.Blake2bInitSaltPersonalParams(
-            state, null, 0, 64, null, ZLINDA_EXPANDSEED_PERSONALIZATION));
+            state, null, 0, 64, null, ZLIND_EXPANDSEED_PERSONALIZATION));
         JLibsodium.cryptoGenerichashBlake2bUpdate(new JLibsodiumParam.Blake2bUpdateParams(state, blob, 33));
         JLibsodium.cryptoGenerichashBlake2bFinal(new JLibsodiumParam.Blake2bFinalParams(state, res, 64));
       } finally {

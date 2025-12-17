@@ -27,7 +27,7 @@ import java.util.List;
 public class KeyIo {
 
   private static int ConvertedSaplingPaymentAddressSize = ((32 + 11) * 8 + 4) / 5;
-  private static String SAPLING_PAYMENT_ADDRESS = "zlinda";
+  private static String SAPLING_PAYMENT_ADDRESS = "zlind";
 
   public static PaymentAddress decodePaymentAddress(String str) {
     byte[] data;
